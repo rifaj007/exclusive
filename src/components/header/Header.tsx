@@ -127,26 +127,28 @@ const Header = () => {
       </header>
 
       {/* Mobile Menu */}
-      <div
-        className={`fixed top-20 md:top-24 left-0 w-full h-full z-20 transform transition-transform duration-300 ease-in-out text-center bg-white pt-8 origin-top ${
-          isMenuOpen ? "animate-menuOpen" : "animate-menuClose"
-        }`}
-      >
-        <div className="md:hidden flex justify-center mb-8">
-          <NavSearch />
+      <div className="lg:hidden">
+        <div
+          className={`fixed top-20 md:top-24 left-0 w-full h-full transition-transform duration-[350ms] text-center bg-white pt-8 origin-top ${
+            isMenuOpen ? "translate-y-0" : "-translate-y-[120%]"
+          }`}
+        >
+          <div className="md:hidden flex justify-center mb-8">
+            <NavSearch />
+          </div>
+          <ul className="flex flex-col gap-12">
+            {navItems.map(({ label, route }) => (
+              <li
+                key={route}
+                className={pathname === route ? "font-semibold underline" : ""}
+              >
+                <Link onClick={() => setIsMenuOpen(false)} href={route}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="flex flex-col gap-12">
-          {navItems.map(({ label, route }) => (
-            <li
-              key={route}
-              className={pathname === route ? "font-semibold underline" : ""}
-            >
-              <Link onClick={() => setIsMenuOpen(false)} href={route}>
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
       </div>
     </>
   );
