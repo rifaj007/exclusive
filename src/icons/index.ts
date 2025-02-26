@@ -1,0 +1,10 @@
+export { default as SearchIcon } from "./search";
+export { default as HeartIcon } from "./heart";
+export { default as CartIcon } from "./cart";
+export { default as ProfileIcon } from "./profile";
+export { default as SendIcon } from "./send";
+export { default as FacebookIcon } from "./facebook";
+export { default as TwitterXIcon } from "./twitter";
+export { default as GithubIcon } from "./github";
+export { default as LinkedinIcon } from "./linkedin";
+export { default as CopyrightIcon } from "./copyright";
