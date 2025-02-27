@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${inter.variable} ${poppins.variable} antialiased flex flex-col h-screen`}
       >
         <Header />
-        <main className="pt-24 flex-1">{children}</main>
+        <main className="pt-[100px] flex-1">{children}</main>
         <Footer />
       </body>
     </html>

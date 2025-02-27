@@ -164,6 +164,10 @@
     @apply font-inter text-xl md:text-2xl leading-none font-bold;
   }
 
+  .button {
+    @apply rounded bg-button-2 py-4 px-7 md:px-12 text-text-1 inline-block md:font-medium
+  }
+
   .footer-heading {
     @apply text-xl font-medium text-text-1 mb-6;
   }
