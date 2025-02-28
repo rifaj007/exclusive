@@ -149,7 +149,6 @@
   h6 {
     @apply text-[20px];
   }
-
   p {
     @apply leading-[26px];
   }
@@ -157,7 +156,7 @@
 
 @layer components {
   .container {
-    @apply w-full mx-auto px-3 sm:px-0 overflow-hidden sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px];
+    @apply w-full mx-auto px-3 sm:px-0 sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px];
   }
 
   .logo {
@@ -165,7 +164,19 @@
   }
 
   .button {
-    @apply rounded bg-button-2 py-4 px-7 md:px-12 text-text-1 inline-block md:font-medium
+    @apply rounded bg-button-2 py-4 px-7 lg:px-9 xl:px-12 text-text-1 md:font-medium text-sm lg:text-base disabled:opacity-70 disabled:cursor-not-allowed;
+  }
+
+  .breadcrumbs {
+    @apply flex items-center gap-3 text-sm text-border-2;
+  }
+
+  .input {
+    @apply bg-secondary-2 placeholder:text-text-3 text-black rounded py-3 px-4 focus:outline-none w-full;
+  }
+
+  .form-validation-error {
+    @apply text-red-500 lg:text-sm text-xs mt-2;
   }
 
   .footer-heading {
@@ -177,14 +188,14 @@
   .flex-center {
     @apply flex justify-center items-center;
   }
+
   .flex-between {
     @apply flex justify-between items-center;
   }
+
   .flex-start {
     @apply flex justify-start items-center;
   }
 
   /* All key frames */
-
-  
 }

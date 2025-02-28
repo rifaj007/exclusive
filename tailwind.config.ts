@@ -141,6 +141,9 @@ export default {
         inter: ["var(--font-inter)"],
         poppins: ["var(--font-poppins)"],
       },
+      boxShadow: {
+        custom: "0 1px 13px rgba(0, 0, 0, 0.05)",
+      },
     },
   },
   plugins: [],

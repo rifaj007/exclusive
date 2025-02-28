@@ -8,3 +8,5 @@ export { default as TwitterXIcon } from "./twitter";
 export { default as GithubIcon } from "./github";
 export { default as LinkedinIcon } from "./linkedin";
 export { default as CopyrightIcon } from "./copyright";
+export { default as PhoneIconWithBg } from "./phoneWithBg";
+export { default as EmailIconWithBg } from "./emailWithBg";
