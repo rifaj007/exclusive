@@ -10,3 +10,7 @@ export { default as LinkedinIcon } from "./linkedin";
 export { default as CopyrightIcon } from "./copyright";
 export { default as PhoneIconWithBg } from "./phoneWithBg";
 export { default as EmailIconWithBg } from "./emailWithBg";
+export { default as ShopIcon } from "./shop";
+export { default as DollarIcon } from "./dollar";
+export { default as ShoppingBagIcon } from "./shoppingBag";
+export { default as MoneyBagIcon } from "./moneyBag";
