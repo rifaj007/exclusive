@@ -14,3 +14,7 @@ export { default as ShopIcon } from "./shop";
 export { default as DollarIcon } from "./dollar";
 export { default as ShoppingBagIcon } from "./shoppingBag";
 export { default as MoneyBagIcon } from "./moneyBag";
+export { default as InstagramIcon } from "./instagram";
+export { default as DeliveryIcon } from "./delivery";
+export { default as CustomerServiceIcon } from "./customerService";
+export { default as SecureIcon } from "./secure";
