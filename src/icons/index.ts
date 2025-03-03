@@ -18,3 +18,4 @@ export { default as InstagramIcon } from "./instagram";
 export { default as DeliveryIcon } from "./delivery";
 export { default as CustomerServiceIcon } from "./customerService";
 export { default as SecureIcon } from "./secure";
+export { default as GoogleIcon } from "./google";

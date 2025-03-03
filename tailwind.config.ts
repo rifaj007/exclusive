@@ -25,6 +25,7 @@ export default {
           1: "var(--text-1)",
           2: "var(--text-2)",
           3: "var(--text-3)",
+          4: "var(--text-4)",
         },
         border: {
           1: "var(--border-1)",

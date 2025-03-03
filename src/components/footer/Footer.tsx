@@ -93,17 +93,29 @@ const Footer = () => {
 
             <div className="flex-between mb-6">
               {/* QR code */}
-              <img src="/images/qr-code.jpg" alt="qr" className="size-[75px]" />
+              <Link href="#">
+                <img
+                  src="/images/footer/qr-code.jpg"
+                  alt="qr"
+                  className="size-[75px]"
+                />
+              </Link>
 
               {/* Play store and App store */}
               <div className="flex flex-col">
-                <div className="w-[110px] h-[40px]">
-                  <img src="/images/google-play-badge.svg" alt="play-store" />
-                </div>
+                <Link href="#" className="w-[110px] h-[40px]">
+                  <img
+                    src="/images/footer/google-play-badge.svg"
+                    alt="play-store"
+                  />
+                </Link>
 
-                <div className="w-[110px] h-[40px]">
-                  <img src="/images/app-store-badge.svg" alt="app-store" />
-                </div>
+                <Link href="#" className="w-[110px] h-[40px]">
+                  <img
+                    src="/images/footer/app-store-badge.svg"
+                    alt="app-store"
+                  />
+                </Link>
               </div>
             </div>
 

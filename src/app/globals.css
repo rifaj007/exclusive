@@ -13,6 +13,7 @@
     --text-1: #fafafa;
     --text-2: #7d8184;
     --text-3: #7a7a7a;
+    --text-4: #999999;
 
     --border-1: #b3b3b3;
     --border-2: #7f7f7f;
@@ -173,6 +174,10 @@
 
   .input {
     @apply bg-secondary-2 placeholder:text-text-3 text-black rounded py-3 px-4 focus:outline-none w-full;
+  }
+
+  .auth-input {
+    @apply border-b border-border-2 pb-2 text-text-4 placeholder:text-text-4 focus:outline-none w-full
   }
 
   .form-validation-error {
