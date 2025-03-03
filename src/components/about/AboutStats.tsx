@@ -14,7 +14,7 @@ const AboutStats = () => {
   const { ref, inView } = useInView({ triggerOnce: true });
 
   return (
-    <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-[140px] mt-[200px]">
+    <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-[140px] xl:mt-[200px]">
       {aboutStatsData.map(({ _id, value, label, icon: Icon }) => {
         const numericValue = parseFloat(value.replace("k", ""));
 
