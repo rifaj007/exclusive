@@ -63,7 +63,7 @@ const AboutSlider = () => {
         ))}
       </Swiper>
 
-      {/* Unique pagination container */}
+{/* slider pagination */}
       <div className="flex-center mt-1 h-4">
         <div className="about-swiper-pagination z-10 flex-center"></div>
       </div>

@@ -28,7 +28,7 @@ const SignUp = () => {
 
       <GoogleLogin text="Sign up with Google" />
 
-      <p className="mt-8 text-[#4D4D4D]">Already have account? <Link href="/login" className="font-medium underline ml-2">Log in</Link></p>
+      <p className="mt-8 text-[#4D4D4D]">Already have account? <Link href="/log-in" className="font-medium underline ml-2">Log in</Link></p>
     </>
   );
 };

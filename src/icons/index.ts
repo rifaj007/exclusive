@@ -19,3 +19,6 @@ export { default as DeliveryIcon } from "./delivery";
 export { default as CustomerServiceIcon } from "./customerService";
 export { default as SecureIcon } from "./secure";
 export { default as GoogleIcon } from "./google";
+export { default as ArrowUpIcon } from "./arrowUp";
+export { default as DropRightIcon } from "./dropRight";
+export { default as DropDownIcon } from "./dropDown";

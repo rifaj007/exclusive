@@ -16,6 +16,121 @@ export const navItems = [
   { label: "Sign Up", route: "/sign-up" },
 ];
 
+/* home page data */
+export const heroNavbarData = [
+  {
+    _id: 1,
+    label: "Woman’s Fashion",
+    link: "/womens-fashion",
+    hasSubmenu: true,
+    submenu: [
+      { _id: 101, label: "Dresses", link: "/womens-fashion/dresses" },
+      { _id: 102, label: "Tops", link: "/womens-fashion/tops" },
+      { _id: 103, label: "Shoes", link: "/womens-fashion/shoes" },
+      { _id: 104, label: "Bags", link: "/womens-fashion/bags" },
+    ],
+  },
+  {
+    _id: 2,
+    label: "Men’s Fashion",
+    link: "/mens-fashion",
+    hasSubmenu: true,
+    submenu: [
+      { _id: 201, label: "Shirts", link: "/mens-fashion/shirts" },
+      { _id: 202, label: "Pants", link: "/mens-fashion/pants" },
+      { _id: 203, label: "Shoes", link: "/mens-fashion/shoes" },
+      { _id: 204, label: "Accessories", link: "/mens-fashion/accessories" },
+    ],
+  },
+  {
+    _id: 3,
+    label: "Electronics",
+    link: "/electronics",
+    hasSubmenu: false,
+  },
+  {
+    _id: 4,
+    label: "Home & Lifestyle",
+    link: "/home-&-lifestyle",
+    hasSubmenu: false,
+  },
+  {
+    _id: 5,
+    label: "Medicine",
+    link: "/medicine",
+    hasSubmenu: false,
+  },
+  {
+    _id: 6,
+    label: "Sports & Outdoor",
+    link: "/sports-&-outdoor",
+    hasSubmenu: false,
+  },
+  {
+    _id: 7,
+    label: "Baby’s & Toys",
+    link: "/babys-&-toys",
+    hasSubmenu: false,
+  },
+  {
+    _id: 8,
+    label: "Groceries & Pets",
+    link: "/groceries-&-pets",
+    hasSubmenu: false,
+  },
+  {
+    _id: 9,
+    label: "Health & Beauty",
+    link: "/health-&-beauty",
+    hasSubmenu: false,
+  },
+];
+
+export const heroSliderData = [
+  {
+    _id: 1,
+    title: "iPhone 14 Series",
+    description: "Up to 10% off Voucher",
+    image: "/images/hero-slider/img_1.png",
+    ctaLink: "/shop-now",
+  },
+  {
+    _id: 2,
+    title: "Xbox Consoles",
+    description: "Up to 50% on select Xbox games",
+    image: "/images/hero-slider/img_2.png",
+    ctaLink: "/shop-now",
+  },
+  {
+    _id: 3,
+    title: "Apple Watch Ultra 2",
+    description: "Sale up to 20% off",
+    image: "/images/hero-slider/img_3.png",
+    ctaLink: "/shop-now",
+  },
+  {
+    _id: 4,
+    title: "Nike, Adidas",
+    description: "MIN 40% OFF",
+    image: "/images/hero-slider/img_4.png",
+    ctaLink: "/shop-now",
+  },
+  {
+    _id: 5,
+    title: "Playstation 5",
+    description: "MIN 25% OFF",
+    image: "/images/hero-slider/img_5.png",
+    ctaLink: "/shop-now",
+  },
+  {
+    _id: 6,
+    title: "Galaxy S24 | S24+",
+    description: "Get up to 5% off",
+    image: "/images/hero-slider/img_6.png",
+    ctaLink: "/shop-now",
+  },
+];
+
 /* about page data */
 export const aboutStatsData = [
   {
