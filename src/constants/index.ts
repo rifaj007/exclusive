@@ -91,7 +91,7 @@ export const heroSliderData = [
     _id: 1,
     title: "iPhone 14 Series",
     description: "Up to 10% off Voucher",
-    image: "/images/hero-slider/img_1.png",
+    image: "/images/hero-slider/img_1.jpeg",
     ctaLink: "/shop-now",
   },
   {
