@@ -12,7 +12,7 @@ const NavSearch = () => {
     <form onSubmit={onSubmit} className="relative w-[245px]">
       <input
         placeholder="What are you looking for?"
-        className="bg-secondary-2 pl-[20px] pr-10 py-2 rounded focus:outline-none text-[12px] placeholder:text-text-3 text-black w-full hover:bg-black/10 transition duration-200 focus:bg-black/10"
+        className="bg-secondary-2 pl-[20px] pr-10 py-2 rounded focus:outline-none text-[12px] placeholder:text-text-3 text-black w-full transition duration-200"
       />
       <div className="absolute right-0 top-0 bottom-0">
         <button

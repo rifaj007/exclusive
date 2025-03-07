@@ -1,23 +1,8 @@
 "use client";
-import CountUp from "react-countup";
+import CountUp, { CountUpProps } from "react-countup";
 
-interface CountUpClientProps {
-  start: number;
-  end: number;
-  duration: number;
-  decimals: number;
-}
-
-const CountUpClient = ({ start, end, duration, decimals }: CountUpClientProps) => {
-  return (
-    <CountUp
-      start={start}
-      end={end}
-      duration={duration}
-      separator=","
-      decimals={decimals}
-    />
-  );
+const CountUpClient = (props: CountUpProps) => {
+  return <CountUp {...props} />;
 };
 
 export default CountUpClient;

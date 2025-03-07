@@ -27,7 +27,7 @@ const AboutSlider = () => {
           el: ".about-swiper-pagination",
           clickable: true,
           renderBullet: (index, className) => {
-            return `<span class="about-swiper-bullet ${className}"></span>`;
+            return `<span class="swiper-bullet ${className}"></span>`;
           },
         }}
         breakpoints={{

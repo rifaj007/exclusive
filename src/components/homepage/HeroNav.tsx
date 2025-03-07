@@ -26,10 +26,10 @@ const HeroNav = () => {
   };
 
   return (
-    <nav className="w-60 pt-10 pr-4 relative border-r border-border-1 h-full">
-      <ul ref={menuRef} className="space-y-4 w-full">
+    <nav className="lg:w-60 lg:pt-10 pt-5 pr-4 relative lg:border-r border-border-1 h-full border-0 lg:mb-0 mb-4">
+      <ul ref={menuRef} className="w-full h-full flex flex-row lg:flex-col gap-4 lg:items-start items-center flex-wrap">
         {heroNavbarData.map((item) => (
-          <li key={item._id} className="relative group">
+          <li key={item._id} className="relative group lg:w-full">
             <div className="flex-between w-full">
               {item.link ? (
                 <Link href={item.link} className="flex-1">
@@ -57,7 +57,7 @@ const HeroNav = () => {
             </div>
 
             {item.hasSubmenu && openSubmenu === item._id && (
-              <ul className="absolute left-full top-0 bg-white shadow-lg rounded-lg min-w-[200px] p-2 space-y-1 z-10 border">
+              <ul className="absolute right-0 left-0 lg:left-full top-5 bg-white shadow-lg rounded-lg w-[150px] lg:min-w-[200px] p-2 space-y-1 z-10 border">
                 {item.submenu?.map((sub) => (
                   <li key={sub._id}>
                     <Link

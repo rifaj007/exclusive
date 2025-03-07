@@ -1,13 +1,15 @@
 "use client";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { navItems } from "@/constants";
-import { CartIcon, HeartIcon, ProfileIcon } from "@/icons";
+import { CartIcon, HeartIcon, ProfileIcon, SearchIcon } from "@/icons";
 import NavSearch from "./NavSearch";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNavSearchOpen, setIsNavSearchOpen] = useState(false);
+  const searchRef = useRef<HTMLDivElement | null>(null);
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
@@ -39,6 +41,25 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setIsNavSearchOpen(false);
+      }
+    };
+
+    if (isNavSearchOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isNavSearchOpen]);
+
   return (
     <>
       <header
@@ -46,7 +67,7 @@ const Header = () => {
           showHeader ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="container">
+        <div className="container relative">
           <nav className="flex justify-between items-center">
             {/* Logo and Mobile Menu Button */}
             <div className="flex items-center gap-5">
@@ -99,13 +120,21 @@ const Header = () => {
             </ul>
 
             <div className="flex gap-6 items-center">
-              {/* Nav Search */}
+              {/* Nav Search for large device */}
               <div className="hidden md:flex">
                 <NavSearch />
               </div>
 
               {/* Wishlist, Cart, and Profile Icons */}
               <div className="flex items-center gap-4">
+                {/* Nav search button for mobile device */}
+                <button
+                  onClick={() => setIsNavSearchOpen(!isNavSearchOpen)}
+                  className="h-full w-full bg-transparent outline-0 md:hidden"
+                >
+                  <SearchIcon />
+                </button>
+
                 {/* Wishlist */}
                 <div>
                   <HeartIcon />
@@ -123,6 +152,16 @@ const Header = () => {
               </div>
             </div>
           </nav>
+
+          {/* Mobile search box */}
+          {isNavSearchOpen && (
+            <div
+              ref={searchRef}
+              className="absolute top-10 left-1/2 -translate-x-1/2"
+            >
+              <NavSearch />
+            </div>
+          )}
         </div>
       </header>
 
@@ -133,9 +172,6 @@ const Header = () => {
             isMenuOpen ? "translate-y-0" : "-translate-y-[120%]"
           }`}
         >
-          <div className="md:hidden flex justify-center mb-8">
-            <NavSearch />
-          </div>
           <ul className="flex flex-col gap-12">
             {navItems.map(({ label, route }) => (
               <li
