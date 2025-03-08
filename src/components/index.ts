@@ -7,3 +7,5 @@ export { default as Services } from "./pages-component/Services";
 export { default as GoogleLogin } from "./auth/GoogleLogin";
 export { default as ScrollProgressButton } from "./pages-component/ScrollProgressButton";
 export { default as Hero } from "./homepage/Hero";
+export { default as FlashSales } from "./flash-sales/FlashSales";
+export { default as ProductCard } from "./product/ProductCard";

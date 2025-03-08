@@ -1,18 +1,7 @@
-"use client";
 import { aboutStatsData } from "@/constants";
-import { useInView } from "react-intersection-observer";
-import dynamic from "next/dynamic";
-
-const CountUpClient = dynamic(
-  () => import("@/components/elements/CountUpClient"),
-  {
-    ssr: false,
-  }
-);
+import CountUpClient from "../elements/CountUpClient";
 
 const AboutStats = () => {
-  const { ref, inView } = useInView({ triggerOnce: true });
-
   return (
     <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-[140px] xl:mt-[200px]">
       {aboutStatsData.map(({ _id, value, label, icon: Icon }) => {
@@ -21,7 +10,6 @@ const AboutStats = () => {
         return (
           <div
             key={_id}
-            ref={ref}
             className="border border-border-1 rounded text-center py-[26px] group hover:bg-[#DB4444] hover:shadow-lg transition duration-300"
           >
             <div className="flex justify-center mb-5">
@@ -34,16 +22,12 @@ const AboutStats = () => {
 
             {/* React CountUp for animated value */}
             <h5 className="font-inter font-bold text-[32px] leading-[30px] mb-1 group-hover:text-white">
-              {inView ? (
-                <CountUpClient
-                  start={0}
-                  end={numericValue}
-                  duration={5}
-                  decimals={value.includes(".") ? 1 : 0}
-                />
-              ) : (
-                "0"
-              )}
+              <CountUpClient
+                enableScrollSpy
+                scrollSpyOnce
+                end={numericValue}
+                duration={5}
+              />
               k
             </h5>
             <p className="group-hover:text-white">{label}</p>

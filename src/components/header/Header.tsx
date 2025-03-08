@@ -10,6 +10,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavSearchOpen, setIsNavSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
@@ -45,7 +46,9 @@ const Header = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         searchRef.current &&
-        !searchRef.current.contains(event.target as Node)
+        !searchRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
       ) {
         setIsNavSearchOpen(false);
       }
@@ -129,7 +132,8 @@ const Header = () => {
               <div className="flex items-center gap-4">
                 {/* Nav search button for mobile device */}
                 <button
-                  onClick={() => setIsNavSearchOpen(!isNavSearchOpen)}
+                ref={buttonRef}
+                  onClick={() => setIsNavSearchOpen((prev) => !prev)}
                   className="h-full w-full bg-transparent outline-0 md:hidden"
                 >
                   <SearchIcon />

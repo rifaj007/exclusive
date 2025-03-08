@@ -16,7 +16,7 @@ export const navItems = [
   { label: "Sign Up", route: "/sign-up" },
 ];
 
-/* home page data */
+/* hero section data */
 export const heroNavbarData = [
   {
     _id: 1,
@@ -128,6 +128,50 @@ export const heroSliderData = [
     description: "Get up to 5% off",
     image: "/images/hero-slider/img_6.png",
     ctaLink: "/shop-now",
+  },
+];
+
+/* product data */
+export const productsData = [
+  {
+    _id: "1",
+    name: "HAVIT HV-G92 Gamepad",
+    price: 120,
+    original_price: 160,
+    discount: "-40%",
+    rating: 4.5,
+    reviews: 88,
+    imageUrl: "/images/product/img_1.png",
+  },
+  {
+    _id: "2",
+    name: "AK-900 Wired Keyboard",
+    price: 960,
+    original_price: 1160,
+    discount: "-35%",
+    rating: 3.5,
+    reviews: 75,
+    imageUrl: "/images/product/img_2.png",
+  },
+  {
+    _id: "3",
+    name: "IPS LCD Gaming Monitor",
+    price: 370,
+    original_price: 400,
+    discount: "-30%",
+    rating: 5,
+    reviews: 99,
+    imageUrl: "/images/product/img_3.png",
+  },
+  {
+    _id: "4",
+    name: "S-Series Comfort Chair",
+    price: 375,
+    original_price: 400,
+    discount: "-25%",
+    rating: 4.5,
+    reviews: 99,
+    imageUrl: "/images/product/img_4.png",
   },
 ];
 

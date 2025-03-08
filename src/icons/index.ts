@@ -23,3 +23,7 @@ export { default as ArrowUpIcon } from "./arrowUp";
 export { default as ArrowRightIcon } from "./arrowRight";
 export { default as DropRightIcon } from "./dropRight";
 export { default as DropDownIcon } from "./dropDown";
+export { default as ViewIcon } from "./view";
+export { default as StarFullIcon } from "./starFull";
+export { default as StarEmptyIcon } from "./starEmpty";
+export { default as StarHalfIcon } from "./starHalf";
