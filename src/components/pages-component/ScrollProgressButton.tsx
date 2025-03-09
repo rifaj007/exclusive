@@ -20,7 +20,7 @@ const ScrollProgressButton = () => {
 
   return (
     <div
-      className={`fixed bottom-6 right-8 w-12 h-12 rounded-full flex-center cursor-pointer bg-secondary-2 z-50 shadow-lg hover:bg- ${
+      className={`fixed bottom-4 sm:bottom-5 md:bottom-6 right-4 sm:right-5 md:right-8 w-10 sm:w-12 h-10 sm:h-12 rounded-full flex-center cursor-pointer bg-secondary-2 z-50 shadow-lg hover:bg- ${
         showButton
           ? "opacity-100 visible translate-y-0"
           : "opacity-0 invisible translate-y-3"
@@ -30,7 +30,7 @@ const ScrollProgressButton = () => {
         transition: "all 0.2s linear, margin-right 0s",
       }}
     >
-      <ArrowUpIcon />
+      <ArrowUpIcon className="w-5 h-5 sm:w-6 sm:h-6" />
     </div>
   );
 };

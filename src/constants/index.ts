@@ -147,7 +147,7 @@ export const flashSalesProductsData = [
     discount: "-40%",
     rating: 4.5,
     reviews: 88,
-    imageUrl: "/images/product/img_1.png",
+    imageUrl: "/images/product/flash-sales/img_1.png",
   },
   {
     _id: "2",
@@ -157,7 +157,7 @@ export const flashSalesProductsData = [
     discount: "-35%",
     rating: 3.5,
     reviews: 75,
-    imageUrl: "/images/product/img_2.png",
+    imageUrl: "/images/product/flash-sales/img_2.png",
   },
   {
     _id: "3",
@@ -167,7 +167,7 @@ export const flashSalesProductsData = [
     discount: "-30%",
     rating: 5,
     reviews: 99,
-    imageUrl: "/images/product/img_3.png",
+    imageUrl: "/images/product/flash-sales/img_3.png",
   },
   {
     _id: "4",
@@ -177,7 +177,7 @@ export const flashSalesProductsData = [
     discount: "-25%",
     rating: 4.5,
     reviews: 99,
-    imageUrl: "/images/product/img_4.png",
+    imageUrl: "/images/product/flash-sales/img_4.png",
   },
   {
     _id: "5",
@@ -187,7 +187,7 @@ export const flashSalesProductsData = [
     discount: "-40%",
     rating: 4.5,
     reviews: 88,
-    imageUrl: "/images/product/img_1.png",
+    imageUrl: "/images/product/flash-sales/img_1.png",
   },
   {
     _id: "6",
@@ -197,7 +197,7 @@ export const flashSalesProductsData = [
     discount: "-35%",
     rating: 3.5,
     reviews: 75,
-    imageUrl: "/images/product/img_2.png",
+    imageUrl: "/images/product/flash-sales/img_2.png",
   },
   {
     _id: "7",
@@ -207,7 +207,7 @@ export const flashSalesProductsData = [
     discount: "-30%",
     rating: 5,
     reviews: 99,
-    imageUrl: "/images/product/img_3.png",
+    imageUrl: "/images/product/flash-sales/img_3.png",
   },
   {
     _id: "8",
@@ -217,9 +217,74 @@ export const flashSalesProductsData = [
     discount: "-25%",
     rating: 4.5,
     reviews: 99,
-    imageUrl: "/images/product/img_4.png",
+    imageUrl: "/images/product/flash-sales/img_4.png",
   },
 ];
+
+export const bestSellingProductsData = [
+  {
+    _id: "1",
+    name: "The north coat",
+    price: 260,
+    original_price: 360,
+    rating: 5,
+    reviews: 65,
+    imageUrl: "/images/product/best-selling/img_1.png",
+  },
+  {
+    _id: "2",
+    name: "Gucci duffle bag",
+    price: 960,
+    original_price: 1160,
+    rating: 4.5,
+    reviews: 95,
+    imageUrl: "/images/product/best-selling/img_2.png",
+  },
+  {
+    _id: "3",
+    name: "RGB liquid CPU Cooler",
+    price: 160,
+    original_price: 170,
+    rating: 3.5,
+    reviews: 54,
+    imageUrl: "/images/product/best-selling/img_3.png",
+  },
+  {
+    _id: "4",
+    name: "Small BookSelf",
+    price: 360,
+    rating: 5,
+    reviews: 44,
+    imageUrl: "/images/product/best-selling/img_4.png",
+  },
+  {
+    _id: "5",
+    name: "The north coat",
+    price: 260,
+    original_price: 360,
+    rating: 5,
+    reviews: 65,
+    imageUrl: "/images/product/best-selling/img_1.png",
+  },
+  {
+    _id: "6",
+    name: "Gucci duffle bag",
+    price: 960,
+    original_price: 1160,
+    rating: 4.5,
+    reviews: 95,
+    imageUrl: "/images/product/best-selling/img_2.png",
+  },
+  {
+    _id: "7",
+    name: "RGB liquid CPU Cooler",
+    price: 160,
+    original_price: 170,
+    rating: 3.5,
+    reviews: 54,
+    imageUrl: "/images/product/best-selling/img_3.png",
+  },
+]
 
 /* category slider data */
 export const categoriesSliderData = [

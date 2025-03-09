@@ -15,6 +15,7 @@ const CategorySlider = () => {
       <Swiper
         autoplay={{
           delay: 1200,
+          pauseOnMouseEnter: true,
         }}
         speed={150}
         onSwiper={setSwiperInstance}
@@ -23,7 +24,8 @@ const CategorySlider = () => {
         }}
         loop={true}
         breakpoints={{
-          320: { slidesPerView: 2, spaceBetween: 20 },
+          320: { slidesPerView: 2, spaceBetween: 15 },
+          425: { slidesPerView: 3, spaceBetween: 15 },
           640: { slidesPerView: 3, spaceBetween: 20 },
           768: { slidesPerView: 4, spaceBetween: 20 },
           1024: { slidesPerView: 5, spaceBetween: 30 },
@@ -41,7 +43,7 @@ const CategorySlider = () => {
               className="py-6 flex flex-col items-center gap-2 "
             >
               <Icon className="group-hover:text-text-1" />
-              <span className="group-hover:text-text-1 transition-all duration-200">
+              <span className="group-hover:text-text-1 text-[14px] sm:text-base transition-all duration-200">
                 {name}
               </span>
             </Link>

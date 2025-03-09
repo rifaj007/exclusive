@@ -5,11 +5,19 @@ import Link from "next/link";
 import { HeartIcon, ViewIcon } from "@/icons";
 
 const ProductCard = ({ data }: ProductCardProps) => {
-  const { _id, imageUrl, name, price, original_price, rating, reviews, discount } = data;
+  const {
+    _id,
+    imageUrl,
+    name,
+    price,
+    original_price,
+    rating,
+    reviews,
+    discount,
+  } = data;
   return (
     <div>
-      {/*  */}
-      <div className="bg-secondary-2 h-[250px] rounded mb-4 relative group z-20">
+      <div className="bg-secondary-2 h-[200px] sm:h-[250px] rounded mb-4 relative group z-20">
         <Image
           src={imageUrl}
           alt={name}
@@ -19,7 +27,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
         />
 
         {/* wishlist and view button */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2">
+        <div className="absolute top-1 sm:top-3 right-1 sm:right-3 flex flex-col gap-2">
           <button className="bg-white rounded-full p-[5px]">
             <HeartIcon className="w-7 h-7" />
           </button>
@@ -37,19 +45,25 @@ const ProductCard = ({ data }: ProductCardProps) => {
         </button>
 
         {/* discount */}
-        {
-          discount && (
-            <div className="absolute top-3 left-3 bg-secondary-3 px-3 rounded"><span className="text-[12px] text-text-1">{discount}</span></div>
-          )
-        }
+        {discount && (
+          <div className="absolute top-3 left-3 bg-secondary-3 px-3 rounded">
+            <span className="text-[12px] text-text-1">{discount}</span>
+          </div>
+        )}
       </div>
 
-      <div className="">
-        <span className="font-medium mb-3">{name}</span>
+      <div>
+        <span className="font-medium mb-3 text-[14px] sm:text-base">
+          {name}
+        </span>
 
-        <div className="font-medium space-x-3 mb-2">
+        <div className="font-medium space-x-3 sm:mb-2 text-[14px] sm:text-base">
           <span className="text-secondary-3">${price}</span>
-          <span className="text-border-2 line-through">${original_price}</span>
+          {original_price && (
+            <span className="text-border-2 line-through">
+              ${original_price}
+            </span>
+          )}
         </div>
 
         <div className="flex gap-2 items-center">

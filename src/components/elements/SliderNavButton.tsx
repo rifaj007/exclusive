@@ -5,7 +5,7 @@ const SliderNavButton = ({ swiper }: { swiper: SwiperType | null }) => {
   if (!swiper) return null;
 
   return (
-    <div className="absolute -top-[88px] right-0 gap-2 hidden md:flex">
+    <div className="absolute -top-[108px] right-0 gap-2 hidden md:flex">
       {/* prev button */}
       <button
         onClick={() => swiper.slidePrev()}

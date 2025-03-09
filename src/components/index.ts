@@ -8,4 +8,6 @@ export { default as GoogleLogin } from "./auth/GoogleLogin";
 export { default as ScrollProgressButton } from "./pages-component/ScrollProgressButton";
 export { default as Hero } from "./homepage/Hero";
 export { default as FlashSales } from "./flash-sales/FlashSales";
-export { default as Categories } from "./category/Categories";
+export { default as FlashSaleBanner } from "./flash-sales/FlashSaleBanner";
+export { default as Categories } from "./categories/Categories";
+export { default as BestSellingProduct } from "./best-selling-product/BestSellingProduct";

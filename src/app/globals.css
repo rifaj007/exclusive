@@ -9,6 +9,7 @@
     --secondary-1: #fefaf1;
     --secondary-2: #f5f5f5;
     --secondary-3: #db4444;
+    --secondary-4: #00FF66;
 
     --text-1: #fafafa;
     --text-2: #7d8184;
@@ -165,7 +166,7 @@
   }
 
   .button {
-    @apply rounded bg-button-2 py-4 px-7 lg:px-9 xl:px-12 text-text-1 md:font-medium text-sm lg:text-base disabled:opacity-70 disabled:cursor-not-allowed;
+    @apply rounded bg-button-2 py-3 sm:py-4 px-6 sm:px-7 lg:px-9 xl:px-12 text-text-1 md:font-medium text-sm lg:text-base disabled:opacity-70 disabled:cursor-not-allowed;
   }
 
   .breadcrumbs {

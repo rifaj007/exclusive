@@ -11,6 +11,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'sm-xs': '425px',
+        'xs': '320px',
+      },
       colors: {
         primary: {
           1: "var(--primary-1)",
@@ -20,6 +24,7 @@ export default {
           1: "var(--secondary-1)",
           2: "var(--secondary-2)",
           3: "var(--secondary-3)",
+          4: "var(--secondary-4)",
         },
         text: {
           1: "var(--text-1)",

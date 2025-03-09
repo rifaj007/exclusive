@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const FlashSaleCountdownTimer = () => {
-  const flashSaleEndTime = new Date().getTime() + 3 * 24 * 60 * 60 * 1000; // Ends in 3 days
+const FlashSaleBannerCountdownTimer = () => {
+    const FlashSaleBannerEndTime = new Date().getTime() + 3 * 24 * 60 * 60 * 1000; // Ends in 3 days
 
   const calculateTimeLeft = () => {
     const now = new Date().getTime();
-    const difference = flashSaleEndTime - now;
+    const difference = FlashSaleBannerEndTime - now;
 
     if (difference <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
@@ -29,32 +29,18 @@ const FlashSaleCountdownTimer = () => {
   }, []);
 
   return (
-    <div className="flex items-end gap-3 sm-xs:gap-4 sm:gap-6 text-black">
+    <div className="flex items-end gap-[6px] sm-xs:gap-4 sm:gap-6 text-black mb-10">
       {["Days", "Hours", "Minutes", "Seconds"]
         .map((unit, index) => (
-          <div key={unit} className="flex flex-col items-center">
-            <span className="text-sm font-medium">{unit}</span>
-            <span className="text-3xl lg:text-4xl font-bold font-inter">
+          <div key={unit} className="flex flex-col justify-center items-center text-black bg-white rounded-full w-16 h-16">
+            <span className="font-semibold -mb-1">
               {Object.values(timeLeft)[index].toString().padStart(2, "0")}
             </span>
+            <span className="text-xs">{unit}</span>
           </div>
-        ))
-        .reduce<React.ReactNode[]>((acc, curr, index) => {
-          if (index > 0) {
-            acc.push(
-              <span
-                key={`colon-${index}`}
-                className="text-4xl text-button-hover1 font-bold"
-              >
-                :
-              </span>
-            );
-          }
-          acc.push(curr);
-          return acc;
-        }, [])}
+        ))}
     </div>
   );
 };
 
-export default FlashSaleCountdownTimer;
+export default FlashSaleBannerCountdownTimer;

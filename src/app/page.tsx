@@ -1,5 +1,7 @@
 import {
+  BestSellingProduct,
   Categories,
+  FlashSaleBanner,
   FlashSales,
   Hero,
   ScrollProgressButton,
@@ -13,6 +15,8 @@ export default function Home() {
         <Hero />
         <FlashSales />
         <Categories />
+        <BestSellingProduct/>
+        <FlashSaleBanner/>
         <Services />
       </div>
 

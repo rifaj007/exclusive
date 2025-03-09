@@ -22,11 +22,14 @@ const FlashSaleSlider = () => {
           enabled: true,
         }}
         loop={true}
+        slidesPerView={2}
+        spaceBetween={20}
         breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 2, spaceBetween: "20px" },
-          1024: { slidesPerView: 3, spaceBetween: "30px" },
-          1280: { slidesPerView: 4, spaceBetween: "30px" },
+          320: { slidesPerView: 2, spaceBetween: 20 },
+          // 640: { slidesPerView: 2, spaceBetween: 20 },
+          768: { slidesPerView: 3, spaceBetween: 30 },
+          1024: { slidesPerView: 4, spaceBetween: 30 },
+          1280: { slidesPerView: 4, spaceBetween: 30 },
         }}
         modules={[Autoplay, Keyboard]}
       >
