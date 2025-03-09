@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const CountdownTimer = ({ endsAt }: { endsAt: number }) => {
+const FlashSaleCountdownTimer = ({ endsAt }: { endsAt: number }) => {
   const calculateTimeLeft = () => {
     const now = new Date().getTime();
     const difference = endsAt - now;
@@ -32,7 +32,7 @@ const CountdownTimer = ({ endsAt }: { endsAt: number }) => {
         .map((unit, index) => (
           <div key={unit} className="flex flex-col items-center">
             <span className="text-sm font-medium">{unit}</span>
-            <span className="text-4xl font-bold font-inter">
+            <span className="text-3xl lg:text-4xl font-bold font-inter">
               {Object.values(timeLeft)[index].toString().padStart(2, "0")}
             </span>
           </div>
@@ -55,4 +55,4 @@ const CountdownTimer = ({ endsAt }: { endsAt: number }) => {
   );
 };
 
-export default CountdownTimer;
+export default FlashSaleCountdownTimer;

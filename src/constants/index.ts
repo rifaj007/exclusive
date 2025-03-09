@@ -1,11 +1,17 @@
 import {
+  CameraIcon,
+  CellPhoneIcon,
+  ComputerIcon,
   CustomerServiceIcon,
   DeliveryIcon,
   DollarIcon,
+  GamepadIcon,
+  HeadphoneIcon,
   MoneyBagIcon,
   SecureIcon,
   ShopIcon,
   ShoppingBagIcon,
+  SmartWatchIcon,
 } from "@/icons";
 
 /* nav bar data */
@@ -131,8 +137,8 @@ export const heroSliderData = [
   },
 ];
 
-/* product data */
-export const productsData = [
+/* products data */
+export const flashSalesProductsData = [
   {
     _id: "1",
     name: "HAVIT HV-G92 Gamepad",
@@ -173,6 +179,62 @@ export const productsData = [
     reviews: 99,
     imageUrl: "/images/product/img_4.png",
   },
+  {
+    _id: "5",
+    name: "HAVIT HV-G92 Gamepad",
+    price: 120,
+    original_price: 160,
+    discount: "-40%",
+    rating: 4.5,
+    reviews: 88,
+    imageUrl: "/images/product/img_1.png",
+  },
+  {
+    _id: "6",
+    name: "AK-900 Wired Keyboard",
+    price: 960,
+    original_price: 1160,
+    discount: "-35%",
+    rating: 3.5,
+    reviews: 75,
+    imageUrl: "/images/product/img_2.png",
+  },
+  {
+    _id: "7",
+    name: "IPS LCD Gaming Monitor",
+    price: 370,
+    original_price: 400,
+    discount: "-30%",
+    rating: 5,
+    reviews: 99,
+    imageUrl: "/images/product/img_3.png",
+  },
+  {
+    _id: "8",
+    name: "S-Series Comfort Chair",
+    price: 375,
+    original_price: 400,
+    discount: "-25%",
+    rating: 4.5,
+    reviews: 99,
+    imageUrl: "/images/product/img_4.png",
+  },
+];
+
+/* category slider data */
+export const categoriesSliderData = [
+  { _id: 1, name: "Phones", icon: CellPhoneIcon },
+  { _id: 2, name: "Computers", icon: ComputerIcon },
+  { _id: 3, name: "SmartWatch", icon: SmartWatchIcon },
+  { _id: 4, name: "Camera", icon: CameraIcon },
+  { _id: 5, name: "HeadPhones", icon: HeadphoneIcon },
+  { _id: 6, name: "Gaming", icon: GamepadIcon },
+  { _id: 7, name: "Phones", icon: CellPhoneIcon },
+  { _id: 8, name: "Computers", icon: ComputerIcon },
+  { _id: 9, name: "SmartWatch", icon: SmartWatchIcon },
+  { _id: 10, name: "Camera", icon: CameraIcon },
+  { _id: 11, name: "HeadPhones", icon: HeadphoneIcon },
+  { _id: 12, name: "Gaming", icon: GamepadIcon },
 ];
 
 /* about page data */

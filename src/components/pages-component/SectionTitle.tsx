@@ -12,7 +12,7 @@ const SectionTitle = ({
         <h6 className="text-secondary-3 text-base">{subTitle}</h6>
       </div>
 
-      <h2 className="text-4xl font-inter tracking-wide">{title}</h2>
+      <h2 className="text-3xl lg:text-4xl font-inter tracking-wide">{title}</h2>
     </div>
   );
 };

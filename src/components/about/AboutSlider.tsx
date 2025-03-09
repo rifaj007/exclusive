@@ -15,11 +15,10 @@ const socialIcons = {
 
 const AboutSlider = () => {
   return (
-    <section className="about-slider pb-[140px]">
+    <section className="pb-[140px]">
       <Swiper
-        grabCursor={true}
         autoplay={{
-          delay: 2500,
+          delay: 1500,
           pauseOnMouseEnter: true,
         }}
         loop={true}
@@ -36,14 +35,15 @@ const AboutSlider = () => {
           1024: { slidesPerView: 3, spaceBetween: "30px" },
         }}
         modules={[Autoplay, Pagination]}
-        className="about-swiper"
       >
         {aboutSliderData.map(({ _id, image, name, position, socialLinks }) => (
           <SwiperSlide key={_id} className="mb-8 md:text-left text-center">
-            <div className="bg-[#F5F5F5] h-[350px] xl:h-[430px] flex justify-center pt-8 mb-8">
+            <div className="bg-[#F5F5F5] h-[350px] xl:h-[430px] flex justify-center pt-8 mb-7">
               <img src={image} alt={name} className="h-full" />
             </div>
-            <h4 className="text-2xl xl:text-[32px] font-medium font-inter">{name}</h4>
+            <h4 className="text-2xl xl:text-[32px] font-medium font-inter mb-1">
+              {name}
+            </h4>
             <p className="mb-2">{position}</p>
 
             <ul className="flex gap-4 items-center md:justify-start justify-center">
@@ -63,7 +63,7 @@ const AboutSlider = () => {
         ))}
       </Swiper>
 
-{/* slider pagination */}
+      {/* slider pagination */}
       <div className="flex-center mt-1 h-4">
         <div className="about-swiper-pagination z-10 flex-center"></div>
       </div>
