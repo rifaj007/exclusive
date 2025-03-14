@@ -11,3 +11,4 @@ export { default as FlashSales } from "./flash-sales/FlashSales";
 export { default as FlashSaleBanner } from "./flash-sales/FlashSaleBanner";
 export { default as Categories } from "./categories/Categories";
 export { default as BestSellingProduct } from "./best-selling-product/BestSellingProduct";
+export { default as ExploreProducts } from "./explore-products/ExploreProducts";

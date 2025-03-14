@@ -15,6 +15,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
     reviews,
     discount,
   } = data;
+
   return (
     <div>
       <div className="bg-secondary-2 h-[200px] sm:h-[250px] rounded mb-4 relative group z-20">
