@@ -185,6 +185,14 @@
     @apply text-red-500 lg:text-sm text-xs mt-2;
   }
 
+  .new-arrival-wrapper {
+    @apply bg-black rounded relative
+  }
+
+  .new-arrival-heading {
+    @apply sm:text-2xl text-xl font-inter font-semibold text-text-1
+  }
+  
   .footer-heading {
     @apply text-xl font-medium text-text-1 mb-6;
   }

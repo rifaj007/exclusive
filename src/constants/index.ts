@@ -550,6 +550,42 @@ export const aboutSliderData = [
   },
 ];
 
+/* new arrival data */
+export const newArrivalData = [
+  {
+    id: 1,
+    title: "PlayStation 5",
+    description: "Black and White version of the PS5 coming out on sale.",
+    image: "ps5.jpg",
+    link: "#",
+    style: "col-span-1 row-span-2 bg-black",
+  },
+  {
+    id: 2,
+    title: "Women's Collections",
+    description: "Featured women's collections that give you another vibe.",
+    image: "women-collection.jpg",
+    link: "#",
+    style: "col-span-1 bg-gray-900",
+  },
+  {
+    id: 3,
+    title: "Speakers",
+    description: "Amazon wireless speakers.",
+    image: "speakers.jpg",
+    link: "#",
+    style: "col-span-1 bg-gray-800",
+  },
+  {
+    id: 4,
+    title: "Perfume",
+    description: "GUCCI INTENSE OUD EDP",
+    image: "perfume.jpg",
+    link: "#",
+    style: "col-span-1 bg-gray-800",
+  },
+];
+
 /* services data */
 export const serviceFeatures = [
   {

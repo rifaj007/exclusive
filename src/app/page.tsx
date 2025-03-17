@@ -5,6 +5,7 @@ import {
   FlashSaleBanner,
   FlashSales,
   Hero,
+  NewArrival,
   ScrollProgressButton,
   Services,
 } from "@/components";
@@ -19,6 +20,7 @@ export default function Home() {
         <BestSellingProduct />
         <FlashSaleBanner />
         <ExploreProducts />
+        <NewArrival />
         <Services />
       </div>
 

@@ -4,7 +4,7 @@ import ExploreProductSlider from "./ExploreProductSlider";
 
 const ExploreProducts = () => {
   return (
-    <section className="mb-[140px]">
+    <section className="lg:mb-[140px] mb-[100px]">
       {/* Section Title */}
       <SectionTitle subTitle="Our Products" title="Explore Our Products" />
 
