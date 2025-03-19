@@ -26,7 +26,7 @@ const HeroNav = () => {
   };
 
   return (
-    <nav className="lg:w-60 lg:pt-10 pt-5 pr-4 relative lg:border-r border-border-1 h-full border-0 lg:mb-0 mb-4">
+    <nav className="lg:w-60 lg:pt-10 sm:pt-5 pr-4 relative lg:border-r border-border-1 h-full border-0 lg:mb-0 mb-4">
       <ul ref={menuRef} className="w-full h-full flex flex-row lg:flex-col gap-4 lg:items-start items-center flex-wrap">
         {heroNavbarData.map((item) => (
           <li key={item._id} className="relative group lg:w-full">

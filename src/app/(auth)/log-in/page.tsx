@@ -12,7 +12,7 @@ const Login = () => {
       <form className="mt-12 mb-4">
         <input
           type="text"
-          placeholder="Email or Phone Number"
+          placeholder="Email"
           className="auth-input mb-10"
         />
         <input

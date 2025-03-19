@@ -13,3 +13,4 @@ export { default as Categories } from "./categories/Categories";
 export { default as BestSellingProduct } from "./best-selling-product/BestSellingProduct";
 export { default as ExploreProducts } from "./explore-products/ExploreProducts";
 export { default as NewArrival } from "./new-arrival/NewArrival";
+export { default as SignUpForm } from "./auth/SignUpForm";

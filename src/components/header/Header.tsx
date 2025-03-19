@@ -66,7 +66,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full bg-white border-b-[0.5px] border-border-1 pt-8 md:pt-10 pb-4 duration-500 z-50 ${
+        className={`fixed top-0 left-0 w-full bg-white border-b-[0.5px] border-border-1 pt-4 sm:pt-8 md:pt-10 pb-4 duration-500 z-50 ${
           showHeader ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -132,7 +132,7 @@ const Header = () => {
               <div className="flex items-center gap-4">
                 {/* Nav search button for mobile device */}
                 <button
-                ref={buttonRef}
+                  ref={buttonRef}
                   onClick={() => setIsNavSearchOpen((prev) => !prev)}
                   className="h-full w-full bg-transparent outline-0 md:hidden"
                 >

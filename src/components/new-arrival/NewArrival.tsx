@@ -77,7 +77,7 @@ const NewArrival = () => {
         </div>
 
         {/* Perfume - Small Block */}
-        <div className="new-arrival-wrapper p-7">
+        <div className="new-arrival-wrapper lg:p-7">
           <Image
             src="/images/new-arrival/perfume.png"
             width={500}

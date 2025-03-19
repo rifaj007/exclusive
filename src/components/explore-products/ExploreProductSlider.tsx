@@ -27,7 +27,7 @@ const ExploreProductSlider = () => {
         keyboard={{
           enabled: true,
         }}
-        // loop={exploreProductsData.length > 8}
+        loop={exploreProductsData.length > 8}
         breakpoints={{
           320: { slidesPerView: 2, spaceBetween: 10 },
           768: { slidesPerView: 3, spaceBetween: 20 },

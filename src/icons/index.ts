@@ -34,3 +34,5 @@ export { default as CameraIcon } from "./camera";
 export { default as GamepadIcon } from "./gamepad";
 export { default as HeadphoneIcon } from "./headphone";
 export { default as ComputerIcon } from "./computer";
+export { default as EyeIcon } from "./eye";
+export { default as EyeCloseIcon } from "./eyeClose";
