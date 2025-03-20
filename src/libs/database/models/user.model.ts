@@ -6,6 +6,11 @@ export interface IUser extends Document {
   password: string;
   address?: string;
   emailVerified: boolean;
+  isAdmin: boolean;
+}
+
+export interface IUserCreate {
+  user: IUser;
 }
 
 const userSchema = new Schema<IUser>(
@@ -15,10 +20,12 @@ const userSchema = new Schema<IUser>(
     password: { type: String, select: false },
     address: { type: String },
     emailVerified: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
 
-const User: Model<IUser> = (models.User as Model<IUser>) || model<IUser>("User", userSchema);
+const User: Model<IUser> =
+  (models.User as Model<IUser>) || model<IUser>("User", userSchema);
 
 export default User;

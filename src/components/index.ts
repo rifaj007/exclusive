@@ -14,3 +14,4 @@ export { default as BestSellingProduct } from "./best-selling-product/BestSellin
 export { default as ExploreProducts } from "./explore-products/ExploreProducts";
 export { default as NewArrival } from "./new-arrival/NewArrival";
 export { default as SignUpForm } from "./auth/SignUpForm";
+export { default as LoginForm } from "./auth/LoginForm";

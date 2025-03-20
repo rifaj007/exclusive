@@ -4,7 +4,7 @@ import Link from "next/link";
 const SignUp = () => {
   return (
     <>
-      <h3 className="text-4xl font-inter font-medium mb-3">
+      <h3 className="sm:text-4xl text-3xl font-inter font-medium mb-3">
         Create an account
       </h3>
       <p>Enter your details below</p>

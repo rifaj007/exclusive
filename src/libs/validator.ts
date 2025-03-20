@@ -14,10 +14,10 @@ export const contactFormSchema = object({
   ),
 });
 
-/* Sign up form validation schema */
+/* sign up form validation schema */
 export const signUpFormSchema = object({
-  name: string().nonempty("Please! give your name."),
-  email: string().email("Please! give your email."),
+  name: string().nonempty("Please! provide your name."),
+  email: string().email("Please! provide your email."),
   password: string()
     .min(1, "Password is required")
     .min(8, "Password must be more than 8 characters")
@@ -35,3 +35,9 @@ export const signUpFormSchema = object({
     });
   }
 });
+
+/* login form validation schema */
+export const loginFormSchema = object({
+  email: string().email("Please! provide your email."),
+  password: string().nonempty("Please! provide your password.")
+})
