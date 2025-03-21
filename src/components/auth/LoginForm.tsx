@@ -1,9 +1,11 @@
 "use client";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
+import { login } from "@/libs/actions/user.action";
 import { loginFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const LoginForm = () => {
@@ -22,7 +24,16 @@ const LoginForm = () => {
   const passwordValue = watch("password");
 
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    console.log(values);
+    try {
+      login({
+        email: values.email,
+        password: values.password,
+      })
+    } catch (error) {
+      console.log(error)
+      toast.error("Error while logging in!");
+    }
+    toast.success("Logged in successfully!");
   }
 
   return (
@@ -70,7 +81,7 @@ const LoginForm = () => {
 
       {/* Signin button */}
       <button disabled={isSubmitting} type="submit" className="button w-full">
-        {isSubmitting ? "Loggin in" : "Log In"}
+        {isSubmitting ? "Logging in" : "Log In"}
       </button>
     </form>
   );

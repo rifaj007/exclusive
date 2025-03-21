@@ -10,7 +10,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavSearchOpen, setIsNavSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const searchButtonRef = useRef<HTMLButtonElement | null>(null);
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
@@ -42,13 +42,14 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  /* ref for search button and content hiding */
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         searchRef.current &&
         !searchRef.current.contains(event.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target as Node)
+        searchButtonRef.current &&
+        !searchButtonRef.current.contains(event.target as Node)
       ) {
         setIsNavSearchOpen(false);
       }
@@ -66,7 +67,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full bg-white border-b-[0.5px] border-border-1 pt-4 sm:pt-8 md:pt-10 pb-4 duration-500 z-50 ${
+        className={`fixed top-0 bg-white left-0 w-full border-b-[0.5px] border-border-1 pt-4 sm:pt-8 md:pt-10 pb-4 duration-500 z-50 ${
           showHeader ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -132,7 +133,7 @@ const Header = () => {
               <div className="flex items-center gap-4">
                 {/* Nav search button for mobile device */}
                 <button
-                  ref={buttonRef}
+                  ref={searchButtonRef}
                   onClick={() => setIsNavSearchOpen((prev) => !prev)}
                   className="h-full w-full bg-transparent outline-0 md:hidden"
                 >
@@ -150,9 +151,11 @@ const Header = () => {
                 </div>
 
                 {/* Profile */}
-                <div>
+                <button>
                   <ProfileIcon />
-                </div>
+                </button>
+
+                <button>Sign Out</button>
               </div>
             </div>
           </nav>
@@ -161,15 +164,22 @@ const Header = () => {
           {isNavSearchOpen && (
             <div
               ref={searchRef}
-              className="absolute top-10 left-1/2 -translate-x-1/2"
+              className="absolute top-12 left-1/2 -translate-x-1/2"
             >
               <NavSearch />
             </div>
           )}
+
+          {/* User dropdown */}
+          <ul className="absolute top-10 right-0 bg-[#0000000A] backdrop-blur-[75px] rounded p-3 max-w-56 w-full">
+            <li>
+              <Link className="flex gap-3 items-center" href="/profile"><ProfileIcon/>Manage My Account</Link>
+            </li>
+          </ul>
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile nav Menu */}
       <div className="lg:hidden">
         <div
           className={`fixed top-20 md:top-24 left-0 w-full h-full transition-transform duration-[350ms] text-center bg-white pt-8 origin-top z-40 ${

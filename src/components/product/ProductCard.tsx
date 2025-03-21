@@ -1,4 +1,4 @@
-import { ProductCardProps } from "@/types";
+import { ProductCardProps } from "@/types/product";
 import Image from "next/image";
 import StarRating from "./StarRating";
 import Link from "next/link";

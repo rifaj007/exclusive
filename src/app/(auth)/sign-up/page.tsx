@@ -1,7 +1,7 @@
 import { GoogleLogin, SignUpForm } from "@/components";
 import Link from "next/link";
 
-const SignUp = () => {
+const SignUp = async () => {
   return (
     <>
       <h3 className="sm:text-4xl text-3xl font-inter font-medium mb-3">

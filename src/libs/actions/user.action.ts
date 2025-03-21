@@ -1,13 +1,23 @@
 "use server";
-
 import bcrypt from "bcryptjs";
 import { handleError } from "@/utils";
-import User, { IUserCreate } from "../database/models/user.model";
-import connectToDatabase from "../database/dbConnect";
+import User from "@/libs/database/models/user.model";
+import connectToDatabase from "@/libs/database/dbConnect";
+import { LoginParams, RegisterUserParams } from "@/types/auth";
+import { signIn } from "@/libs/auth";
 
-export const registerUser = async ({ user }: IUserCreate) => {
+export const login = async ({ email, password }: LoginParams) => {
+  try {
+    await signIn("credentials", { email, password, redirectTo: "/"});
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+export const registerUser = async ({ user }: RegisterUserParams) => {
   try {
     await connectToDatabase();
+    console.log(user);
 
     // check if user already exists
     const userExists = await User.findOne({ email: user.email });
@@ -17,8 +27,9 @@ export const registerUser = async ({ user }: IUserCreate) => {
 
     const hashedPassword = await bcrypt.hash(user.password, 10);
 
-    const newUser = await User.create({ ...user, password: hashedPassword });
-    return { message: "User registered successfully", user: newUser };
+    await User.create({ ...user, password: hashedPassword });
+
+    await login({ email: user.email, password: user.password });
   } catch (error) {
     handleError(error);
   }

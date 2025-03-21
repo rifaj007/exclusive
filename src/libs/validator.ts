@@ -19,12 +19,11 @@ export const signUpFormSchema = object({
   name: string().nonempty("Please! provide your name."),
   email: string().email("Please! provide your email."),
   password: string()
-    .min(1, "Password is required")
-    .min(8, "Password must be more than 8 characters")
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
-      "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-    ),
+    .min(1, "Please! provide your password.")
+    .min(8, "Password must be at least 8 characters.")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter.")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter.")
+    .regex(/[0-9]/, "Password must contain at least one number."),
   confirmPassword: string().nonempty("Please confirm your password."),
 }).superRefine(({ password, confirmPassword }, ctx) => {
   if (password !== confirmPassword) {
@@ -39,5 +38,10 @@ export const signUpFormSchema = object({
 /* login form validation schema */
 export const loginFormSchema = object({
   email: string().email("Please! provide your email."),
-  password: string().nonempty("Please! provide your password.")
-})
+  password: string()
+    .min(1, "Please! provide your password.")
+    .min(8, "Password must be at least 8 characters.")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter.")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter.")
+    .regex(/[0-9]/, "Password must contain at least one number."),
+});

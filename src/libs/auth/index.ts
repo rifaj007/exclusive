@@ -1,71 +1,87 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-// import Google from "next-auth/providers/google";
+import Google from "next-auth/providers/google";
 import connectToDatabase from "../database/dbConnect";
 import User from "@/libs/database/models/user.model";
 import { compare } from "bcryptjs";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    /* Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }), */
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
 
     Credentials({
-      name: "User",
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
+
       authorize: async (credentials) => {
-        let user = null;
+        const email = credentials.email as string | undefined;
+        const password = credentials.password as string | undefined;
+
+        if (!password) {
+          throw new Error("Invalid password");
+        }
 
         await connectToDatabase();
 
-        /* const userExist = await User.findOne({ email: credentials?.email }).select("+password");
-        if (!userExist) {
-          throw new Error("User not found");
+        const user = await User.findOne({ email }).select("+password +role");
+        if (!user) {
+          console.log("Invalid credentials");
+          return null;
         }
 
-        const passwordMatch = await compare(credentials.password, userExist.password);
+        const passwordMatch = await compare(password, user.password);
         if (!passwordMatch) {
-          throw new Error("Invalid password");
-        } */
+          console.log("Invalid password");
+          return null;
+        }
 
-        return user
+        return user;
       },
     }),
   ],
+  pages: {
+    signIn: "/sign-in",
+  },
   callbacks: {
     async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id;  // Use token.id instead of token.sub for clarity
-        session.user.isAdmin = token.isAdmin;
+      if (session?.user) {
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
       }
       return session;
     },
+
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.isAdmin = user.isAdmin;
+        token.sub = user.id;
+        token.name = user.name;
       }
       return token;
     },
-    async signIn({ user, account }) {
+
+    signIn: async ({ user, account }) => {
       if (account?.provider === "google") {
         try {
+          const { email, name, image, id } = user;
           await connectToDatabase();
-          // const existingUser = await User.findOne({ email: user.email });
-/* 
+          const existingUser = await User.findOne({ email });
+
           if (!existingUser) {
             await User.create({
-              email: user.email,
-              name: user.name,
-              image: user.image,
-              authProviderId: user.id,
+              email,
+              name,
+              address: "",
+              image,
+              authProviderId: id,
+              emailVerified: true,
             });
-          } */
+          }
           return true;
         } catch (error) {
           console.error("Error while creating user:", error);
@@ -76,16 +92,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (account?.provider === "credentials") {
         return true;
       }
-
       return false;
     },
   },
-  /* 
-  pages: {
-    signIn: "/sign-in",
-  },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET,
   session: {
     strategy: "jwt",
-  }, */
+  },
 });

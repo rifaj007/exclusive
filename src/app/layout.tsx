@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Poppins } from "next/font/google";
 import { Footer, Header } from "@/components";
+import { Toaster } from "react-hot-toast";
 
 export const inter = Inter({
   variable: "--font-inter",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <Header />
         <main className="pt-[97px] flex-1">{children}</main>
         <Footer />
+        <Toaster reverseOrder={false}/>
       </body>
     </html>
   );

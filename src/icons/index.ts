@@ -36,3 +36,7 @@ export { default as HeadphoneIcon } from "./headphone";
 export { default as ComputerIcon } from "./computer";
 export { default as EyeIcon } from "./eye";
 export { default as EyeCloseIcon } from "./eyeClose";
+export { default as BagIcon } from "./bag";
+export { default as CancelIcon } from "./cancel";
+export { default as StarLineIcon } from "./starLine";
+export { default as LogoutIcon } from "./logout";

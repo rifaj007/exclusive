@@ -1,9 +1,11 @@
 "use client";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
+import { registerUser } from "@/libs/actions/user.action";
 import { signUpFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const SignUpForm = () => {
@@ -24,7 +26,24 @@ const SignUpForm = () => {
   const confirmPasswordValue = watch("confirmPassword");
 
   async function onSubmit(values: z.infer<typeof signUpFormSchema>) {
-    console.log(values);
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { confirmPassword, ...otherValues } = values; // getting all values expects the confirmPassword
+
+      await registerUser({
+        user: {
+          ...otherValues,
+          password: values.confirmPassword,
+          address: "",
+          emailVerified: false,
+          role: "user",
+        },
+      });
+      toast.success("User registered successfully!");
+    } catch (error) {
+      console.log(error)
+      toast.error("Error while registering user!");
+    }
   }
 
   return (

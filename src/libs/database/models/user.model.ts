@@ -1,16 +1,15 @@
 import { Schema, model, models, Model, Document } from "mongoose";
 
 export interface IUser extends Document {
+  _id: string;
   name: string;
   email: string;
   password: string;
   address?: string;
   emailVerified: boolean;
-  isAdmin: boolean;
-}
-
-export interface IUserCreate {
-  user: IUser;
+  role: string;
+  image?: string;
+  authProviderId?: string;
 }
 
 const userSchema = new Schema<IUser>(
@@ -20,12 +19,14 @@ const userSchema = new Schema<IUser>(
     password: { type: String, select: false },
     address: { type: String },
     emailVerified: { type: Boolean, default: false },
-    isAdmin: { type: Boolean, default: false },
+    role: { type: String, default: "user" },
+    image: { type: String },
+    authProviderId: { type: String },
   },
   { timestamps: true }
 );
 
 const User: Model<IUser> =
-  (models.User as Model<IUser>) || model<IUser>("User", userSchema);
+  (models?.User as Model<IUser>) || model<IUser>("User", userSchema);
 
 export default User;
