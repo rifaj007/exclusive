@@ -8,7 +8,7 @@ export interface RegisterUserParams {
     role: string;
     image?: string;
     authProviderId?: string;
-  };
+  }
 }
 
 export interface LoginParams {

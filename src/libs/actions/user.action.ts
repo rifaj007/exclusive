@@ -8,7 +8,7 @@ import { signIn } from "@/libs/auth";
 
 export const login = async ({ email, password }: LoginParams) => {
   try {
-    await signIn("credentials", { email, password, redirectTo: "/"});
+    await signIn("credentials", { email, password, redirect: false });
   } catch (error) {
     handleError(error);
   }

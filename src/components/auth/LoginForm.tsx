@@ -15,6 +15,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -25,15 +26,17 @@ const LoginForm = () => {
 
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     try {
-      login({
+      await login({
         email: values.email,
         password: values.password,
       })
+
+      reset();
+      toast.success("Logged in successfully!");
     } catch (error) {
       console.log(error)
       toast.error("Error while logging in!");
     }
-    toast.success("Logged in successfully!");
   }
 
   return (

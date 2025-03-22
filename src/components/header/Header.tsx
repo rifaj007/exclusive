@@ -3,17 +3,37 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { navItems } from "@/constants";
-import { CartIcon, HeartIcon, ProfileIcon, SearchIcon } from "@/icons";
+import {
+  BagIcon,
+  CancelIcon,
+  CartIcon,
+  HeartIcon,
+  LogoutIcon,
+  ProfileIcon,
+  SearchIcon,
+  StarLineIcon,
+} from "@/icons";
 import NavSearch from "./NavSearch";
+// import {  } from "@/libs/auth";
+import { signOut, useSession } from "next-auth/react";
 
 const Header = () => {
+  /* ------ All the state variables ------ */
+  // menu open state
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // nav search state
   const [isNavSearchOpen, setIsNavSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement | null>(null);
   const searchButtonRef = useRef<HTMLButtonElement | null>(null);
+  // dropdown state
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLUListElement | null>(null);
+  const profileButtonRef = useRef<HTMLButtonElement | null>(null);
+  // show header on scroll state
   const [showHeader, setShowHeader] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+
   const pathname = usePathname();
+  const { status } = useSession();
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
@@ -29,20 +49,21 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      if (currentScrollY > 100) {
         setShowHeader(false);
+        setIsMenuOpen(false);
+        setIsNavSearchOpen(false);
+        setIsDropdownOpen(false);
       } else {
         setShowHeader(true);
       }
-
-      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
-  /* ref for search button and content hiding */
+  // Handle clicks outside of nav search box
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -64,17 +85,37 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isNavSearchOpen]);
 
+  // Handle clicks outside of user dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        profileButtonRef.current &&
+        !profileButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isDropdownOpen]);
+
   return (
     <>
       <header
-        className={`fixed top-0 bg-white left-0 w-full border-b-[0.5px] border-border-1 pt-4 sm:pt-8 md:pt-10 pb-4 duration-500 z-50 ${
+        className={`fixed top-0 bg-white left-0 w-full border-b-[0.5px] border-border-1 pt-4 sm:pt-8 md:pt-10 pb-4 duration-500 z-50  ${
           showHeader ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         <div className="container relative">
           <nav className="flex justify-between items-center">
             {/* Logo and Mobile Menu Button */}
-            <div className="flex items-center gap-5">
+            <div className="flex items-center sm-xs:gap-5 gap-3">
               {/* Mobile menu button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -123,39 +164,51 @@ const Header = () => {
               ))}
             </ul>
 
-            <div className="flex gap-6 items-center">
+            <div className="flex gap-3 sm-xs:gap-6 items-center">
               {/* Nav Search for large device */}
               <div className="hidden md:flex">
                 <NavSearch />
               </div>
 
-              {/* Wishlist, Cart, and Profile Icons */}
-              <div className="flex items-center gap-4">
-                {/* Nav search button for mobile device */}
-                <button
-                  ref={searchButtonRef}
-                  onClick={() => setIsNavSearchOpen((prev) => !prev)}
-                  className="h-full w-full bg-transparent outline-0 md:hidden"
-                >
-                  <SearchIcon />
-                </button>
+              {/* Nav search button for mobile device */}
+              <button
+                ref={searchButtonRef}
+                onClick={() => setIsNavSearchOpen((prev) => !prev)}
+                className="h-full w-full bg-transparent outline-0 md:hidden"
+              >
+                <SearchIcon />
+              </button>
 
+              {/* Wishlist, Cart, and Profile Icons */}
+              <div className="flex items-center gap-1 sm-xs:gap-3 sm:gap-4">
                 {/* Wishlist */}
-                <div>
+                <button>
                   <HeartIcon />
-                </div>
+                </button>
 
                 {/* Cart */}
-                <div>
-                  <CartIcon />
-                </div>
-
-                {/* Profile */}
                 <button>
-                  <ProfileIcon />
+                  <CartIcon />
                 </button>
 
-                <button>Sign Out</button>
+                {/* Profile button */}
+                {status === "authenticated" && (
+                  <button
+                    ref={profileButtonRef}
+                    onClick={() => setIsDropdownOpen((prev) => !prev)}
+                    className={`${
+                      isDropdownOpen
+                        ? "bg-secondary-3 rounded-full h-8 w-8 flex-center"
+                        : ""
+                    } flex-center`}
+                  >
+                    <ProfileIcon
+                      className={`${
+                        isDropdownOpen ? "text-white w-6 h-6" : ""
+                      }`}
+                    />
+                  </button>
+                )}
               </div>
             </div>
           </nav>
@@ -171,11 +224,69 @@ const Header = () => {
           )}
 
           {/* User dropdown */}
-          <ul className="absolute top-10 right-0 bg-[#0000000A] backdrop-blur-[75px] rounded p-3 max-w-56 w-full">
-            <li>
-              <Link className="flex gap-3 items-center" href="/profile"><ProfileIcon/>Manage My Account</Link>
-            </li>
-          </ul>
+          {isDropdownOpen && (
+            <ul
+              ref={dropdownRef}
+              className="text-text-1 flex flex-col gap-3 absolute top-12 right-0 w-56 p-3 rounded bg-black/40 shadow-lg backdrop-blur-[150px]"
+            >
+              <li>
+                <Link
+                  href="/user/profile"
+                  className="flex items-center gap-3 text-sm"
+                >
+                  <ProfileIcon />
+                  Manage My Account
+                </Link>
+              </li>
+
+              {/* Order route */}
+              <li>
+                <Link
+                  href="/user/order"
+                  className="flex items-center gap-3 text-sm"
+                >
+                  <BagIcon />
+                  My Order
+                </Link>
+              </li>
+
+              {/* Cancellations route */}
+              <li>
+                <Link
+                  href="/user/cancellations"
+                  className="flex items-center gap-3 text-sm"
+                >
+                  <CancelIcon />
+                  My Cancellations
+                </Link>
+              </li>
+
+              {/* Reviews route */}
+              <li>
+                <Link
+                  href="/user/reviews"
+                  className="flex items-center gap-3 text-sm"
+                >
+                  <StarLineIcon />
+                  My Reviews
+                </Link>
+              </li>
+
+              {/* Logout button */}
+              <li>
+                <button
+                  onClick={() => {
+                    signOut({ redirect: false });
+                    setIsDropdownOpen(false);
+                  }}
+                  className="flex items-center gap-3 text-sm w-full text-left"
+                >
+                  <LogoutIcon />
+                  Logout
+                </button>
+              </li>
+            </ul>
+          )}
         </div>
       </header>
 

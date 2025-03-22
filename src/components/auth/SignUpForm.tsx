@@ -3,6 +3,7 @@ import { EyeCloseIcon, EyeIcon } from "@/icons";
 import { registerUser } from "@/libs/actions/user.action";
 import { signUpFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -12,10 +13,14 @@ const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
@@ -38,7 +43,10 @@ const SignUpForm = () => {
           emailVerified: false,
           role: "user",
         },
+        callbackUrl
       });
+
+      reset();
       toast.success("User registered successfully!");
     } catch (error) {
       console.log(error)

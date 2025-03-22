@@ -24,20 +24,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const password = credentials.password as string | undefined;
 
         if (!password) {
-          throw new Error("Invalid password");
+          throw new Error("Please! provide your password");
         }
 
         await connectToDatabase();
 
         const user = await User.findOne({ email }).select("+password +role");
         if (!user) {
-          console.log("Invalid credentials");
+          console.log("Invalid Email or Password");
           return null;
         }
 
         const passwordMatch = await compare(password, user.password);
         if (!passwordMatch) {
-          console.log("Invalid password");
+          console.log("Wrong password");
           return null;
         }
 

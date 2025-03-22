@@ -1,7 +1,5 @@
 import {
-  BagIcon,
   CameraIcon,
-  CancelIcon,
   CellPhoneIcon,
   ComputerIcon,
   CustomerServiceIcon,
@@ -9,14 +7,11 @@ import {
   DollarIcon,
   GamepadIcon,
   HeadphoneIcon,
-  LogoutIcon,
   MoneyBagIcon,
-  ProfileIcon,
   SecureIcon,
   ShopIcon,
   ShoppingBagIcon,
   SmartWatchIcon,
-  StarLineIcon,
 } from "@/icons";
 
 /* all default values */
@@ -27,25 +22,6 @@ export const navItems = [
   { label: "Contact", route: "/contact" },
   { label: "About", route: "/about" },
   { label: "Sign Up", route: "/sign-up" },
-];
-
-/* user dropdown data */
-export const userDropdownData = [
-  {
-    _id: 1,
-    label: "Manage My Account",
-    route: "/user/profile",
-    icon: ProfileIcon,
-  },
-  { _id: 2, label: "My Order", route: "/user/order", icon: BagIcon },
-  {
-    _id: 3,
-    label: "My Cancellations",
-    route: "/user/cancellations",
-    icon: CancelIcon,
-  },
-  { _id: 4, label: "My Reviews", route: "/user/reviews", icon: StarLineIcon },
-  // { _id: 5, label: "Logout", icon: LogoutIcon },
 ];
 
 /* hero section data */
