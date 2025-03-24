@@ -1,8 +1,9 @@
 "use client";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
-import { login } from "@/libs/actions/user.action";
 import { loginFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -10,6 +11,9 @@ import { z } from "zod";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const {
     register,
@@ -26,21 +30,38 @@ const LoginForm = () => {
 
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     try {
-      await login({
+      const res = await signIn("credentials", {
         email: values.email,
         password: values.password,
-      })
+        redirect: false,
+      });
 
-      reset();
-      toast.success("Logged in successfully!");
+      if (res?.error) {
+        // Check specific error messages from NextAuth
+        if (res.error.includes("No user found")) {
+          toast.error("No account found with this email. Please sign up.");
+        } else if (res.error.includes("Wrong password")) {
+          toast.error("Incorrect password. Please try again.");
+        } else {
+          toast.error("Authentication failed. Please check your credentials.");
+        }
+        return;
+      } else {
+        reset();
+        router.push(callbackUrl);
+        toast.success("Logged in successfully!");
+      }
     } catch (error) {
-      console.log(error)
-      toast.error("Error while logging in!");
+      console.error("Login error:", error);
+      toast.error("Something went wrong. Please try again later.");
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-12 mb-4 flex flex-col gap-10">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="mt-12 mb-4 flex flex-col gap-10"
+    >
       {/* Email */}
       <div>
         <input

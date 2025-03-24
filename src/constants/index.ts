@@ -14,7 +14,11 @@ import {
   SmartWatchIcon,
 } from "@/icons";
 
-/* all default values */
+export const privateRoutes = [
+  "/user",
+  "/admin",
+  "/checkout",
+]
 
 /* nav bar data */
 export const navItems = [

@@ -17,7 +17,6 @@ export const login = async ({ email, password }: LoginParams) => {
 export const registerUser = async ({ user }: RegisterUserParams) => {
   try {
     await connectToDatabase();
-    console.log(user);
 
     // check if user already exists
     const userExists = await User.findOne({ email: user.email });

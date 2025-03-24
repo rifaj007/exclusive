@@ -4,6 +4,7 @@ import Google from "next-auth/providers/google";
 import connectToDatabase from "../database/dbConnect";
 import User from "@/libs/database/models/user.model";
 import { compare } from "bcryptjs";
+import { privateRoutes } from "@/constants";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -31,14 +32,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const user = await User.findOne({ email }).select("+password +role");
         if (!user) {
-          console.log("Invalid Email or Password");
-          return null;
+          throw new Error("No user found with this email");
         }
 
         const passwordMatch = await compare(password, user.password);
         if (!passwordMatch) {
-          console.log("Wrong password");
-          return null;
+          throw new Error("Wrong password");
         }
 
         return user;
@@ -46,21 +45,52 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/sign-in",
+    signIn: "/log-in",
   },
   callbacks: {
+    authorized({ request, auth }) {
+      const { pathname } = request.nextUrl;
+
+      const searchTerm = request.nextUrl.pathname
+        .split("/")
+        .slice(0, 2)
+        .join("/");
+
+      // prevent unauthenticated users (who did not log in) from accessing private routes
+      if (privateRoutes.includes(searchTerm)) {
+        return !!auth;
+        // prevent authenticated users from accessing pages such as login, forgot password, sign up
+      } else if (
+        pathname.startsWith("/login") ||
+        pathname.startsWith("/forgot-password") ||
+        pathname.startsWith("/signup")
+      ) {
+        const isLoggedIn = !!auth;
+
+        if (isLoggedIn) {
+          // redirect authenticated users to the home page
+          return Response.redirect(new URL("/", request.nextUrl));
+        }
+
+        // if user is not authenticated, proceed
+        return true;
+      }
+
+      return true;
+    },
+
     async session({ session, token }) {
       if (session?.user) {
-        session.user.id = token.id as string;
-        session.user.name = token.name as string;
+        session.user.id = token.sub as string;
+        session.user.role = token.role as string;
       }
       return session;
     },
 
     async jwt({ token, user }) {
       if (user) {
-        token.sub = user.id;
-        token.name = user.name;
+        token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },
