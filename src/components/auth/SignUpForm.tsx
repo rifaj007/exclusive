@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 
 const SignUpForm = () => {
+  /* state for showing and hiding the password */
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -33,7 +34,7 @@ const SignUpForm = () => {
   async function onSubmit(values: z.infer<typeof signUpFormSchema>) {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { confirmPassword, ...otherValues } = values; // getting all values expects the confirmPassword
+      const { confirmPassword, ...otherValues } = values;
 
       await registerUser({
         user: {
@@ -42,9 +43,8 @@ const SignUpForm = () => {
           address: "",
           emailVerified: false,
           role: "user",
-        },
-        callbackUrl
-      });
+        }
+      })
 
       reset();
       toast.success("User registered successfully!");
