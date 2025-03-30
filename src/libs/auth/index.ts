@@ -4,7 +4,6 @@ import Google from "next-auth/providers/google";
 import connectToDatabase from "../database/dbConnect";
 import User from "@/libs/database/models/user.model";
 import { compare } from "bcryptjs";
-import { privateRoutes } from "@/constants";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -24,20 +23,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const email = credentials.email as string | undefined;
         const password = credentials.password as string | undefined;
 
+        if (!email) {
+          throw new Error("missing_email");
+        }
+
         if (!password) {
-          throw new Error("Please! provide your password");
+          throw new Error("missing_password");
         }
 
         await connectToDatabase();
 
         const user = await User.findOne({ email }).select("+password +role");
         if (!user) {
-          throw new Error("No user found with this email");
+          throw new Error("invalid_email");
         }
 
         const passwordMatch = await compare(password, user.password);
         if (!passwordMatch) {
-          throw new Error("Wrong password");
+          throw new Error("invalid_password");
         }
 
         return user;
@@ -48,40 +51,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/log-in",
   },
   callbacks: {
-    authorized({ request, auth }) {
-      const { pathname } = request.nextUrl;
-
-      const searchTerm = request.nextUrl.pathname
-        .split("/")
-        .slice(0, 2)
-        .join("/");
-
-      // prevent unauthenticated users (who did not log in) from accessing private routes
-      if (privateRoutes.includes(searchTerm)) {
-        return !!auth;
-        // prevent authenticated users from accessing pages such as login, forgot password, sign up
-      } else if (
-        pathname.startsWith("/login") ||
-        pathname.startsWith("/forgot-password") ||
-        pathname.startsWith("/signup")
-      ) {
-        const isLoggedIn = !!auth;
-
-        if (isLoggedIn) {
-          // redirect authenticated users to the home page
-          return Response.redirect(new URL("/", request.nextUrl));
-        }
-
-        // if user is not authenticated, proceed
-        return true;
-      }
-
-      return true;
-    },
-
     async session({ session, token }) {
       if (session?.user) {
-        session.user.id = token.sub as string;
+        session.user.id = token.id as string;
         session.user.role = token.role as string;
       }
       return session;
@@ -96,33 +68,39 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     signIn: async ({ user, account }) => {
-      if (account?.provider === "google") {
-        try {
-          const { email, name, image, id } = user;
-          await connectToDatabase();
-          const existingUser = await User.findOne({ email });
+      try {
+        if (account?.provider === "google") {
+          try {
+            const { email, name, image, id } = user;
+            await connectToDatabase();
+            const existingUser = await User.findOne({ email });
 
-          if (!existingUser) {
-            await User.create({
-              email,
-              name,
-              address: "",
-              image,
-              authProviderId: id,
-              emailVerified: true,
-            });
+            if (!existingUser) {
+              await User.create({
+                email,
+                name,
+                address: "",
+                image,
+                authProviderId: id,
+                emailVerified: true,
+                role: "user",
+              });
+            }
+            return true;
+          } catch (error) {
+            console.error("Error while creating user:", error);
+            return false;
           }
-          return true;
-        } catch (error) {
-          console.error("Error while creating user:", error);
-          return false;
         }
-      }
 
-      if (account?.provider === "credentials") {
-        return true;
+        if (account?.provider === "credentials") {
+          return true;
+        }
+        return false;
+      } catch (error) {
+        console.error("Error in signIn callback:", error);
+        throw new Error("Authentication failed");
       }
-      return false;
     },
   },
   secret: process.env.AUTH_SECRET,

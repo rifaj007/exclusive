@@ -4,7 +4,7 @@ import { loginFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -14,6 +14,13 @@ const LoginForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+
+  // set callback url in local storage
+  useEffect(() => {
+    if (callbackUrl) {
+      localStorage.setItem("callbackUrl", callbackUrl);
+    }
+  }, [callbackUrl]);
 
   const {
     register,
@@ -37,20 +44,15 @@ const LoginForm = () => {
       });
 
       if (res?.error) {
-        // Check specific error messages from NextAuth
-        if (res.error.includes("No user found")) {
-          toast.error("No account found with this email. Please sign up.");
-        } else if (res.error.includes("Wrong password")) {
-          toast.error("Incorrect password. Please try again.");
-        } else {
-          toast.error("Authentication failed. Please check your credentials.");
-        }
+        toast.error("Invalid email or password!");
         return;
-      } else {
-        reset();
-        router.push(callbackUrl);
-        toast.success("Logged in successfully!");
       }
+
+      reset();
+      const redirectUrl = localStorage.getItem("callbackUrl") || "/";
+      localStorage.removeItem("callbackUrl");
+      router.push(redirectUrl);
+      toast.success("Logged in successfully!");
     } catch (error) {
       console.error("Login error:", error);
       toast.error("Something went wrong. Please try again later.");

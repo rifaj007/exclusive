@@ -3,7 +3,8 @@ import "./globals.css";
 import { Inter, Poppins } from "next/font/google";
 import { Footer, Header } from "@/components";
 import { Toaster } from "react-hot-toast";
-import { Provider } from "./provider";
+import { auth } from "@/libs/auth";
+import { SessionProvider } from "next-auth/react";
 
 export const inter = Inter({
   variable: "--font-inter",
@@ -25,23 +26,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang="en">
-      <Provider>
-        <body
-          className={`${inter.variable} ${poppins.variable} antialiased flex flex-col h-screen`}
-        >
+      <body
+        className={`${inter.variable} ${poppins.variable} antialiased flex flex-col h-screen`}
+      >
+        <SessionProvider session={session}>
           <Header />
           <main className="pt-[97px] flex-1">{children}</main>
           <Footer />
           <Toaster reverseOrder={false} />
-        </body>
-      </Provider>
+        </SessionProvider>
+      </body>
     </html>
   );
 }

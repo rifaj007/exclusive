@@ -3,8 +3,9 @@ import { EyeCloseIcon, EyeIcon } from "@/icons";
 import { registerUser } from "@/libs/actions/user.action";
 import { signUpFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -13,9 +14,15 @@ const SignUpForm = () => {
   /* state for showing and hiding the password */
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState("/");
+  const router = useRouter();
 
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  useEffect(() => {
+    const storedCallbackUrl = localStorage.getItem("callbackUrl");
+    if (storedCallbackUrl) {
+      setRedirectUrl(storedCallbackUrl);
+    }
+  }, []);
 
   const {
     register,
@@ -36,21 +43,34 @@ const SignUpForm = () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { confirmPassword, ...otherValues } = values;
 
-      await registerUser({
+      const response = await registerUser({
         user: {
           ...otherValues,
           password: values.confirmPassword,
           address: "",
           emailVerified: false,
           role: "user",
-        }
-      })
+        },
+      });
+
+      if (response?.success === false) {
+        toast.error(response.message);
+        return;
+      }
+
+      await signIn("credentials", {
+        email: values.email,
+        password: values.confirmPassword,
+        redirect: false,
+      });
 
       reset();
       toast.success("User registered successfully!");
+      router.push(redirectUrl);
+      localStorage.removeItem("callbackUrl");
     } catch (error) {
-      console.log(error)
-      toast.error("Error while registering user!");
+      console.log(error);
+      toast.error("An unexpected error occurred!");
     }
   }
 

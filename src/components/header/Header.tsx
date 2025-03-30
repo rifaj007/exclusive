@@ -33,7 +33,7 @@ const Header = () => {
   const [showHeader, setShowHeader] = useState(true);
 
   const pathname = usePathname();
-  const { status } = useSession();
+  const { data: session } = useSession();
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
@@ -150,18 +150,20 @@ const Header = () => {
 
             {/* Navigation items */}
             <ul className="hidden lg:flex gap-12">
-              {navItems.map(({ label, route }) => (
-                <li
-                  key={route}
-                  className={
-                    pathname === route
-                      ? "border-b border-border-2 !font-normal"
-                      : ""
-                  }
-                >
-                  <Link href={route}>{label}</Link>
-                </li>
-              ))}
+              {navItems
+                .filter(({ route }) => !(session && route === "/sign-up"))
+                .map(({ label, route }) => (
+                  <li
+                    key={route}
+                    className={
+                      pathname === route
+                        ? "border-b border-border-2 !font-normal"
+                        : ""
+                    }
+                  >
+                    <Link href={route}>{label}</Link>
+                  </li>
+                ))}
             </ul>
 
             <div className="flex gap-3 sm-xs:gap-6 items-center">
@@ -192,21 +194,27 @@ const Header = () => {
                 </button>
 
                 {/* Profile button */}
-                {status === "authenticated" && (
+                {session && (
                   <button
                     ref={profileButtonRef}
                     onClick={() => setIsDropdownOpen((prev) => !prev)}
-                    className={`${
-                      isDropdownOpen
-                        ? "bg-secondary-3 rounded-full h-8 w-8 flex-center"
-                        : ""
-                    } flex-center`}
+                    className="w-8 h-8"
                   >
-                    <ProfileIcon
-                      className={`${
-                        isDropdownOpen ? "text-white w-6 h-6" : ""
-                      }`}
-                    />
+                    {session.user?.image ? (
+                      <img
+                        src={session.user?.image}
+                        alt="profile"
+                        className="h-8 w-8 rounded-full"
+                      />
+                    ) : (
+                      <ProfileIcon
+                        className={`${
+                          isDropdownOpen
+                            ? "text-white p-1 bg-secondary-3 rounded-full"
+                            : ""
+                        } flex-center`}
+                      />
+                    )}
                   </button>
                 )}
               </div>
