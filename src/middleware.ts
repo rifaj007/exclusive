@@ -1,36 +1,36 @@
 import { getToken } from "next-auth/jwt";
-import { privateRoutes } from "./constants";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { privateRoutes } from "./constants";
+import { auth } from "./libs/auth";
 
-export async function middleware(req: NextRequest) {
+export default auth(async function middleware(req: NextRequest) {
   const { nextUrl } = req;
-  
-  // Extract the token from the request headers
-  const token = await getToken({req, secret: process.env.AUTH_SECRET});
+  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
 
-  const pathname = nextUrl.pathname;
-
-  // Check authentication status
   const isAuthenticated = !!token;
+  const isPrivateRoute = privateRoutes.includes(nextUrl.pathname);
 
-  const isPrivateRoute = privateRoutes.includes(pathname);
-
-  // Prevent unauthenticated users from accessing protected routes
+  // Redirect unauthenticated users trying to access private pages
   if (!isAuthenticated && isPrivateRoute) {
-    return NextResponse.redirect(new URL(`/log-in?callbackUrl=${pathname}`, req.url));
+    return NextResponse.redirect(
+      new URL(
+        `/log-in?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`,
+        req.url
+      )
+    );
   }
 
-  // Prevent authenticated users from accessing auth routes
+  // Redirect authenticated users away from login/signup
   if (
     isAuthenticated &&
-    ["/log-in", "/sign-up", "/forgot-password"].includes(pathname)
+    ["/log-in", "/sign-up", "/forgot-password"].includes(nextUrl.pathname)
   ) {
-    return NextResponse.redirect(new URL("/", nextUrl));
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
   return NextResponse.next();
-}
+});
 
 // Apply middleware only to relevant routes
 export const config = {

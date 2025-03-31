@@ -66,7 +66,7 @@ const SignUpForm = () => {
 
       reset();
       toast.success("User registered successfully!");
-      router.push(redirectUrl);
+      router.push(decodeURIComponent(redirectUrl));
       localStorage.removeItem("callbackUrl");
     } catch (error) {
       console.log(error);

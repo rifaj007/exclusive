@@ -50,9 +50,9 @@ const LoginForm = () => {
 
       reset();
       const redirectUrl = localStorage.getItem("callbackUrl") || "/";
-      localStorage.removeItem("callbackUrl");
-      router.push(redirectUrl);
+      router.push(decodeURIComponent(redirectUrl));
       toast.success("Logged in successfully!");
+      localStorage.removeItem("callbackUrl");
     } catch (error) {
       console.error("Login error:", error);
       toast.error("Something went wrong. Please try again later.");
