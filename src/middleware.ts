@@ -10,13 +10,14 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({req, secret: process.env.AUTH_SECRET});
 
   const pathname = nextUrl.pathname;
-  const searchTerm = pathname.split("/").slice(0, 2).join("/");
 
   // Check authentication status
   const isAuthenticated = !!token;
 
+  const isPrivateRoute = privateRoutes.includes(pathname);
+
   // Prevent unauthenticated users from accessing protected routes
-  if (!isAuthenticated && privateRoutes.includes(searchTerm)) {
+  if (!isAuthenticated && isPrivateRoute) {
     return NextResponse.redirect(new URL(`/log-in?callbackUrl=${pathname}`, req.url));
   }
 

@@ -284,7 +284,7 @@ const Header = () => {
               <li>
                 <button
                   onClick={() => {
-                    signOut({ redirect: false });
+                    signOut({ redirect: true, callbackUrl: "/" });
                     setIsDropdownOpen(false);
                   }}
                   className="flex items-center gap-3 text-sm w-full text-left"

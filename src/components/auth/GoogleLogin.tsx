@@ -1,14 +1,12 @@
 "use client";
 import { GoogleIcon } from "@/icons";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 const GoogleLogin = ({ text }: { text: string }) => {
   const [redirectUrl, setRedirectUrl] = useState("/");
-  const router = useRouter();
 
+  // Load stored callback URL from localStorage
   useEffect(() => {
     const storedCallbackUrl = localStorage.getItem("callbackUrl");
     if (storedCallbackUrl) {
@@ -16,23 +14,17 @@ const GoogleLogin = ({ text }: { text: string }) => {
     }
   }, []);
 
+  // Handle Google Login
   const handleGoogleLogin = async () => {
-    try {
-      await signIn("google", { redirect: false });
+    await signIn("google", { callbackUrl: redirectUrl });
 
-      toast.success("Logged in successfully!");
-      router.push(redirectUrl);
-      localStorage.removeItem("callbackUrl");
-    } catch (error) {
-      console.log(error);
-      toast.error("An unexpected error occurred!");
-    }
+    localStorage.removeItem("callbackUrl");
   };
 
   return (
     <button
       onClick={handleGoogleLogin}
-      className="flex-center gap-4 py-4 border-text-4 border rounded w-full"
+      className="flex items-center justify-center gap-4 py-4 border border-gray-300 rounded w-full"
     >
       <GoogleIcon /> {text}
     </button>
