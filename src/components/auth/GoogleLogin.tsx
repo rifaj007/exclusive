@@ -24,7 +24,7 @@ const GoogleLogin = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleGoogleLogin}
-      className="flex items-center justify-center gap-4 py-4 border border-gray-300 rounded w-full"
+      className="flex items-center justify-center gap-4 py-4 border border-border-1 rounded w-full"
     >
       <GoogleIcon /> {text}
     </button>

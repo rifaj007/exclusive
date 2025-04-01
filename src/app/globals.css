@@ -154,6 +154,10 @@
   p {
     @apply leading-[26px];
   }
+
+  button {
+    @apply bg-transparent outline-none
+  }
 }
 
 @layer components {
