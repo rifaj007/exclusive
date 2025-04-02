@@ -2,8 +2,8 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import connectToDatabase from "../database/dbConnect";
-import User from "../database/models/user.model";
 import { compare } from "bcryptjs";
+import { User } from "../database/models/auth.model";
 
 export default {
   providers: [
@@ -48,23 +48,8 @@ export default {
     }),
   ],
   callbacks: {
-    async session({ session, token }) {
-      if (session?.user) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as string;
-      }
-      return session;
-    },
-
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.role = user.role;
-      }
-      return token;
-    },
-
-    signIn: async ({ user, account }) => {
+    signIn: async ({ user, account, profile }) => {
+      console.log(user, account, profile);
       try {
         if (account?.provider === "google") {
           try {
@@ -93,11 +78,32 @@ export default {
         if (account?.provider === "credentials") {
           return true;
         }
+
         return false;
       } catch (error) {
         console.error("Error in signIn callback:", error);
         throw new Error("Authentication failed");
       }
+    },
+
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user._id = token._id as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+        session.user.role = token.role as string;
+      }
+      return session;
+    },
+
+    async jwt({ token, user }) {
+      if (user) {
+        token._id = user._id;
+        token.name = user.name;
+        token.email = user.email;
+        token.role = user.role;
+      }
+      return token;
     },
   },
   secret: process.env.AUTH_SECRET,

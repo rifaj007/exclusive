@@ -1,11 +1,9 @@
 "use client";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
-import { registerUser } from "@/libs/actions/user.action";
+import { signUpWithCredentials } from "@/libs/actions/auth/signup-with-credentials";
 import { signUpFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -14,15 +12,6 @@ const SignUpForm = () => {
   /* state for showing and hiding the password */
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [redirectUrl, setRedirectUrl] = useState("/");
-  const router = useRouter();
-
-  useEffect(() => {
-    const storedCallbackUrl = localStorage.getItem("callbackUrl");
-    if (storedCallbackUrl) {
-      setRedirectUrl(storedCallbackUrl);
-    }
-  }, []);
 
   const {
     register,
@@ -43,34 +32,29 @@ const SignUpForm = () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { confirmPassword, ...otherValues } = values;
 
-      const response = await registerUser({
+      const res = await signUpWithCredentials({
         user: {
           ...otherValues,
           password: values.confirmPassword,
           address: "",
           emailVerified: false,
           role: "user",
+          provider: "credentials",
         },
       });
 
-      if (response?.success === false) {
-        toast.error(response.message);
-        return;
+      if (res.success) {
+        toast.success(res.success, { duration: 10000 });
       }
 
-      await signIn("credentials", {
-        email: values.email,
-        password: values.confirmPassword,
-        redirect: false,
-      });
+      if (res.error) {
+        toast.error(res.error, { duration: 10000 });
+      }
 
       reset();
-      toast.success("User registered successfully!");
-      router.push(decodeURIComponent(redirectUrl));
-      localStorage.removeItem("callbackUrl");
     } catch (error) {
       console.log(error);
-      toast.error("An unexpected error occurred!");
+      toast.error("An unexpected error occurred! Please try again.");
     }
   }
 
@@ -165,7 +149,7 @@ const SignUpForm = () => {
 
       {/* Signup button */}
       <button disabled={isSubmitting} type="submit" className="button w-full">
-        {isSubmitting ? "Creating account" : "Create account"}
+        {isSubmitting ? "Creating..." : "Create account"}
       </button>
     </form>
   );

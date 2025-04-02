@@ -15,3 +15,4 @@ export { default as ExploreProducts } from "./explore-products/ExploreProducts";
 export { default as NewArrival } from "./new-arrival/NewArrival";
 export { default as SignUpForm } from "./auth/SignUpForm";
 export { default as LoginForm } from "./auth/LoginForm";
+export { default as NewVerification } from "./new-verification/NewVerification";

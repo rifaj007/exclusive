@@ -3,6 +3,7 @@ import { EyeCloseIcon, EyeIcon } from "@/icons";
 import { loginFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -62,7 +63,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-12 mb-4 flex flex-col gap-10"
+      className="mt-12 mb-7 flex flex-col gap-10"
     >
       {/* Email */}
       <div>
@@ -106,9 +107,13 @@ const LoginForm = () => {
       </div>
 
       {/* Signin button */}
-      <button disabled={isSubmitting} type="submit" className="button w-full">
-        {isSubmitting ? "Logging in" : "Log In"}
-      </button>
+      <div className="flex-between">
+        <button disabled={isSubmitting} type="submit" className="button px-8">
+          {isSubmitting ? "Logging in" : "Log In"}
+        </button>
+
+        <Link className="text-secondary-3" href="/forget-password">Forget Password?</Link>
+      </div>
     </form>
   );
 };

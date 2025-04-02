@@ -1,4 +1,4 @@
-export interface RegisterUserParams {
+export interface SignUpWithCredentialsParams {
   user: {
     name: string;
     email: string;
@@ -8,5 +8,6 @@ export interface RegisterUserParams {
     role: string;
     image?: string;
     authProviderId?: string;
-  }
+    provider: "google" | "credentials";
+  };
 }
