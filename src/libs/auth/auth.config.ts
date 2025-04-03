@@ -13,12 +13,6 @@ export default {
     }),
 
     Credentials({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-
       authorize: async (credentials) => {
         const email = credentials.email as string | undefined;
         const password = credentials.password as string | undefined;
@@ -35,12 +29,12 @@ export default {
 
         const user = await User.findOne({ email }).select("+password +role");
         if (!user) {
-          throw new Error("invalid_email");
+          return null;
         }
 
         const passwordMatch = await compare(password, user.password);
         if (!passwordMatch) {
-          throw new Error("invalid_password");
+          return null;
         }
 
         return user;

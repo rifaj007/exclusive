@@ -47,3 +47,27 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     console.error("Error sending verification email:", error);
   }
 };
+
+export const sendPasswordResetEmail = async (email: string, token: string) => {
+  const resetLink = `${baseURL}/new-password?token=${token}`;
+
+  const mailOptions = {
+    from: emailUser,
+    to: email,
+    subject: "Reset your password",
+    html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+                <h2 style="color: #000; text-align: center;">Reset your password</h2>
+                <p style="font-size: 16px; color: #333;">Hi there,</p>
+                <p style="font-size: 16px; color: #333;">We received a request to reset the password for your account. If you made this request, please click the button below to reset your password.</p>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="${resetLink}" 
+                        style="display: inline-block; padding: 12px 20px; font-size: 16px; font-weight: bold; 
+                        color: #ffffff; background-color: #DB4444; text-decoration: none; 
+                        border-radius: 5px;">
+                        Reset Password
+                    </a>
+                </div>`,
+  };
+  await transporter.sendMail(mailOptions);
+};

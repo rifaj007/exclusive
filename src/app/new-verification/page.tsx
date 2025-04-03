@@ -1,11 +1,11 @@
-import { NewVerification } from "@/components"
+import { NewVerification } from "@/components";
 
 const NewVerificationPage = () => {
   return (
     <section>
-        <NewVerification/>
+      <NewVerification />
     </section>
-  )
-}
+  );
+};
 
-export default NewVerificationPage
+export default NewVerificationPage;

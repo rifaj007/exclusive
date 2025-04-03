@@ -1,27 +1,19 @@
 "use client";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
+import { logInWithCredentials } from "@/libs/actions/auth/login-with-credentials";
 import { loginFormSchema } from "@/libs/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
-
-  // set callback url in local storage
-  useEffect(() => {
-    if (callbackUrl) {
-      localStorage.setItem("callbackUrl", callbackUrl);
-    }
-  }, [callbackUrl]);
+  const callbackUrl = searchParams.get("callbackUrl");
 
   const {
     register,
@@ -38,25 +30,18 @@ const LoginForm = () => {
 
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     try {
-      const res = await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        redirect: false,
-      });
+      const data = await logInWithCredentials(values, callbackUrl);
 
-      if (res?.error) {
-        toast.error("Invalid email or password!");
-        return;
+      if (data?.error) {
+        toast.error(data.error);
+      } else if (data?.success) {
+        toast.success(data.success);
+        reset();
+      } else if (data?.url) {
+        window.location.assign(data?.url);
       }
-
-      reset();
-      const redirectUrl = localStorage.getItem("callbackUrl") || "/";
-      router.push(decodeURIComponent(redirectUrl));
-      toast.success("Logged in successfully!");
-      localStorage.removeItem("callbackUrl");
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error("Something went wrong. Please try again later.");
+    } catch {
+      toast.error("Something went wrong!. Please try again.");
     }
   }
 
@@ -112,7 +97,9 @@ const LoginForm = () => {
           {isSubmitting ? "Logging in" : "Log In"}
         </button>
 
-        <Link className="text-secondary-3" href="/forget-password">Forget Password?</Link>
+        <Link className="text-secondary-3" href="/reset-password">
+          Forget Password?
+        </Link>
       </div>
     </form>
   );

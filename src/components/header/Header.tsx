@@ -14,8 +14,9 @@ import {
   StarLineIcon,
 } from "@/icons";
 import NavSearch from "./NavSearch";
-// import {  } from "@/libs/auth";
-import { signOut, useSession } from "next-auth/react";
+import { useCurrentUser } from "@/hooks/use-session";
+import { routes } from "@/constants/routes";
+import { logout } from "@/libs/actions/auth/logout";
 
 const Header = () => {
   /* ------ All the state variables ------ */
@@ -33,7 +34,7 @@ const Header = () => {
   const [showHeader, setShowHeader] = useState(true);
 
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const user = useCurrentUser();
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
@@ -105,6 +106,14 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isDropdownOpen]);
 
+  // Handling logout
+  const handleLogout = async () => {
+    await logout()
+
+    setIsDropdownOpen(false);
+    window.location.assign(routes.defaultLogoutRedirect);
+  };
+
   return (
     <>
       <header
@@ -151,7 +160,7 @@ const Header = () => {
             {/* Navigation items */}
             <ul className="hidden lg:flex gap-12">
               {navItems
-                .filter(({ route }) => !(session && route === "/sign-up"))
+                .filter(({ route }) => !(user && route === "/sign-up"))
                 .map(({ label, route }) => (
                   <li
                     key={route}
@@ -194,15 +203,15 @@ const Header = () => {
                 </button>
 
                 {/* Profile button */}
-                {session && (
+                {user && (
                   <button
                     ref={profileButtonRef}
                     onClick={() => setIsDropdownOpen((prev) => !prev)}
                     className="w-8 h-8"
                   >
-                    {session.user?.image ? (
+                    {user?.image ? (
                       <img
-                        src={session.user?.image}
+                        src={user?.image}
                         alt="profile"
                         className="h-8 w-8 rounded-full"
                       />
@@ -283,10 +292,7 @@ const Header = () => {
               {/* Logout button */}
               <li>
                 <button
-                  onClick={() => {
-                    signOut({ redirect: false});
-                    setIsDropdownOpen(false);
-                  }}
+                  onClick={handleLogout}
                   className="flex items-center gap-3 text-sm w-full text-left"
                 >
                   <LogoutIcon />
