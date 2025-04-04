@@ -38,5 +38,10 @@ export default withAuthMiddleware((req) => {
 });
 
 export const config = {
+  runtime: "nodejs",
+  unstable_allowDynamic: [
+    "/src/libs/database/dbConnect.ts",
+    "/node_modules/mongoose/dist/**",
+  ],
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

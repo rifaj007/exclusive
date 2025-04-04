@@ -4,8 +4,8 @@ import Link from "next/link";
 const ResetPasswordPage = () => {
   return (
     <>
-      <h3 className="sm:text-4xl text-3xl font-inter font-medium mb-3">
-        Reset your password
+      <h3 className="sm:text-3xl text-2xl font-inter font-medium mb-3">
+        Forget your password
       </h3>
       <p>Enter your email below</p>
 
