@@ -7,10 +7,7 @@ import { User } from "../database/models/auth.model";
 
 export default {
   providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    Google,
 
     Credentials({
       authorize: async (credentials) => {

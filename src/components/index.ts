@@ -18,3 +18,4 @@ export { default as LoginForm } from "./auth/LoginForm";
 export { default as NewVerification } from "./new-verification/NewVerification";
 export { default as ResetPasswordForm } from "./auth/ResetPasswordForm";
 export { default as NewPasswordForm } from "./auth/NewPasswordForm";
+export { default as Loading } from "./pages-component/Loading";
