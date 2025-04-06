@@ -47,8 +47,7 @@ const NewPasswordForm = () => {
     }
   }
 
-  if (!token)
-    return <p className="text-red-700 py-4 font-semibold">Token is missing</p>;
+  if (!token) return <p className="text-red-700 py-4 font-semibold">Token is missing</p>;
 
   return (
     <>

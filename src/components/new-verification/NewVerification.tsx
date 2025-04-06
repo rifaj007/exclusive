@@ -3,6 +3,7 @@ import { newVerification } from "@/libs/actions/auth/new-verification";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import Loading from "../pages-component/Loading";
 
 const NewVerification = () => {
   const searchParams = useSearchParams();
@@ -34,7 +35,7 @@ const NewVerification = () => {
     onSubmit();
   }, [onSubmit]);
 
-  if (!success && !error) return <p>Loading........</p>;
+  if (!success && !error) return <Loading/>;
 
   return (
     <div>
