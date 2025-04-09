@@ -7,12 +7,19 @@ export interface CartItem extends ProductData {
   color: number;
 }
 
+export interface Coupon {
+  code: string;
+  discountPercentage: number;
+}
+
 interface CartState {
   cartItems: CartItem[];
+  coupon: Coupon | null;
 }
 
 const initialState: CartState = {
   cartItems: [],
+  coupon: null,
 };
 
 interface AddToCartPayload {
@@ -33,6 +40,7 @@ const cartSlice = createSlice({
     // set cart from storage
     setCartFromStorage: (state, action: PayloadAction<CartState>) => {
       state.cartItems = action.payload.cartItems;
+      state.coupon = action.payload.coupon;
     },
 
     // add to cart
@@ -82,6 +90,18 @@ const cartSlice = createSlice({
 
       localStorage.setItem("cart", JSON.stringify(state));
     },
+
+    // add coupon
+    addCoupon: (state, action: PayloadAction<Coupon>) => {
+      state.coupon = action.payload;
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
+
+    // remove coupon
+    removeCoupon: (state) => {
+      state.coupon = null;
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
   },
 });
 
@@ -91,6 +111,8 @@ export const {
   removeProductFromCart,
   clearCart,
   changeQuantity,
+  addCoupon,
+  removeCoupon,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

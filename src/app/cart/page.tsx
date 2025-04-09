@@ -1,4 +1,4 @@
-import { CartCheckout, CartTable } from "@/components";
+import { CartSummary, CartTable } from "@/components";
 import Link from "next/link";
 
 const CartPage = () => {
@@ -18,7 +18,7 @@ const CartPage = () => {
         <CartTable />
 
         {/* Cart Checkout */}
-        <CartCheckout />
+        <CartSummary />
       </div>
     </section>
   );
