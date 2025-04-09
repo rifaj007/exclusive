@@ -48,7 +48,7 @@ const ResetPasswordForm = () => {
         )}
       </div>
 
-      <button disabled={isSubmitting} type="submit" className="button px-8">
+      <button disabled={isSubmitting} type="submit" className="button-primary px-8">
         {isSubmitting ? "Sending email..." : "Send Reset Email"}
       </button>
     </form>

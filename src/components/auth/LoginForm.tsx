@@ -93,7 +93,7 @@ const LoginForm = () => {
 
       {/* Signin button */}
       <div className="flex-between">
-        <button disabled={isSubmitting} type="submit" className="button px-8">
+        <button disabled={isSubmitting} type="submit" className="button-primary px-8">
           {isSubmitting ? "Logging in" : "Log In"}
         </button>
 

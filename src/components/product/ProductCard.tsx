@@ -1,10 +1,22 @@
+"use client";
 import { ProductCardProps } from "@/types/product";
 import Image from "next/image";
 import StarRating from "./StarRating";
 import Link from "next/link";
 import { HeartIcon, ViewIcon } from "@/icons";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
+import { useEffect, useState } from "react";
+import {
+  addProductToCart,
+  removeProductFromCart,
+} from "@/store/features/CartState/CartSlice";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ data }: ProductCardProps) => {
+  const [isExistingToCart, setIsExistingToCart] = useState(false);
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
+
   const {
     _id,
     imageUrl,
@@ -15,6 +27,31 @@ const ProductCard = ({ data }: ProductCardProps) => {
     reviews,
     discount,
   } = data;
+
+  useEffect(() => {
+    const isExisting = cartItems.some((item) => item._id === _id);
+    setIsExistingToCart(isExisting);
+  }, [cartItems, _id]);
+
+  const handleAddToCart = () => {
+    dispatch(
+      addProductToCart({
+        product: { ...data },
+        quantity: 1,
+        selectedSize: "S",
+        color: 1,
+      })
+    );
+
+    toast.success("Product added to cart!");
+  };
+
+  // remove from cart
+  const handleRemoveFromCart = () => {
+    dispatch(removeProductFromCart(_id));
+
+    toast.error("Product removed from cart!");
+  };
 
   return (
     <div>
@@ -40,10 +77,22 @@ const ProductCard = ({ data }: ProductCardProps) => {
           </Link>
         </div>
 
-        {/* add to cart button */}
-        <button className="bg-black text-white py-2 w-full rounded-b absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-          Add To Cart
-        </button>
+        {/* add or remove to cart button */}
+        {isExistingToCart ? (
+          <button
+            onClick={handleRemoveFromCart}
+            className="bg-red-700 text-white py-2 w-full rounded-b absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-all duration-500"
+          >
+            Remove from Cart
+          </button>
+        ) : (
+          <button
+            onClick={handleAddToCart}
+            className="bg-black text-white py-2 w-full rounded-b absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-all duration-500"
+          >
+            Add To Cart
+          </button>
+        )}
 
         {/* discount */}
         {discount && (

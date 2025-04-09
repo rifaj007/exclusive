@@ -161,8 +161,8 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="border border-[#141414] flex-center pt-4 pb-6 gap-2 text-[#3D3D3D]">
-        <CopyrightIcon />{" "}
-        <p className="sm:text-base text-[14px]">
+        <CopyrightIcon className="w-4 h-4 sm-xs:w-5 sm-xs:h-5" />{" "}
+        <p className="sm:text-base sm-xs:text-sm text-xs">
           Copyright Exclusive {new Date().getFullYear()}. All right reserved
         </p>
       </div>

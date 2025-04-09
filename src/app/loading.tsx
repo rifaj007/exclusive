@@ -1,9 +1,7 @@
-import { Loading } from '@/components'
+import { Loading } from "@/components";
 
 const loading = () => {
-  return (
-    <Loading/>
-  )
-}
+  return <Loading />;
+};
 
-export default loading
+export default loading;

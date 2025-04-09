@@ -19,3 +19,5 @@ export { default as NewVerification } from "./new-verification/NewVerification";
 export { default as ResetPasswordForm } from "./auth/ResetPasswordForm";
 export { default as NewPasswordForm } from "./auth/NewPasswordForm";
 export { default as Loading } from "./pages-component/Loading";
+export { default as CartTable } from "./cart/CartTable";
+export { default as CartCheckout } from "./cart/CartCheckout";

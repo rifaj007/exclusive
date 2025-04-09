@@ -18,7 +18,7 @@ const FlashSales = () => {
       <FlashSaleSlider />
 
       <div className="flex justify-center">
-        <Link href={`/products/category`} className="button">
+        <Link href={`/products/category`} className="button-primary">
           View All Products
         </Link>
       </div>

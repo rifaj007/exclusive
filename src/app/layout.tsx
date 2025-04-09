@@ -5,7 +5,7 @@ import { Footer, Header } from "@/components";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/libs/auth";
-import { StoreProvider } from "@/provider/StoreProvider";
+import StoreProvider from "@/provider/StoreProvider";
 
 export const inter = Inter({
   variable: "--font-inter",

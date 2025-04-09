@@ -162,15 +162,19 @@
 
 @layer components {
   .container {
-    @apply w-full mx-auto px-3 sm:px-0 sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px];
+    @apply w-full mx-auto px-3 sm:px-0 sm:max-w-[600px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px];
   }
 
   .logo {
     @apply font-inter text-xl md:text-2xl leading-none font-bold;
   }
 
-  .button {
+  .button-primary {
     @apply rounded bg-button-2 py-3 sm:py-4 px-6 sm:px-7 lg:px-9 xl:px-12 text-text-1 md:font-medium text-sm lg:text-base disabled:opacity-70 disabled:cursor-not-allowed;
+  }
+
+  .button-secondary {
+    @apply rounded bg-transparent border border-border-2 py-3 sm:py-4 px-6 sm:px-7 lg:px-9 xl:px-12 text-black md:font-medium text-sm lg:text-base disabled:opacity-70 disabled:cursor-not-allowed;
   }
 
   .breadcrumbs {

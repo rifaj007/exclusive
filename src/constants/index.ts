@@ -157,7 +157,7 @@ export const flashSalesProductsData = [
   },
   {
     _id: "2",
-    name: "AK-900 Wired Keyboard",
+    name: "AK-900 Wired Keyboard AK-900 Wired Keyboard AK-900 Wired Keyboard AK-900 Wired Keyboard",
     price: 960,
     original_price: 1160,
     discount: "-35%",

@@ -44,7 +44,7 @@ const NewVerification = () => {
           <div className="flex items-center flex-col gap-3">
             <p className="text-green-500">{success}</p>
 
-            <Link className="button inline-block" href="/log-in">
+            <Link className="button-primary inline-block" href="/log-in">
               Back to Login
             </Link>
           </div>
@@ -54,7 +54,7 @@ const NewVerification = () => {
           <div className="flex items-center flex-col gap-3">
             <p className="text-red-500">{error}</p>
 
-            <Link className="button inline-block" href="/sign-up">
+            <Link className="button-primary inline-block" href="/sign-up">
               Back to Signup
             </Link>
           </div>

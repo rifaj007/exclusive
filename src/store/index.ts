@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartSlice from "./features/CartState/CartSlice";
+import cartReducer from "./features/CartState/CartSlice";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    cart: cartSlice,
+    cart: cartReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type AppStore = typeof store;
+
+export default store;

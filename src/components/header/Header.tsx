@@ -6,7 +6,6 @@ import { navItems } from "@/constants";
 import {
   BagIcon,
   CancelIcon,
-  CartIcon,
   HeartIcon,
   LogoutIcon,
   ProfileIcon,
@@ -17,6 +16,7 @@ import NavSearch from "./NavSearch";
 import { useCurrentUser } from "@/hooks/use-session";
 import { routes } from "@/constants/routes";
 import { logout } from "@/libs/actions/auth/logout";
+import CartLink from "./CartLink";
 
 const Header = () => {
   /* ------ All the state variables ------ */
@@ -108,7 +108,7 @@ const Header = () => {
 
   // Handling logout
   const handleLogout = async () => {
-    await logout()
+    await logout();
 
     setIsDropdownOpen(false);
     window.location.assign(routes.defaultLogoutRedirect);
@@ -198,9 +198,7 @@ const Header = () => {
                 </button>
 
                 {/* Cart */}
-                <button>
-                  <CartIcon />
-                </button>
+                <CartLink />
 
                 {/* Profile button */}
                 {user && (

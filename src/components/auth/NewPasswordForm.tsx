@@ -121,7 +121,7 @@ const NewPasswordForm = () => {
         </div>
 
         {/* Signup button */}
-        <button disabled={isSubmitting} type="submit" className="button w-full">
+        <button disabled={isSubmitting} type="submit" className="button-primary w-full">
           {isSubmitting ? "Resetting..." : "Reset Password"}
         </button>
       </form>

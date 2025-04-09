@@ -1,7 +1,7 @@
 import { AboutSlider, AboutStats, Services } from "@/components";
 import Link from "next/link";
 
-const About = () => {
+const AboutPage = () => {
   return (
     <div className="pt-8 lg:pt-12 xl:pt-20 pb-20 lg:pb-[100px] xl:pb-[140px]">
       <div className="container">
@@ -64,4 +64,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutPage;

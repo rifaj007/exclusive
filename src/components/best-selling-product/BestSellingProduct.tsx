@@ -26,7 +26,7 @@ const BestSellingProduct = () => {
       <div className="flex justify-center">
         <Link
           href={`/products/best-selling`}
-          className="button sm:hidden"
+          className="button-primary sm:hidden"
         >
           View All
         </Link>

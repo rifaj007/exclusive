@@ -69,3 +69,8 @@ export const newPasswordSchema = object({
     });
   }
 });
+
+/* coupon code validation schema */
+export const couponCodeSchema = object({
+  couponCode: string().min(1, "Please! provide a coupon code."),
+});
