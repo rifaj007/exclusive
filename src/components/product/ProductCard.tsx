@@ -11,11 +11,17 @@ import {
   removeProductFromCart,
 } from "@/store/features/CartState/CartSlice";
 import toast from "react-hot-toast";
+import {
+  addProductToWishlist,
+  removeProductFromWishlist,
+} from "@/store/features/WishlistState/WishlistSlice";
 
 const ProductCard = ({ data }: ProductCardProps) => {
   const [isExistingToCart, setIsExistingToCart] = useState(false);
+  const [isExistingToWishlist, setIsExistingToWishlist] = useState(false);
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
+  const wishlistItems = useAppSelector((state) => state.wishlist.wishlistItems);
 
   const {
     _id,
@@ -28,10 +34,17 @@ const ProductCard = ({ data }: ProductCardProps) => {
     discount,
   } = data;
 
+  // checking product is existing in cart or not
   useEffect(() => {
     const isExisting = cartItems.some((item) => item._id === _id);
     setIsExistingToCart(isExisting);
   }, [cartItems, _id]);
+
+  // checking product is existing in wishlist or not
+  useEffect(() => {
+    const isExisting = wishlistItems.some((item) => item._id === _id);
+    setIsExistingToWishlist(isExisting);
+  }, [wishlistItems, _id]);
 
   const handleAddToCart = () => {
     dispatch(
@@ -39,7 +52,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
         product: { ...data },
         quantity: 1,
         selectedSize: "S",
-        color: 1,
+        color: 0,
       })
     );
 
@@ -53,6 +66,17 @@ const ProductCard = ({ data }: ProductCardProps) => {
     toast.error("Product removed from cart!");
   };
 
+  // handle wishlist
+  const handleAddToWishlist = () => {
+    dispatch(addProductToWishlist(data));
+    toast.success("Product added to wishlist!");
+  };
+
+  const handleRemoveFromWishlist = () => {
+    dispatch(removeProductFromWishlist(_id));
+    toast.error("Product removed from wishlist!");
+  };
+
   return (
     <div>
       <div className="bg-secondary-2 h-[200px] sm:h-[250px] rounded mb-4 relative group z-20">
@@ -61,19 +85,31 @@ const ProductCard = ({ data }: ProductCardProps) => {
           alt={name}
           width={600}
           height={500}
-          className="object-contain h-full group-hover:scale-100 scale-90 transition-transform duration-300 ease-in-out"
+          className="object-contain h-full group-hover:scale-100 scale-90 transition duration-300 ease-in-out"
         />
 
         {/* wishlist and view button */}
         <div className="absolute top-1 sm:top-3 right-1 sm:right-3 flex flex-col gap-2">
-          <button className="bg-white rounded-full p-[5px]">
-            <HeartIcon className="w-7 h-7" />
-          </button>
+          {isExistingToWishlist ? (
+            <button
+              onClick={handleRemoveFromWishlist}
+              className="bg-secondary-3 rounded-full p-[5px]"
+            >
+              <HeartIcon className="w-7 h-7 text-white" />
+            </button>
+          ) : (
+            <button
+              onClick={handleAddToWishlist}
+              className="bg-white hover:bg-secondary-3 transition duration-200 rounded-full p-[5px]"
+            >
+              <HeartIcon className="w-7 h-7 hover:text-white" />
+            </button>
+          )}
           <Link
             href={`/products/${_id}`}
-            className="bg-white rounded-full p-[5px] inline-block"
+            className="bg-white hover:bg-secondary-3 transition duration-200 rounded-full p-[5px] inline-block"
           >
-            <ViewIcon />
+            <ViewIcon className="hover:text-white" />
           </Link>
         </div>
 

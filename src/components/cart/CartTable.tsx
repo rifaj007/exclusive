@@ -46,9 +46,9 @@ const CartTable = () => {
   if (!hasMounted) return <Loading />;
 
   return (
-    <div className="pt-12 xl:pt-20 px-2 mb-16 sm:mb-20">
+    <div >
       {cartItems.length > 0 ? (
-        <div>
+        <div className="pt-12 xl:pt-20 px-2 mb-16 sm:mb-20">
           {/* Table header */}
           <div className="hidden shadow-custom bg-white rounded py-4 md:py-6 px-4 md:px-10 sm:flex-between font-medium mb-10 ">
             <span className="w-[200px] md:w-[340px] lg:w-[400px]">Product</span>
@@ -154,12 +154,12 @@ const CartTable = () => {
         </div>
       ) : (
         /* if cart is empty  */
-        <div>
+        <div className="sm:w-[400px] mx-auto pt-12 xl:pt-20 ">
           <div className="text-center">
             <h6 className="mb-4">Your Cart Is Currently Empty!</h6>
 
             <p className="mb-6">
-              You don‘t have any items to your cart, to continue shopping <br />{" "}
+              You don‘t have any items to your cart, to continue shopping,
               please! click the below Return To Shop button and add items to
               your cart.
             </p>

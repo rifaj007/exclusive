@@ -21,3 +21,4 @@ export { default as NewPasswordForm } from "./auth/NewPasswordForm";
 export { default as Loading } from "./pages-component/Loading";
 export { default as CartTable } from "./cart/CartTable";
 export { default as CartSummary } from "./cart/CartSummary";
+export { default as WishlistProductCard } from "./product/WishlistProductCard";

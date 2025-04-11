@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FlashSaleBannerCountdownTimer from "./FlashSaleBannerCountdownTimer";
+import Image from "next/image";
 
 const FlashSaleBanner = () => {
   return (
@@ -14,15 +15,17 @@ const FlashSaleBanner = () => {
         {/* Flash sale countdown banner */}
         <FlashSaleBannerCountdownTimer />
 
-        <Link href={`/product/electronics`} className="button bg-secondary-4">Buy Now!</Link>
+        <Link href={`/product/electronics`} className="button-primary bg-secondary-4">Buy Now!</Link>
       </div>
 
       {/* Banner image */}
       <div className="max-w-[500px] lg:max-w-[600px] max-h-[300px] lg:max-h-[500px] relative hidden sm:block">
-        <img
+        <Image
           className="h-full sm:-mt-20 md:-mt-28 lg:-mt-10 xl:ml-0 lg:ml-10 relative z-10"
           src="/images/category/banner.png"
           alt="banner"
+          width={900}
+          height={600}
         />
         <div className="bg-[#D9D9D9] opacity-30 blur-[100px] rounded-full absolute top-0 bottom-0 right-0 h-[450px] xl:h-[500px] w-[450px] xl:w-[500px]" />
       </div>

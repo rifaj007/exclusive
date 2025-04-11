@@ -42,7 +42,7 @@ export default async function RootLayout({
         >
           <StoreProvider>
             <Header />
-            <main className="pt-[97px] flex-1">{children}</main>
+            <main className="pt-[145px] flex-1">{children}</main>
             <Footer />
             <Toaster reverseOrder={false} />
           </StoreProvider>

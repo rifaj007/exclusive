@@ -6,7 +6,6 @@ import { navItems } from "@/constants";
 import {
   BagIcon,
   CancelIcon,
-  HeartIcon,
   LogoutIcon,
   ProfileIcon,
   SearchIcon,
@@ -17,6 +16,8 @@ import { useCurrentUser } from "@/hooks/use-session";
 import { routes } from "@/constants/routes";
 import { logout } from "@/libs/actions/auth/logout";
 import CartLink from "./CartLink";
+import TopHeader from "./TopHeader";
+import WishlistLink from "./WishlistLink";
 
 const Header = () => {
   /* ------ All the state variables ------ */
@@ -50,7 +51,7 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY > 100) {
+      if (currentScrollY > 90) {
         setShowHeader(false);
         setIsMenuOpen(false);
         setIsNavSearchOpen(false);
@@ -117,11 +118,13 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 bg-white left-0 w-full border-b-[0.5px] border-border-1 pt-4 sm:pt-8 md:pt-10 pb-4 duration-500 z-50  ${
+        className={`fixed top-0 bg-white left-0 w-full border-b-[0.5px] border-border-1 pb-4 duration-500 z-50  ${
           showHeader ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="container relative">
+        {/* Top Header */}
+        <TopHeader />
+        <div className="container relative pt-4 sm:pt-8 md:pt-10">
           <nav className="flex justify-between items-center">
             {/* Logo and Mobile Menu Button */}
             <div className="flex items-center sm-xs:gap-5 gap-3">
@@ -193,9 +196,7 @@ const Header = () => {
               {/* Wishlist, Cart, and Profile Icons */}
               <div className="flex items-center gap-1 sm-xs:gap-3 sm:gap-4">
                 {/* Wishlist */}
-                <button>
-                  <HeartIcon />
-                </button>
+                <WishlistLink/>
 
                 {/* Cart */}
                 <CartLink />

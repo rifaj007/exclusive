@@ -95,7 +95,12 @@ const CartSummary = () => {
         {coupon && (
           <div className="flex gap-3 items-center mt-3 sm:justify-start justify-end">
             <p className="text-sm">Remove coupon?</p>
-            <button className="text-red-500" onClick={() => dispatch(removeCoupon())}>Remove</button>
+            <button
+              className="text-red-500"
+              onClick={() => dispatch(removeCoupon())}
+            >
+              Remove
+            </button>
           </div>
         )}
       </div>
