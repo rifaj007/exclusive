@@ -6,25 +6,32 @@ const { auth: withAuthMiddleware } = NextAuth(authConfig);
 
 export default withAuthMiddleware((req) => {
   const isLoggedIn = !!req.auth;
+  const userRole = req.auth?.user?.role;
   const { nextUrl } = req;
 
+  // redirect api routes to api auth route
   const isApiAuthRoute = nextUrl.pathname.startsWith(routes.apiAuthPrefix);
-  const isPrivateRoute = routes.private.includes(nextUrl.pathname);
+  if (isApiAuthRoute) return;
+
+  // redirect logged in user from auth routes to login page
   const isAuthRoute = routes.auth.includes(nextUrl.pathname);
   const defaultLoginRedirectUrl = new URL(routes.defaultLoginRedirect, nextUrl);
 
-  if (isApiAuthRoute) {
-    return undefined;
+  if (isAuthRoute && isLoggedIn) {
+    return Response.redirect(defaultLoginRedirectUrl);
   }
 
-  if (isAuthRoute) {
-    if (isLoggedIn) {
-      return Response.redirect(defaultLoginRedirectUrl);
-    }
-    return undefined;
+  // function for checking if route matches
+  function isRouteMatch(pathname: string, route: string) {
+    return pathname === route || pathname.startsWith(`${route}/`);
   }
 
-  if (isPrivateRoute && !isLoggedIn) {
+  const protectedRoutes = [...routes.private, ...routes.adminOnly].some(
+    (route) => isRouteMatch(nextUrl.pathname, route)
+  );
+
+  // redirect not logged in user from private and admin routes to login page
+  if (protectedRoutes && !isLoggedIn) {
     let callbackUrl = nextUrl.pathname;
     if (nextUrl.search) callbackUrl += nextUrl.search;
 
@@ -34,7 +41,16 @@ export default withAuthMiddleware((req) => {
     );
   }
 
-  return undefined;
+  // redirect non admin user from admin routes to login page
+  const isAdminRoute = routes.adminOnly.some((route) =>
+    isRouteMatch(nextUrl.pathname, route)
+  );
+
+  if (isAdminRoute && userRole !== "admin") {
+    return Response.redirect(new URL("/403", nextUrl));
+  }
+
+  return;
 });
 
 export const config = {

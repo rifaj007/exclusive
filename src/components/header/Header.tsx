@@ -161,7 +161,7 @@ const Header = () => {
             </div>
 
             {/* Navigation items */}
-            <ul className="hidden lg:flex gap-12">
+            <ul className="hidden lg:flex xl:gap-12 gap-8">
               {navItems
                 .filter(({ route }) => !(user && route === "/sign-up"))
                 .map(({ label, route }) => (

@@ -1,4 +1,4 @@
-import { object, string } from "zod";
+import { number, object, string } from "zod";
 
 /* contact section form validation schema */
 export const contactFormSchema = object({
@@ -73,4 +73,17 @@ export const newPasswordSchema = object({
 /* coupon code validation schema */
 export const couponCodeSchema = object({
   couponCode: string().min(1, "Please! provide a coupon code."),
+});
+
+/* admin add product form validation schema */
+export const adminAddProductFormSchema = object({
+  name: string().nonempty("Product name cannot be empty."),
+  description: string().nonempty("Product description cannot be empty."),
+  offerPrice: number().min(1, "Please! provide a price."),
+  originalPrice: number().min(1, "Please! provide a original price."),
+  discount: number().min(1, "Please! provide a discount."),
+  rating: number().min(1, "Please! provide a rating."),
+  reviews: number().min(1, "Please! provide a reviews."),
+  imageUrl: string().nonempty("Please! provide an image."),
+  category: string().nonempty("Please! provide a category."),
 });

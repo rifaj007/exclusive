@@ -14,18 +14,13 @@ import {
   SmartWatchIcon,
 } from "@/icons";
 
-export const privateRoutes = [
-  "/user",
-  "/admin",
-  "/checkout",
-]
-
 /* nav bar data */
 export const navItems = [
   { label: "Home", route: "/" },
+  { label: "Collections", route: "/collections" },
   { label: "Contact", route: "/contact" },
   { label: "About", route: "/about" },
-  { label: "Sign Up", route: "/sign-up" },
+  { label: "Login", route: "/log-in" },
 ];
 
 /* hero section data */

@@ -189,8 +189,16 @@
     @apply border-b border-border-2 pb-2 text-text-4 placeholder:text-text-4 focus:outline-none w-full;
   }
 
+  .admin-input {
+    @apply bg-secondary-2 placeholder:text-text-3 text-black rounded py-3 px-4 focus:outline-none w-full text-sm placeholder:text-sm;
+  }
+
   .form-validation-error {
     @apply text-red-500 lg:text-sm text-xs mt-2;
+  }
+
+  .admin-form-validation-error {
+    @apply text-red-500 text-xs mt-2;
   }
 
   .new-arrival-wrapper {

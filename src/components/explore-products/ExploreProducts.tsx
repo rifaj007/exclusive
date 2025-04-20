@@ -12,7 +12,7 @@ const ExploreProducts = () => {
       <ExploreProductSlider />
 
       <div className="flex justify-center">
-        <Link href="/products" className="button">
+        <Link href="/collections" className="button-primary">
           View All Products
         </Link>
       </div>

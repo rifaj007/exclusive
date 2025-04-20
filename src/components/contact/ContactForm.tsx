@@ -13,9 +13,9 @@ const ContactForm = () => {
     resolver: zodResolver(contactFormSchema),
   });
 
-  async function onSubmit(values: z.infer<typeof contactFormSchema>) {
+  const onSubmit = async (values: z.infer<typeof contactFormSchema>) => {
     console.log(values);
-  }
+  };
 
   return (
     <form
@@ -76,7 +76,7 @@ const ContactForm = () => {
 
       <button
         disabled={isSubmitting}
-        className="button float-right block md:mb-6 "
+        className="button-primary float-right block md:mb-6 "
         type="submit"
       >
         {isSubmitting ? "Sending message" : "Send message"}

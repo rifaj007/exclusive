@@ -106,7 +106,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
             </button>
           )}
           <Link
-            href={`/products/${_id}`}
+            href={`/collections/${_id}`}
             className="bg-white hover:bg-secondary-3 transition duration-200 rounded-full p-[5px] inline-block"
           >
             <ViewIcon className="hover:text-white" />
