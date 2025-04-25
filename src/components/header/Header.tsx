@@ -162,20 +162,20 @@ const Header = () => {
 
             {/* Navigation items */}
             <ul className="hidden lg:flex xl:gap-12 gap-8">
-              {navItems
-                .filter(({ route }) => !(user && route === "/sign-up"))
-                .map(({ label, route }) => (
+              {navItems.map(({ label, route }) => {
+                if (route === "/sign-up" && user) return null;
+                const isActive = pathname === route;
+                return (
                   <li
                     key={route}
                     className={
-                      pathname === route
-                        ? "border-b border-border-2 !font-normal"
-                        : ""
+                      isActive ? "border-b border-border-2 !font-normal" : ""
                     }
                   >
                     <Link href={route}>{label}</Link>
                   </li>
-                ))}
+                );
+              })}
             </ul>
 
             <div className="flex gap-3 sm-xs:gap-6 items-center">
@@ -196,7 +196,7 @@ const Header = () => {
               {/* Wishlist, Cart, and Profile Icons */}
               <div className="flex items-center gap-1 sm-xs:gap-3 sm:gap-4">
                 {/* Wishlist */}
-                <WishlistLink/>
+                <WishlistLink />
 
                 {/* Cart */}
                 <CartLink />
@@ -311,16 +311,21 @@ const Header = () => {
           }`}
         >
           <ul className="flex flex-col gap-12">
-            {navItems.map(({ label, route }) => (
-              <li
-                key={route}
-                className={pathname === route ? "font-semibold underline" : ""}
-              >
-                <Link onClick={() => setIsMenuOpen(false)} href={route}>
-                  {label}
-                </Link>
-              </li>
-            ))}
+            {navItems.map(({ label, route }) => {
+              if (route === "/sign-up" && user) return null;
+              return (
+                <li
+                  key={route}
+                  className={
+                    pathname === route ? "font-semibold underline" : ""
+                  }
+                >
+                  <Link onClick={() => setIsMenuOpen(false)} href={route}>
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { number, object, string } from "zod";
+import { array, number, object, string, z } from "zod";
 
 /* contact section form validation schema */
 export const contactFormSchema = object({
@@ -79,11 +79,38 @@ export const couponCodeSchema = object({
 export const adminAddProductFormSchema = object({
   name: string().nonempty("Product name cannot be empty."),
   description: string().nonempty("Product description cannot be empty."),
-  offerPrice: number().min(1, "Please! provide a price."),
-  originalPrice: number().min(1, "Please! provide a original price."),
-  discount: number().min(1, "Please! provide a discount."),
-  rating: number().min(1, "Please! provide a rating."),
-  reviews: number().min(1, "Please! provide a reviews."),
-  imageUrl: string().nonempty("Please! provide an image."),
+  offerPrice: number({
+    required_error: "Please! provide a price",
+    invalid_type_error: "Price must be a number",
+  }).min(0, "Price must be at least 0"),
+  originalPrice: number({
+    required_error: "Please! provide a price",
+    invalid_type_error: "Price must be a number",
+  }).min(0, "Price must be at least 0"),
+  discount: number({ invalid_type_error: "Discount must be a number" })
+    .optional()
+    .refine((val) => val === undefined || val > 0, {
+      message: "Discount must be greater than 0",
+    }),
+  rating: number({
+    required_error: "Please! provide rating.",
+    invalid_type_error: "Rating must be a number",
+  })
+    .min(1, "Rating must be at least 1")
+    .max(5, "Rating must be less than or equal to 5"),
+  reviews: number({
+    required_error: "Please! provide reviews.",
+    invalid_type_error: "Reviews must be a number",
+  }).min(0, "Reviews must be at least 0"),
+  image: array(string().url("upload one image")).min(
+    1,
+    "Please upload at least one image."
+  ),
   category: string().nonempty("Please! provide a category."),
+  type: string().optional(),
+  size: array(string()).optional(),
+  colors: array(string()).optional(),
+  availability: z.enum(["In Stock", "Out of Stock"], {
+    errorMap: () => ({ message: "Select availability status" }),
+  }),
 });

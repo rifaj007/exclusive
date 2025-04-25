@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
+import { withUt } from "uploadthing/tw";
 
-export default {
+export default withUt({
   corePlugins: {
     container: false,
   },
@@ -12,8 +13,8 @@ export default {
   theme: {
     extend: {
       screens: {
-        'sm-xs': '425px',
-        'xs': '320px',
+        "sm-xs": "425px",
+        xs: "320px",
       },
       colors: {
         primary: {
@@ -153,4 +154,4 @@ export default {
     },
   },
   plugins: [],
-} satisfies Config;
+}) satisfies Config;

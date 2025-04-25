@@ -17,9 +17,9 @@ export default async function AdminLayout({
           <span className="text-black">Admin Dashboard</span>
         </nav>
 
-        <div className="flex">
+        <div className="sm:flex">
           {/* Admin menu */}
-          <div className="max-w-[250px] w-full">
+          <div className="max-w-[200px] xl:max-w-[250px] w-full sm:mb-0 mb-10">
             {/* All Products navigation */}
             <div className="mb-6">
               <span className="font-semibold mb-4 inline-block">Products</span>
@@ -49,7 +49,7 @@ export default async function AdminLayout({
           </div>
 
           {/* Main content */}
-          <div className="bg-white shadow-custom p-8 flex-1 rounded-md">{children}</div>
+          <div className="bg-white shadow-custom p-4 lg:p-8 flex-1 rounded-md">{children}</div>
         </div>
       </div>
     </section>

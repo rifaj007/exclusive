@@ -20,7 +20,7 @@ export const navItems = [
   { label: "Collections", route: "/collections" },
   { label: "Contact", route: "/contact" },
   { label: "About", route: "/about" },
-  { label: "Login", route: "/log-in" },
+  { label: "Signup", route: "/sign-up" },
 ];
 
 /* hero section data */

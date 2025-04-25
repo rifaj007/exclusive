@@ -42,3 +42,6 @@ export { default as StarLineIcon } from "./starLine";
 export { default as LogoutIcon } from "./logout";
 export { default as CancelWithBgIcon } from "./cancelWithBg";
 export { default as DeleteIcon } from "./delete";
+export { default as PlusIcon } from "./plus";
+export { default as ArrowDownIcon } from "./arrowDown";
+export { default as EditIcon } from "./edit";

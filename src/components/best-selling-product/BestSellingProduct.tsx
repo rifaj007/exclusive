@@ -11,7 +11,7 @@ const BestSellingProduct = () => {
 
         <Link
           href={`/products/best-selling`}
-          className="button hidden sm:block"
+          className="button-primary hidden sm:block"
         >
           View All
         </Link>
