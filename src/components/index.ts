@@ -24,3 +24,4 @@ export { default as CartSummary } from "./cart/CartSummary";
 export { default as WishlistProductCard } from "./product/WishlistProductCard";
 export { default as Filters } from "./collections/Filters";
 export { default as AddProductForm } from "./admin/AddProductForm";
+export { default as ProductDetails } from "./product/ProductDetails";

@@ -1,6 +1,5 @@
 "use client";
 import { CartIcon, DeleteIcon, ViewIcon } from "@/icons";
-import { ProductCardProps } from "@/types/product";
 import Image from "next/image";
 import StarRating from "./StarRating";
 import Link from "next/link";
@@ -8,25 +7,26 @@ import { useAppDispatch } from "@/hooks/redux-hooks";
 import { removeProductFromWishlist } from "@/store/features/WishlistState/WishlistSlice";
 import toast from "react-hot-toast";
 import { addProductToCart } from "@/store/features/CartState/CartSlice";
+import { ProductParams } from "@/types/product";
 
-const WishlistProductCard = ({ data }: ProductCardProps) => {
+const WishlistProductCard = ({ product }: ProductParams) => {
   const dispatch = useAppDispatch();
 
   const {
     _id,
-    imageUrl,
+    image,
     name,
-    price,
-    original_price,
+    offerPrice,
+    originalPrice,
     rating,
     reviews,
     discount,
-  } = data;
+  } = product;
 
   const handleAddToCart = () => {
     dispatch(
       addProductToCart({
-        product: { ...data },
+        product,
         quantity: 1,
         selectedSize: "S",
         color: 0,
@@ -48,7 +48,7 @@ const WishlistProductCard = ({ data }: ProductCardProps) => {
     <div>
       <div className="bg-secondary-2 h-[200px] sm:h-[250px] rounded relative group z-20">
         <Image
-          src={imageUrl}
+          src={image[0]}
           alt={name}
           width={600}
           height={500}
@@ -94,10 +94,10 @@ const WishlistProductCard = ({ data }: ProductCardProps) => {
         </span>
 
         <div className="font-medium space-x-3 sm:mb-2 text-[14px] sm:text-base">
-          <span className="text-secondary-3">${price}</span>
-          {original_price && (
+          <span className="text-secondary-3">${offerPrice}</span>
+          {originalPrice && (
             <span className="text-border-2 line-through">
-              ${original_price}
+              ${originalPrice}
             </span>
           )}
         </div>

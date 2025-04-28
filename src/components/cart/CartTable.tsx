@@ -46,7 +46,7 @@ const CartTable = () => {
   if (!hasMounted) return <Loading />;
 
   return (
-    <div >
+    <div>
       {cartItems.length > 0 ? (
         <div className="pt-12 xl:pt-20 px-2 mb-16 sm:mb-20">
           {/* Table header */}
@@ -63,7 +63,7 @@ const CartTable = () => {
 
           {/* Table body */}
           <div className="flex flex-col gap-10 pb-6">
-            {cartItems.map(({ _id, name, imageUrl, price, quantity }) => (
+            {cartItems.map(({ _id, name, image, offerPrice, quantity }) => (
               // Each cart item
               <div
                 key={_id}
@@ -71,7 +71,7 @@ const CartTable = () => {
               >
                 {/* Product image, title and remove button */}
                 <div className="md:flex items-center gap-5 w-[210px] md:w-[340px] lg:w-[400px] relative">
-                  <Image src={imageUrl} alt={name} width={60} height={60} />
+                  <Image src={image[0]} alt={name} width={60} height={60} />
 
                   <button
                     className="absolute -left-2 -top-2"
@@ -81,7 +81,7 @@ const CartTable = () => {
                   </button>
 
                   <Link
-                    href={`/product/${_id}`}
+                    href={`/collections/${_id}`}
                     className="hover:underline pr-3 sm:text-base text-sm"
                   >
                     {name}
@@ -93,7 +93,7 @@ const CartTable = () => {
                     {/* Price */}
                     <div>
                       <span className="block sm:hidden text-sm">Price:</span> $
-                      {price}
+                      {offerPrice}
                     </div>
 
                     {/* Quantity */}
@@ -101,10 +101,10 @@ const CartTable = () => {
                       <span className="block sm:hidden text-center mb-2 text-sm">
                         Quantity:{" "}
                       </span>
-                      <div className="flex items-center border-border-1">
+                      <div className="flex items-center">
                         {/* Decrease Quantity Button */}
                         <button
-                          className="rounded-l bg-secondary-2 py-1 px-3.5 duration-100 hover:bg-secondary-3 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-secondary-2 disabled:hover:text-black"
+                          className="rounded-l border border-r-0 border-border-2 py-1 px-3.5 duration-100 hover:bg-secondary-3 hover:text-white hover:border-secondary-3 disabled:hover:border-border-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-secondary-2 disabled:hover:text-black"
                           onClick={() => handleDecreaseQuantity(_id, quantity)}
                           disabled={quantity <= 1}
                         >
@@ -113,7 +113,7 @@ const CartTable = () => {
 
                         {/* Quantity Display */}
                         <input
-                          className="h-8 w-8 border bg-white text-center text-xs outline-none"
+                          className="border border-border-2 w-10 h-[34px] bg-white text-center text-xs outline-none"
                           type="number"
                           value={quantity}
                           readOnly
@@ -121,7 +121,7 @@ const CartTable = () => {
 
                         {/* Increase Quantity Button */}
                         <button
-                          className="rounded-r bg-secondary-2 py-1 px-3.5 duration-100 hover:bg-secondary-3 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-secondary-2 disabled:hover:text-black"
+                          className="rounded-r border border-l-0 border-border-2 py-1 px-3.5 duration-100 hover:bg-secondary-3 hover:text-white hover:border-secondary-3 disabled:hover:border-border-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-secondary-2 disabled:hover:text-black"
                           onClick={() => handleIncreaseQuantity(_id, quantity)}
                           disabled={quantity >= 10}
                         >
@@ -135,7 +135,7 @@ const CartTable = () => {
                       <span className="block sm:hidden text-sm">
                         Sub Total:
                       </span>{" "}
-                      ${price * quantity}
+                      ${offerPrice * quantity}
                     </div>
                   </div>
                 </div>

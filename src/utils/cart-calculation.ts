@@ -5,7 +5,7 @@ export const calculateCartSummary = (
   coupon?: Coupon | null
 ) => {
   const subTotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + item.offerPrice * item.quantity,
     0
   );
 
@@ -19,5 +19,5 @@ export const calculateCartSummary = (
 
   const total = totalAfterDiscount + shipping;
 
-  return { subTotal, discount, shipping, total };
+  return { subTotal, discount, totalAfterDiscount, shipping, total };
 };

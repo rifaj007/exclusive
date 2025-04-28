@@ -4,11 +4,11 @@ import { Grid, Autoplay, Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
 import SliderNavButton from "../elements/SliderNavButton";
-import { exploreProductsData } from "@/constants";
 import ProductCard from "../product/ProductCard";
 import 'swiper/css/grid';
+import { IProduct } from "@/libs/database/models/product.model";
 
-const ExploreProductSlider = () => {
+const ExploreProductSlider = ({ products }: { products: IProduct[] }) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   return (
@@ -36,9 +36,9 @@ const ExploreProductSlider = () => {
         }}
         modules={[Grid, Autoplay, Keyboard]}
       >
-        {exploreProductsData.map((data) => (
-          <SwiperSlide key={data._id}>
-            <ProductCard data={data} />
+        {products.map((product) => (
+          <SwiperSlide key={product._id}>
+            <ProductCard product={product} />
           </SwiperSlide>
         ))}
       </Swiper>

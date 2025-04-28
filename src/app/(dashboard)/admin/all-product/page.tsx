@@ -31,15 +31,15 @@ const AdminAllProductPage = async () => {
                 >
                   {product.name}
                 </Link>
-                <p>{product.category}</p>
-                <p>{product.availability}</p>
+                <p>Category: {product.category}</p>
+                <p>Availability: {product.availability}</p>
                 <p>
-                  {product.offerPrice}{" "}
+                  Offer Price: {product.offerPrice} Original Price:{" "}
                   <span className="line-through text-gray-400">
                     {product.originalPrice}
                   </span>
                 </p>
-                <p>{product.rating}</p>
+                <p>Rating: {product.rating}</p>
               </div>
             </div>
 

@@ -2,8 +2,11 @@ import Link from "next/link";
 import SectionTitle from "../pages-component/SectionTitle";
 import FlashSaleCountdownTimer from "./FlashSaleCountdownTimer";
 import FlashSaleSlider from "./FlashSaleSlider";
+import { getFlashSaleProducts } from "@/libs/actions/product";
 
-const FlashSales = () => {
+const FlashSales = async () => {
+  const flashSalesProducts = await getFlashSaleProducts();
+
   return (
     <section className="mb-20 pb-[60px] border-b border-border-1">
       {/* Section title and flash sales timer */}
@@ -15,10 +18,11 @@ const FlashSales = () => {
       </div>
 
       {/* Flash sales Product card slider */}
-      <FlashSaleSlider />
+        <FlashSaleSlider products={flashSalesProducts} />
+
 
       <div className="flex justify-center">
-        <Link href={`/products/category`} className="button-primary">
+        <Link href={`/collections/category`} className="button-primary">
           View All Products
         </Link>
       </div>

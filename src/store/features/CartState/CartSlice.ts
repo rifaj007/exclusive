@@ -1,10 +1,11 @@
-import { ProductData } from "@/types/product";
+import { IProduct } from "@/libs/database/models/product.model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { WritableDraft } from "immer";
 
-export interface CartItem extends ProductData {
+export interface CartItem extends IProduct {
   quantity: number;
   selectedSize: string;
-  color: number;
+  color: string;
 }
 
 export interface Coupon {
@@ -23,11 +24,12 @@ const initialState: CartState = {
 };
 
 interface AddToCartPayload {
-  product: ProductData;
+  product: IProduct;
   quantity: number;
   selectedSize: string;
-  color: number;
+  color: string;
 }
+
 interface ChangeQuantityPayload {
   _id: string;
   quantity: number;
@@ -39,7 +41,12 @@ const cartSlice = createSlice({
   reducers: {
     // set cart from storage
     setCartFromStorage: (state, action: PayloadAction<CartState>) => {
-      state.cartItems = action.payload.cartItems;
+      state.cartItems = action.payload.cartItems.map((item) => ({
+        ...item,
+        quantity: item.quantity,
+        selectedSize: item.selectedSize,
+        color: item.color,
+      })) as unknown as WritableDraft<CartItem>[];
       state.coupon = action.payload.coupon;
     },
 
@@ -53,8 +60,10 @@ const cartSlice = createSlice({
         const newQuantity = existingItem.quantity + quantity;
         existingItem.quantity = Math.min(newQuantity, 10);
       } else {
+        const serializableProduct = JSON.parse(JSON.stringify(product));
+
         state.cartItems.push({
-          ...product,
+          ...serializableProduct,
           quantity: Math.min(quantity, 10),
           selectedSize,
           color,

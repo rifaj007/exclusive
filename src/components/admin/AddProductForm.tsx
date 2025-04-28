@@ -105,9 +105,9 @@ const AddProductForm = ({ product }: IProps) => {
       } else {
         await createNewProduct({ product: payload });
         toast.success("Product added successfully");
-        router.push("/admin/all-product");
       }
-
+      
+      router.push("/admin/all-product");
       reset();
       setSelectedColors([]);
       setSelectedOptions([]);

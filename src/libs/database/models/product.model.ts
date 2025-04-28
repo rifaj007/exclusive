@@ -17,7 +17,8 @@ export interface IProduct extends Document {
   availability: "In Stock" | "Out of Stock";
   flashSale?: boolean;
   bestSelling?: boolean;
-  new?: boolean;
+  explore?: boolean;
+  isNew?: boolean;
 }
 
 const productSchema = new Schema<IProduct>(
@@ -44,7 +45,8 @@ const productSchema = new Schema<IProduct>(
     },
     flashSale: { type: Boolean, default: false },
     bestSelling: { type: Boolean, default: false },
-    new: { type: Boolean, default: false },
+    explore: { type: Boolean, default: false },
+    isNew: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

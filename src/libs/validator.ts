@@ -96,7 +96,7 @@ export const adminAddProductFormSchema = object({
     required_error: "Please! provide rating.",
     invalid_type_error: "Rating must be a number",
   })
-    .min(1, "Rating must be at least 1")
+    .min(0, "Rating must be at least 0")
     .max(5, "Rating must be less than or equal to 5"),
   reviews: number({
     required_error: "Please! provide reviews.",

@@ -56,6 +56,45 @@ export const getSingleProduct = async (id: string) => {
   }
 };
 
+// get flash sale products
+export const getFlashSaleProducts = async () => {
+  try {
+    await connectToDatabase();
+
+    const flashSaleProducts = await Product.find({ flashSale: true });
+
+    return JSON.parse(JSON.stringify(flashSaleProducts));
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// get best selling products
+export const getBestSellingProducts = async () => {
+  try {
+    await connectToDatabase();
+
+    const bestSellingProducts = await Product.find({ bestSelling: true });
+
+    return JSON.parse(JSON.stringify(bestSellingProducts));
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// get explore products
+export const getExploreProducts = async () => {
+  try {
+    await connectToDatabase();
+
+    const exploreProducts = await Product.find({ explore: true });
+
+    return JSON.parse(JSON.stringify(exploreProducts));
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 // update product
 export const updateProduct = async ({ product }: ProductParams) => {
   try {

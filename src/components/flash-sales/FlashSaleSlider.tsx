@@ -2,16 +2,17 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
 import ProductCard from "../product/ProductCard";
-import { flashSalesProductsData } from "@/constants";
 import { Autoplay, Keyboard } from "swiper/modules";
 import SliderNavButton from "../elements/SliderNavButton";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { IProduct } from "@/libs/database/models/product.model";
 
-const FlashSaleSlider = () => {
+const FlashSaleSlider = ({ products }: { products: IProduct[] }) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   return (
-    <div className="relative mb-[60px]">
+    <Suspense fallback={<p>Loading</p>}>
+      <div className="relative mb-[60px]">
       <Swiper
         autoplay={{
           delay: 1200,
@@ -31,16 +32,17 @@ const FlashSaleSlider = () => {
         }}
         modules={[Autoplay, Keyboard]}
       >
-        {flashSalesProductsData.map((data) => (
+        {products.map((data) => (
           <SwiperSlide key={data._id}>
-            <ProductCard data={data} />
+            <ProductCard product={data} />
           </SwiperSlide>
         ))}
       </Swiper>
 
       {/* flash sales slider navigation button */}
       <SliderNavButton swiper={swiperInstance} />
-    </div>
+      </div>
+    </Suspense>
   );
 };
 

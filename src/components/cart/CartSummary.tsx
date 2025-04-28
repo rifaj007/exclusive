@@ -25,7 +25,7 @@ const CartSummary = () => {
   });
 
   // Calculate cart summary
-  const { subTotal, shipping, discount, total } = calculateCartSummary(
+  const { subTotal, shipping, totalAfterDiscount, discount, total } = calculateCartSummary(
     cartItems,
     coupon
   );
@@ -124,16 +124,34 @@ const CartSummary = () => {
             </div>
           )}
 
+          {/* Total after discount */}
+          {
+            discount > 0 && (
+              <div className="flex justify-between border-b border-text-4 pb-4 mb-4">
+                <span>Total after discount:</span>
+                <span>${totalAfterDiscount.toFixed(2)}</span>
+              </div>
+            )
+          }
+
           {/* Shipping */}
           <div className="border-b border-text-4 pb-4 mb-4">
             <div className="flex justify-between mb-1">
               <span>Shipping:</span>
-              <span>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</span>
+              <p>
+                {shipping === 0 ? (
+                  <span className="text-red-600">Free</span>
+                ) : (
+                  `$${shipping.toFixed(2)}`
+                )}
+              </p>
             </div>
 
-            <p className="text-xs text-end">
-              (Shipping is free if you order more than $250)
-            </p>
+            {shipping === 10 && (
+              <p className="text-xs text-end">
+                (Shipping is free if you order more than $250)
+              </p>
+            )}
           </div>
 
           {/* Total */}

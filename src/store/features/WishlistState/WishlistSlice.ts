@@ -1,9 +1,10 @@
-import { ProductData } from "@/types/product";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "../CartState/CartSlice";
+import { IProduct } from "@/libs/database/models/product.model";
+import { WritableDraft } from "immer";
 
 interface WishlistState {
-  wishlistItems: ProductData[];
+  wishlistItems: IProduct[];
 }
 
 const initialState: WishlistState = {
@@ -15,12 +16,12 @@ const wishlistSlice = createSlice({
   initialState,
   reducers: {
     // add to wishlist
-    addProductToWishlist: (state, action: PayloadAction<ProductData>) => {
+    addProductToWishlist: (state, action: PayloadAction<IProduct>) => {
       const exists = state.wishlistItems.find(
         (item) => item._id === action.payload._id
       );
       if (!exists) {
-        state.wishlistItems.push(action.payload);
+        state.wishlistItems.push(JSON.parse(JSON.stringify(action.payload)));
         localStorage.setItem("wishlist", JSON.stringify(state));
       }
     },
@@ -53,7 +54,7 @@ const wishlistSlice = createSlice({
         } else {
           // Add as new item with default values
           mergedCartItems.push({
-            ...wishlistItem,
+            ...JSON.parse(JSON.stringify(wishlistItem)),
             quantity: 1,
             selectedSize: "S",
             color: 0,
@@ -75,7 +76,8 @@ const wishlistSlice = createSlice({
 
     // set wishlist from local storage
     setWishlistFromStorage: (state, action: PayloadAction<WishlistState>) => {
-      state.wishlistItems = action.payload.wishlistItems;
+      state.wishlistItems = action.payload
+        .wishlistItems as unknown as WritableDraft<CartItem>[];
     },
   },
 });

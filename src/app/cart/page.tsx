@@ -1,6 +1,10 @@
 import { CartSummary, CartTable } from "@/components";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Cart",
+};
+
 const CartPage = () => {
   return (
     <section className="pt-8 lg:pt-12 xl:pt-20 pb-20 lg:pb-[100px] xl:pb-[140px]">
