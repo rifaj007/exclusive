@@ -96,7 +96,7 @@ const AddProductForm = ({ product }: IProps) => {
         ...values,
         flashSale: product?.flashSale ?? false,
         bestSelling: product?.bestSelling ?? false,
-        new: product?.new ?? false,
+        isNew: product?.isNew ?? false,
       };
 
       if (product) {
@@ -106,7 +106,7 @@ const AddProductForm = ({ product }: IProps) => {
         await createNewProduct({ product: payload });
         toast.success("Product added successfully");
       }
-      
+
       router.push("/admin/all-product");
       reset();
       setSelectedColors([]);
