@@ -2,8 +2,7 @@
 import { Loading, WishlistProductCard } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import useHasMounted from "@/hooks/useHasMounted";
-import { setCartFromStorage } from "@/store/features/CartState/CartSlice";
-import { moveAllToCart } from "@/store/features/WishlistState/WishlistSlice";
+import { clearWishlist } from "@/store/features/WishlistState/WishlistSlice";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
@@ -13,16 +12,10 @@ const WishlistPage = () => {
   const dispatch = useAppDispatch();
 
   // handle all product to cart
-  const handleMoveAllToCart = () => {
-    dispatch(moveAllToCart());
+  const handleClearWishlist = () => {
+    dispatch(clearWishlist());
 
-    // get updated cart from localStorage and update cart state
-    const updatedCart = localStorage.getItem("cart");
-    if (updatedCart) {
-      dispatch(setCartFromStorage(JSON.parse(updatedCart)));
-    }
-
-    toast.success("All Product added to cart!");
+    toast.success("Cleared Wishlist!");
   };
 
   if (!hasMounted) return <Loading />;
@@ -38,10 +31,10 @@ const WishlistPage = () => {
 
               {/* move all product to cart */}
               <button
-                onClick={handleMoveAllToCart}
+                onClick={handleClearWishlist}
                 className="button-secondary"
               >
-                Move All To Cart
+                Clear Wishlist
               </button>
             </div>
 

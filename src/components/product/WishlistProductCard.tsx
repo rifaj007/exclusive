@@ -1,12 +1,11 @@
 "use client";
-import { CartIcon, DeleteIcon, ViewIcon } from "@/icons";
+import { DeleteIcon, ViewIcon } from "@/icons";
 import Image from "next/image";
 import StarRating from "./StarRating";
 import Link from "next/link";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { removeProductFromWishlist } from "@/store/features/WishlistState/WishlistSlice";
 import toast from "react-hot-toast";
-import { addProductToCart } from "@/store/features/CartState/CartSlice";
 import { ProductParams } from "@/types/product";
 
 const WishlistProductCard = ({ product }: ProductParams) => {
@@ -22,21 +21,6 @@ const WishlistProductCard = ({ product }: ProductParams) => {
     reviews,
     discount,
   } = product;
-
-  const handleAddToCart = () => {
-    dispatch(
-      addProductToCart({
-        product,
-        quantity: 1,
-        selectedSize: "S",
-        color: 0,
-      })
-    );
-
-    dispatch(removeProductFromWishlist(_id));
-
-    toast.success("Product added to cart!");
-  };
 
   // remove from wishlist
   const handleRemoveFromWishlist = () => {
@@ -57,6 +41,7 @@ const WishlistProductCard = ({ product }: ProductParams) => {
 
         {/* wishlist and view button */}
         <div className="absolute top-1 sm:top-3 right-1 sm:right-3 flex flex-col gap-2">
+          {/* remove from wishlist */}
           <button
             onClick={handleRemoveFromWishlist}
             className="bg-white hover:bg-secondary-3 transition duration-200 rounded-full p-[5px]"
@@ -64,8 +49,9 @@ const WishlistProductCard = ({ product }: ProductParams) => {
             <DeleteIcon className="hover:text-white" />
           </button>
 
+          {/* view product */}
           <Link
-            href={`/products/${_id}`}
+            href={`/collections/${_id}`}
             className="bg-white hover:bg-secondary-3 transition duration-200 rounded-full p-[5px] inline-block"
           >
             <ViewIcon className="hover:text-white" />
@@ -75,37 +61,30 @@ const WishlistProductCard = ({ product }: ProductParams) => {
         {/* discount */}
         {discount && (
           <div className="absolute top-3 left-3 bg-secondary-3 px-3 rounded">
-            <span className="text-[12px] text-text-1">{discount}</span>
+            <span className="text-[12px] text-text-1">-{discount}%</span>
           </div>
         )}
       </div>
 
-      {/* add to cart button */}
-      <button
-        onClick={handleAddToCart}
-        className="bg-black text-white py-2 w-full rounded-b mb-4 flex-center gap-2 sm:text-base text-sm"
-      >
-        <CartIcon className="sm:w-8 sm:h-8 h-6 w-6" /> Add To Cart
-      </button>
-
       <div>
+        {/* product name */}
         <span className="font-medium mb-3 text-[14px] sm:text-base">
           {name}
         </span>
 
+        {/* prices */}
         <div className="font-medium space-x-3 sm:mb-2 text-[14px] sm:text-base">
           <span className="text-secondary-3">${offerPrice}</span>
           {originalPrice && (
-            <span className="text-border-2 line-through">
-              ${originalPrice}
-            </span>
+            <span className="text-border-2 line-through">${originalPrice}</span>
           )}
         </div>
 
+        {/* rating and reviews */}
         <div className="flex gap-2 items-center">
           <StarRating rating={rating} />
           <span className="font-semibold text-[14px] text-border-2">
-            ({reviews})
+            ({reviews}){/*  */}
           </span>
         </div>
       </div>

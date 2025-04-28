@@ -90,6 +90,7 @@ const ProductDetails = ({ product }: ProductParams) => {
         color: selectedColor,
       })
     );
+    dispatch(removeProductFromWishlist(_id));
 
     toast.success("Product added to cart!");
   };
