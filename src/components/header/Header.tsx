@@ -194,7 +194,7 @@ const Header = () => {
               </button>
 
               {/* Wishlist, Cart, and Profile Icons */}
-              <div className="flex items-center gap-1 sm-xs:gap-3 sm:gap-4">
+              <div className="flex items-center gap-2 sm-xs:gap-3 sm:gap-4">
                 {/* Wishlist */}
                 <WishlistLink />
 
@@ -306,7 +306,7 @@ const Header = () => {
       {/* Mobile nav Menu */}
       <div className="lg:hidden">
         <div
-          className={`fixed top-20 md:top-24 left-0 w-full h-full transition-transform duration-[350ms] text-center bg-white pt-8 origin-top z-40 ${
+          className={`fixed top-32 md:top-24 left-0 w-full h-full transition-transform duration-[350ms] text-center bg-white pt-8 origin-top z-40 ${
             isMenuOpen ? "translate-y-0" : "-translate-y-[120%]"
           }`}
         >
