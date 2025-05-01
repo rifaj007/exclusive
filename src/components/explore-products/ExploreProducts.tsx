@@ -14,7 +14,7 @@ const ExploreProducts = async () => {
       <ExploreProductSlider products={exploreProductsData} />
 
       <div className="flex justify-center">
-        <Link href="/collections" className="button-primary">
+        <Link href="/collections?explore=true" className="button-primary">
           View All Products
         </Link>
       </div>

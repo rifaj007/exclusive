@@ -25,7 +25,10 @@ const NewArrival = () => {
               Black and White version of the PS5 <br /> coming out on sale.
             </p>
 
-            <Link href="#" className="underline text-white">
+            <Link
+              href="/collections/681282db2d145242d20e10cc"
+              className="underline text-white"
+            >
               Shop Now
             </Link>
           </div>
@@ -50,7 +53,10 @@ const NewArrival = () => {
               vibe.
             </p>
 
-            <Link href="#" className="underline text-white">
+            <Link
+              href="/collections?category=Woman’s Fashion"
+              className="underline text-white"
+            >
               Shop Now
             </Link>
           </div>
@@ -70,7 +76,10 @@ const NewArrival = () => {
             <h2 className="new-arrival-heading mb-0">Speakers</h2>
             <p className="mb-0 text-[14px]">Amazon wireless speakers.</p>
 
-            <Link href="#" className="underline text-white">
+            <Link
+              href="/collections?category=Electronics&type=Speakers"
+              className="underline text-white"
+            >
               Shop Now
             </Link>
           </div>
@@ -90,7 +99,12 @@ const NewArrival = () => {
             <h2 className="new-arrival-heading mb-0">Perfume</h2>
             <p className="mb-0 text-[14px]">GUCCI INTENSE OUD EDP</p>
 
-            <Link href="#" className="underline text-white">
+            <Link
+              href={`/collections?category=${encodeURIComponent(
+                "Groceries & Pets"
+              )}&type=${encodeURIComponent("Perfume")}`}
+              className="underline text-white"
+            >
               Shop Now
             </Link>
           </div>

@@ -30,7 +30,7 @@ const WishlistProductCard = ({ product }: ProductParams) => {
 
   return (
     <div>
-      <div className="bg-secondary-2 h-[200px] sm:h-[250px] rounded relative group z-20">
+      <div className="shadow-custom border-2 border-secondary-2 h-[200px] sm:h-[250px] rounded relative group z-20">
         <Image
           src={image[0]}
           alt={name}
@@ -66,7 +66,7 @@ const WishlistProductCard = ({ product }: ProductParams) => {
         )}
       </div>
 
-      <div>
+      <div className="mt-2">
         {/* product name */}
         <span className="font-medium mb-3 text-[14px] sm:text-base">
           {name}

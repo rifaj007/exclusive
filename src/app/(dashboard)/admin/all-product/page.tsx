@@ -1,15 +1,15 @@
 import DeleteButton from "@/components/admin/DeleteButton";
 import { EditIcon } from "@/icons";
-import { getAllProducts } from "@/libs/actions/product";
+import { getAllProductsForAdmin } from "@/libs/actions/product";
 import { IProduct } from "@/libs/database/models/product.model";
 import Image from "next/image";
 import Link from "next/link";
 
 const AdminAllProductPage = async () => {
-  const products = await getAllProducts();
+  const products = await getAllProductsForAdmin();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="grid grid-cols-2 gap-4">
       {products.length > 0 ? (
         products.map((product: IProduct) => (
           <div
@@ -17,7 +17,7 @@ const AdminAllProductPage = async () => {
             className="border border-border-1 p-4 rounded-md flex justify-between"
           >
             {/* Product details */}
-            <div className="flex gap-5">
+            <div className="flex flex-col lg:flex-row gap-5">
               <Image
                 src={product.image[0]}
                 alt="product"

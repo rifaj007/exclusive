@@ -15,7 +15,7 @@ const FlashSaleBanner = () => {
         {/* Flash sale countdown banner */}
         <FlashSaleBannerCountdownTimer />
 
-        <Link href={`/product/electronics`} className="button-primary bg-secondary-4">Buy Now!</Link>
+        <Link href="collections/681284b02d145242d20e1151" className="button-primary bg-secondary-4">Buy Now!</Link>
       </div>
 
       {/* Banner image */}

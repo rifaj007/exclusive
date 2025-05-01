@@ -239,6 +239,7 @@ const ProductDetails = ({ product }: ProductParams) => {
           <button
             onClick={handleAddToCart}
             className="button-primary text-sm font-normal px-5"
+            disabled={availability !== "In Stock"}
           >
             Add To Cart
           </button>

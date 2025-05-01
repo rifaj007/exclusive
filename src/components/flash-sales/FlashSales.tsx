@@ -22,7 +22,7 @@ const FlashSales = async () => {
 
 
       <div className="flex justify-center">
-        <Link href={`/collections/category`} className="button-primary">
+        <Link href="/collections?flash-sale=true" className="button-primary">
           View All Products
         </Link>
       </div>

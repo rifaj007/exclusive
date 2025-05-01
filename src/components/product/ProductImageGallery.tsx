@@ -53,7 +53,7 @@ const ProductImageGallery = ({ images }: ProductImageGalleryProps) => {
 
       {/* Main Image with Zoom and Transition */}
       <div className="lg:flex-1 relative group overflow-hidden">
-        <div className="w-full aspect-square relative rounded-lg bg-gray-100">
+        <div className="w-full aspect-square relative rounded-lg">
           <Image
             src={selectedImage}
             alt="Selected Product Image"

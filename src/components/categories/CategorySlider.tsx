@@ -33,13 +33,13 @@ const CategorySlider = () => {
         }}
         modules={[Autoplay, Keyboard]}
       >
-        {categoriesSliderData.map(({ _id, icon: Icon, name }) => (
+        {categoriesSliderData.map(({ _id, icon: Icon, name, link }) => (
           <SwiperSlide
             key={_id}
             className="border border-border-1 rounded transition-all duration-300 hover:bg-secondary-3 hover:border-secondary-3 group"
           >
             <Link
-              href={`/category/${name}`}
+              href={link}
               className="py-6 flex flex-col items-center gap-2 "
             >
               <Icon className="group-hover:text-text-1" />

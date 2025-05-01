@@ -6,6 +6,8 @@ import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/libs/auth";
 import StoreProvider from "@/provider/StoreProvider";
+import { SkeletonTheme } from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export const inter = Inter({
   variable: "--font-inter",
@@ -40,12 +42,17 @@ export default async function RootLayout({
         <body
           className={`${inter.variable} ${poppins.variable} antialiased flex flex-col h-screen`}
         >
-          <StoreProvider>
-            <Header />
-            <main className="pt-[145px] flex-1">{children}</main>
-            <Footer />
-            <Toaster reverseOrder={false} />
-          </StoreProvider>
+          <SkeletonTheme
+            baseColor="var(--neutral-200)"
+            highlightColor="var(--secondary-2)"
+          >
+            <StoreProvider>
+              <Header />
+              <main className="pt-[145px] flex-1">{children}</main>
+              <Footer />
+              <Toaster reverseOrder={false} />
+            </StoreProvider>
+          </SkeletonTheme>
         </body>
       </html>
     </SessionProvider>

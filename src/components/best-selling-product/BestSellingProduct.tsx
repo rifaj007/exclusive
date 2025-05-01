@@ -13,7 +13,7 @@ const BestSellingProduct = async () => {
         <SectionTitle subTitle="This Month" title="Best Selling Products" />
 
         <Link
-          href={`/products/best-selling`}
+          href="/collections?best-selling=true"
           className="button-primary hidden sm:block"
         >
           View All
@@ -28,7 +28,7 @@ const BestSellingProduct = async () => {
 
       <div className="flex justify-center">
         <Link
-          href={`/products/best-selling`}
+          href="/collections?best-selling=true"
           className="button-primary sm:hidden"
         >
           View All

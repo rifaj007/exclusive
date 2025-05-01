@@ -1,8 +1,9 @@
 "use server";
 import connectToDatabase from "@/libs/database/dbConnect";
-import Product from "@/libs/database/models/product.model";
+import Product, { IProduct } from "@/libs/database/models/product.model";
 import { CreateProductParams, ProductParams } from "@/types/product";
 import { handleError } from "@/utils/handle-error";
+import { FilterQuery } from "mongoose";
 
 // create new product
 export const createNewProduct = async ({ product }: CreateProductParams) => {
@@ -18,11 +19,82 @@ export const createNewProduct = async ({ product }: CreateProductParams) => {
 };
 
 // get all products
-export const getAllProducts = async () => {
+export const getAllProducts = async ({
+  category,
+  type,
+  query,
+  sort,
+  page = 1,
+  flashSale,
+  bestSelling,
+  explore,
+}: {
+  category?: string;
+  type?: string;
+  query?: string;
+  sort?: string;
+  page?: number;
+  flashSale?: boolean;
+  bestSelling?: boolean;
+  explore?: boolean;
+}) => {
   try {
     await connectToDatabase();
 
-    const products = await Product.find({});
+    const PAGE_SIZE = 8; // products per page
+    const filters: FilterQuery<IProduct> = {};
+
+    if (category) {
+      filters.category = category;
+    }
+
+    if (type) {
+      filters.type = type;
+    }
+
+    if (query) {
+      filters.name = { $regex: query, $options: "i" };
+    }
+
+    if (flashSale) filters.flashSale = true;
+    if (bestSelling) filters.bestSelling = true;
+    if (explore) filters.explore = true;
+
+    const sortOption: Record<string, 1 | -1> = {};
+
+    if (sort === "lowToHigh") {
+      sortOption.offerPrice = 1; // ascending
+    } else if (sort === "highToLow") {
+      sortOption.offerPrice = -1; // descending
+    } else {
+      sortOption.createdAt = 1; // default: newest first
+    }
+
+    const products = await Product.find(filters)
+      .sort(sortOption)
+      .skip((page - 1) * PAGE_SIZE)
+      .limit(PAGE_SIZE);
+
+    const totalProducts = await Product.countDocuments(filters); // for pagination
+
+    return JSON.parse(
+      JSON.stringify({
+        products,
+        totalPages: Math.ceil(totalProducts / PAGE_SIZE),
+        currentPage: page,
+      })
+    );
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// get all products for admin
+export const getAllProductsForAdmin = async () => {
+  try {
+    await connectToDatabase();
+
+    const products = await Product.find({}).sort({ createdAt: -1 });
 
     return JSON.parse(JSON.stringify(products));
   } catch (error) {
