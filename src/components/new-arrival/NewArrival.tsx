@@ -9,13 +9,13 @@ const NewArrival = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[30px] mt-[60px] text-text-1">
         {/* PlayStation 5 - Large Block */}
-        <div className="lg:row-span-2 sm:col-span-2 new-arrival-wrapper">
+        <div className="lg:row-span-2 sm:col-span-2 new-arrival-wrapper relative">
           <Image
             src="/images/new-arrival/playstation-5.png"
-            width={500}
-            height={500}
+            width={800}
+            height={800}
             alt="PlayStation 5"
-            className="w-auto h-auto rounded lg:ml-0 ml-auto"
+            className="w-full h-auto rounded lg:ml-0 ml-auto"
           />
 
           <div className="absolute bottom-8 left-8 right-0">
