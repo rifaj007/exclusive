@@ -50,7 +50,7 @@ export const heroNavbarData = [
       { _id: 201, label: "Jacket", link: generateLink("Men’s Fashion", "Jacket") },
       { _id: 202, label: "Pant", link: generateLink("Men’s Fashion", "Pant") },
       { _id: 203, label: "Shirt", link: generateLink("Men’s Fashion", "Shirt") },
-      { _id: 203, label: "Shoes", link: generateLink("Men’s Fashion", "Shoes") },
+      { _id: 204, label: "Shoes", link: generateLink("Men’s Fashion", "Shoes") },
     ],
   },
   {
@@ -64,8 +64,8 @@ export const heroNavbarData = [
       { _id: 303, label: "Monitor", link: generateLink("Electronics", "Monitor") },
       { _id: 304, label: "Camera", link: generateLink("Electronics", "Camera") },
       { _id: 305, label: "Speakers", link: generateLink("Electronics", "Speakers") },
-      { _id: 305, label: "Phones", link: generateLink("Electronics", "Phones") },
-      { _id: 305, label: "SmartWatch", link: generateLink("Electronics", "SmartWatch") },
+      { _id: 306, label: "Phones", link: generateLink("Electronics", "Phones") },
+      { _id: 307, label: "SmartWatch", link: generateLink("Electronics", "SmartWatch") },
     ],
   },
   {

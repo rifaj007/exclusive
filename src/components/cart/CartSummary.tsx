@@ -1,16 +1,29 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
+import { useCurrentUser } from "@/hooks/use-session";
 import useHasMounted from "@/hooks/useHasMounted";
 import { couponCodeSchema } from "@/libs/validator";
-import { addCoupon, removeCoupon } from "@/store/features/CartState/CartSlice";
+import {
+  addCoupon,
+  clearCart,
+  removeCoupon,
+} from "@/store/features/CartState/CartSlice";
 import { calculateCartSummary } from "@/utils/cart-calculation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
+import { loadStripe } from "@stripe/stripe-js";
+import { checkoutOrder } from "@/libs/actions/checkout/order.action";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
 const CartSummary = () => {
+  const user = useCurrentUser();
+  const router = useRouter();
   const hasMounted = useHasMounted();
   const { cartItems, coupon } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
@@ -25,13 +38,11 @@ const CartSummary = () => {
   });
 
   // Calculate cart summary
-  const { subTotal, shipping, totalAfterDiscount, discount, total } = calculateCartSummary(
-    cartItems,
-    coupon
-  );
+  const { subTotal, shipping, totalAfterDiscount, discount, total } =
+    calculateCartSummary(cartItems, coupon);
 
   // handling coupon code apply
-  async function onSubmit(values: z.infer<typeof couponCodeSchema>) {
+  const onSubmit = async (values: z.infer<typeof couponCodeSchema>) => {
     const code = values.couponCode.trim();
 
     // coupon
@@ -49,7 +60,32 @@ const CartSummary = () => {
     } else {
       toast.error("Invalid coupon code!");
     }
-  }
+  };
+
+  // handling checkout
+  const handleCheckout = async () => {
+    if (!user) {
+      router.push("log-in?callbackUrl=%2Fcart");
+      return;
+    }
+
+    if (cartItems.length === 0) {
+      return;
+    }
+
+    try {
+      const stripe = await stripePromise;
+      if (!stripe) {
+        throw new Error("Stripe is not initialized");
+      }
+      const session = await checkoutOrder(cartItems);
+
+      dispatch(clearCart());
+      window.location.href = session!;
+    } catch (error) {
+      console.error("Checkout failed", error);
+    }
+  };
 
   if (!hasMounted) return null;
 
@@ -125,14 +161,12 @@ const CartSummary = () => {
           )}
 
           {/* Total after discount */}
-          {
-            discount > 0 && (
-              <div className="flex justify-between border-b border-text-4 pb-4 mb-4">
-                <span>Total after discount:</span>
-                <span>${totalAfterDiscount.toFixed(2)}</span>
-              </div>
-            )
-          }
+          {discount > 0 && (
+            <div className="flex justify-between border-b border-text-4 pb-4 mb-4">
+              <span>Total after discount:</span>
+              <span>${totalAfterDiscount.toFixed(2)}</span>
+            </div>
+          )}
 
           {/* Shipping */}
           <div className="border-b border-text-4 pb-4 mb-4">
@@ -162,9 +196,12 @@ const CartSummary = () => {
         </div>
 
         <div className="flex justify-center">
-          <Link className="button-primary inline-block" href="/checkout">
+          <button
+            onClick={handleCheckout}
+            className="button-primary inline-block"
+          >
             Process to checkout
-          </Link>
+          </button>
         </div>
       </div>
     </div>

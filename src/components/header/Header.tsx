@@ -243,7 +243,7 @@ const Header = () => {
           {isDropdownOpen && (
             <ul
               ref={dropdownRef}
-              className="text-text-1 flex flex-col gap-3 absolute top-12 right-0 w-56 p-3 rounded bg-black/40 shadow-lg backdrop-blur-[150px]"
+              className="text-text-1 flex flex-col gap-3 absolute right-0 w-56 p-3 rounded bg-black/40 shadow-lg backdrop-blur-[150px]"
             >
               <li>
                 <Link
