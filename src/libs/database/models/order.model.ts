@@ -8,7 +8,7 @@ export interface ProductOrder {
   name: string;
   price: number;
   size?: string;
-  colors?: string;
+  color?: string;
   image: string;
   quantity: number;
 }
@@ -21,7 +21,7 @@ const OrderSchema = new Schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
   size: { type: String },
-  colors: { type: String },
+  color: { type: String },
   image: { type: String, required: true },
   quantity: { type: Number, required: true },
 });

@@ -52,7 +52,7 @@ export async function POST(request: Request) {
           name: metadata.name || "",
           price: (item.amount_subtotal || 0) / 100,
           size: metadata.size || "",
-          colors: metadata.color || "",
+          color: metadata.color || "",
           image: metadata.image || "",
           quantity: item.quantity || 1,
         };

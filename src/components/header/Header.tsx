@@ -3,14 +3,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { navItems } from "@/constants";
-import {
-  BagIcon,
-  CancelIcon,
-  LogoutIcon,
-  ProfileIcon,
-  SearchIcon,
-  StarLineIcon,
-} from "@/icons";
+import { BagIcon, LogoutIcon, ProfileIcon, SearchIcon } from "@/icons";
 import NavSearch from "./NavSearch";
 import { useCurrentUser } from "@/hooks/use-session";
 import { routes } from "@/constants/routes";
@@ -263,28 +256,6 @@ const Header = () => {
                 >
                   <BagIcon />
                   My Order
-                </Link>
-              </li>
-
-              {/* Cancellations route */}
-              <li>
-                <Link
-                  href="/user/cancellations"
-                  className="flex items-center gap-3 text-sm"
-                >
-                  <CancelIcon />
-                  My Cancellations
-                </Link>
-              </li>
-
-              {/* Reviews route */}
-              <li>
-                <Link
-                  href="/user/reviews"
-                  className="flex items-center gap-3 text-sm"
-                >
-                  <StarLineIcon />
-                  My Reviews
                 </Link>
               </li>
 

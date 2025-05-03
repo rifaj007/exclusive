@@ -30,6 +30,8 @@ export const checkoutOrder = async (cartItems: CartItem[]) => {
             id: item._id,
             name: item.name,
             price: item.offerPrice,
+            size: item.selectedSize,
+            color: item.color,
             image: item.image[0],
           },
         },
@@ -67,7 +69,7 @@ export const checkoutOrder = async (cartItems: CartItem[]) => {
 
 export const createOrder = async (order: ProductOrder) => {
   try {
-    console.log(order)
+    console.log(order);
     await connectToDatabase();
 
     const newOrder = await Order.create({
@@ -75,6 +77,33 @@ export const createOrder = async (order: ProductOrder) => {
     });
 
     return JSON.parse(JSON.stringify(newOrder));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getOrdersByUserId = async () => {
+  try {
+    await connectToDatabase();
+
+    const session = await auth();
+    const userId = session?.user?._id as string;
+
+    const orders = await Order.find({ userId: userId }).sort({ createdAt: -1 });
+
+    return JSON.parse(JSON.stringify(orders));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllOrders = async () => {
+  try {
+    await connectToDatabase();
+
+    const orders = await Order.find({}).sort({ createdAt: -1 });
+
+    return JSON.parse(JSON.stringify(orders));
   } catch (error) {
     console.log(error);
   }
