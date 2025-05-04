@@ -8,7 +8,6 @@ import Stripe from "stripe";
 export const checkoutOrder = async (cartItems: CartItem[]) => {
   const session = await auth();
   const email = session?.user?.email as string;
-  console.log("User ID during checkout:", email);
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 

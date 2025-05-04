@@ -1,14 +1,16 @@
 import { createOrder } from "@/libs/actions/checkout/order.action";
+import connectToDatabase from "@/libs/database/dbConnect";
+import ProcessedEvent from "@/libs/database/models/processed-event.model";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(request: Request) {
+  await connectToDatabase(); 
+
   const body = await request.text();
-
   const sig = (await request.headers.get("Stripe-Signature")) as string;
-
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
   let event;
@@ -20,10 +22,18 @@ export async function POST(request: Request) {
   }
 
   // get the id and type
+  const eventId = event.id;
   const eventType = event.type;
 
   // create
   if (eventType === "checkout.session.completed") {
+    const existingEvent = await ProcessedEvent.findOne({ eventId });
+
+    if (existingEvent) {
+      console.log(`Webhook event ${eventId} already processed. Ignoring.`);
+      return new Response("Webhook received and already processed", { status: 200 });
+    }
+
     const session = event.data.object as Stripe.Checkout.Session;
     console.log("logging from session:", session);
 
@@ -34,6 +44,7 @@ export async function POST(request: Request) {
         { expand: ["data.price.product"] }
       );
       console.log("Line Item:", lineItems);
+
       // map line items to orders
       const orders = lineItems.data.map((item) => {
         // access meta data directly from the item
@@ -62,8 +73,11 @@ export async function POST(request: Request) {
       const savedOrders = await Promise.all(
         orders.map((order) => createOrder(order))
       );
-
       console.log("Orders created successfully", savedOrders);
+
+      // record that this event has been processed
+      await ProcessedEvent.create({ eventId });
+      
       return NextResponse.json({
         message: "Orders created",
         orders: savedOrders,
