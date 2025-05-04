@@ -4,7 +4,7 @@ export interface ProductOrder {
   stripeId: string;
   userId: string;
   createdAt: Date;
-  id: string;
+  productId: string;
   name: string;
   price: number;
   size?: string;
@@ -17,7 +17,7 @@ const OrderSchema = new Schema({
   stripeId: { type: String, required: true },
   userId: { type: String, required: true },
   createdAt: { type: Date, required: true },
-  id: { type: String, required: true },
+  productId: { type: String, },
   name: { type: String, required: true },
   price: { type: Number, required: true },
   size: { type: String },

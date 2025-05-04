@@ -27,7 +27,7 @@ export const checkoutOrder = async (cartItems: CartItem[]) => {
           images: [item.image[0]],
           metadata: {
             userId: userId,
-            id: item._id,
+            productId: item._id,
             name: item.name,
             price: item.offerPrice,
             size: item.selectedSize,
@@ -69,12 +69,9 @@ export const checkoutOrder = async (cartItems: CartItem[]) => {
 
 export const createOrder = async (order: ProductOrder) => {
   try {
-    console.log(order);
     await connectToDatabase();
 
-    const newOrder = await Order.create({
-      ...order,
-    });
+    const newOrder = await Order.create(order);
 
     return JSON.parse(JSON.stringify(newOrder));
   } catch (error) {

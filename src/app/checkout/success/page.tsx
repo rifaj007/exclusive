@@ -11,7 +11,7 @@ const SuccessPage = () => {
           <p>Thank you for your order.</p>
 
           <Link
-            href="/user/orders"
+            href="/user/order"
             className="button-primary px-3 py-3 text-sm font-normal"
           >
             View Orders

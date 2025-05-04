@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 export async function POST(request: Request) {
   const body = await request.text();
 
-  const sig = (await request.headers.get("stripe-signature")) as string;
+  const sig = (await request.headers.get("Stripe-Signature")) as string;
 
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   // create
   if (eventType === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
-    console.log(session);
+    console.log("logging from session:", session);
 
     try {
       // fetch line items associated with the session
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
           stripeId: session.id,
           userId: metadata.userId || "",
           createdAt: new Date(),
-          id: metadata.id || "",
+          productId: metadata.productId || "",
           name: metadata.name || "",
           price: (item.amount_subtotal || 0) / 100,
           size: metadata.size || "",
