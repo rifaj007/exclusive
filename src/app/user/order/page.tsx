@@ -1,11 +1,11 @@
-import { getOrdersByUserId } from "@/libs/actions/checkout/order.action"
+import { getOrdersByUserId } from "@/libs/actions/checkout/order.action";
 
-const UserOrderPage =async () => {
-const orders = await getOrdersByUserId();
+const UserOrderPage = async () => {
+  const orders = await getOrdersByUserId();
 
-  return (
-    <div className="container">UserOrderPage: {orders.length}</div>
-  )
-}
+  console.log(orders)
 
-export default UserOrderPage
+  return <div className="container">UserOrderPage: {orders.length}</div>;
+};
+
+export default UserOrderPage;
