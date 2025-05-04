@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 
         return {
           stripeId: session.id,
-          userId: metadata.userId || "",
+          email: metadata.email || "",
           createdAt: new Date(),
           productId: metadata.productId || "",
           name: metadata.name || "",

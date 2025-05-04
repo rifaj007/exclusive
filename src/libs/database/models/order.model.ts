@@ -2,7 +2,7 @@ import { Schema, models, model } from "mongoose";
 
 export interface ProductOrder {
   stripeId: string;
-  userId: string;
+  email: string;
   createdAt: Date;
   productId: string;
   name: string;
@@ -15,7 +15,7 @@ export interface ProductOrder {
 
 const OrderSchema = new Schema({
   stripeId: { type: String, required: true },
-  userId: { type: String, required: true },
+  email: { type: String, required: true },
   createdAt: { type: Date, required: true },
   productId: { type: String, },
   name: { type: String, required: true },

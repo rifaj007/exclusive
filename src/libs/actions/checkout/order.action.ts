@@ -7,8 +7,8 @@ import Stripe from "stripe";
 
 export const checkoutOrder = async (cartItems: CartItem[]) => {
   const session = await auth();
-  const userId = session?.user?._id as string;
-  console.log(userId, "userId from checkoutOrder action");
+  const email = session?.user?.email as string;
+  console.log("User ID during checkout:", email);
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -27,7 +27,7 @@ export const checkoutOrder = async (cartItems: CartItem[]) => {
           description: item.description,
           images: [item.image[0]],
           metadata: {
-            userId: userId,
+            email,
             productId: item._id,
             name: item.name,
             price: item.offerPrice,
@@ -85,9 +85,9 @@ export const getOrdersByUserId = async () => {
     await connectToDatabase();
 
     const session = await auth();
-    const userId = session?.user?._id as string;
+    const email = session?.user?.email as string;
 
-    const orders = await Order.find({ userId: userId }).sort({ createdAt: -1 });
+    const orders = await Order.find({ email }).sort({ createdAt: -1 });
 
     return JSON.parse(JSON.stringify(orders));
   } catch (error) {
