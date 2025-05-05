@@ -63,7 +63,7 @@ const ProfileImageUploader = ({ existingImage, onImageSelect }: Props) => {
   return (
     <div
       {...getRootProps()}
-      className={`border-2 border-dashed rounded-md text-center cursor-pointer transition",
+      className={`border-2 border-dashed p-2 rounded-md text-center cursor-pointer transition",
         ${isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"}`}
       onClick={handleClick}
     >
