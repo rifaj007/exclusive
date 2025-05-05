@@ -18,8 +18,6 @@ const ProfileForm = ({ user }: UserParams) => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  console.log(user);
-
   const {
     register,
     handleSubmit,
