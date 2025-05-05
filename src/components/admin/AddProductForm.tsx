@@ -62,7 +62,7 @@ const AddProductForm = ({ product }: IProps) => {
     }
   }, [register, product, reset]);
 
-  const { startUpload } = useUploadThing("productImageUploader");
+  const { startUpload } = useUploadThing("imageUploader");
 
   const handleImageChange = (files: File[]) => {
     setImageFiles(files);

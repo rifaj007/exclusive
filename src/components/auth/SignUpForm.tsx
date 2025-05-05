@@ -27,6 +27,7 @@ const SignUpForm = () => {
   const passwordValue = watch("password");
   const confirmPasswordValue = watch("confirmPassword");
 
+  /* handle submit */
   async function onSubmit(values: z.infer<typeof signUpFormSchema>) {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

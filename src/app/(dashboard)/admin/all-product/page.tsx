@@ -9,7 +9,7 @@ const AdminAllProductPage = async () => {
   const products = await getAllProductsForAdmin();
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid lg:grid-cols-2 gap-4">
       {products.length > 0 ? (
         products.map((product: IProduct) => (
           <div
@@ -17,29 +17,46 @@ const AdminAllProductPage = async () => {
             className="border border-border-1 p-4 rounded-md flex justify-between"
           >
             {/* Product details */}
-            <div className="flex flex-col lg:flex-row gap-5">
-              <Image
-                src={product.image[0]}
-                alt="product"
-                width={100}
-                height={100}
-              />
-              <div className="text-text-3 text-sm">
+            <div className="flex sm:gap-5 gap-2">
+              {/* image */}
+              <Link href={`/collections/${product._id}`}>
+                <Image
+                  src={product.image[0]}
+                  alt="product"
+                  width={100}
+                  height={100}
+                  className="max-h-[100px]"
+                />
+              </Link>
+
+              <div className="flex flex-col text-sm">
+                {/* name */}
                 <Link
                   href={`/collections/${product._id}`}
-                  className="text-black"
+                  className="text-sm font-medium"
                 >
                   {product.name}
                 </Link>
-                <p>Category: {product.category}</p>
-                <p>Availability: {product.availability}</p>
-                <p>
-                  Offer Price: {product.offerPrice} Original Price:{" "}
-                  <span className="line-through text-gray-400">
+
+                {/* category */}
+                <span>
+                  Category:{" "}
+                  <span className="text-text-4">{product.category}</span>
+                </span>
+
+{/* availability */}
+                <span>Availability:{" "} <span className="text-text-4">{product.availability}</span></span>
+
+                {/* price */}
+                <span>
+                  Offer Price: <span className="text-text-4">{product.offerPrice}</span> Original Price:{" "}
+                  <span className="line-through text-text-4">
                     {product.originalPrice}
                   </span>
-                </p>
-                <p>Rating: {product.rating}</p>
+                </span>
+
+                {/* rating */}
+                <span>Rating: {" "} <span className="text-text-4">{product.rating}</span></span>
               </div>
             </div>
 

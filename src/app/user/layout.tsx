@@ -1,21 +1,18 @@
 "use client";
-import { Loading } from "@/components";
-import useHasMounted from "@/hooks/useHasMounted";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function AdminLayout({
+export default function UserLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hasMounted = useHasMounted();
   const pathname = usePathname();
+
   const isActive = (path: string) => {
     return pathname === path;
   };
 
-  if (!hasMounted) return <Loading />;
   return (
     <section className="pt-8 lg:pt-12 xl:pt-20 pb-20 lg:pb-[100px] xl:pb-[140px]">
       <div className="container">
@@ -25,67 +22,52 @@ export default function AdminLayout({
             Home
           </Link>
           <span>/</span>
-          <span className="text-black">Admin Dashboard</span>
+          <span className="text-black">My Account</span>
         </nav>
 
         <div className="sm:flex">
-          {/* Admin menu */}
+          {/* User menu */}
           <div className="max-w-[200px] xl:max-w-[250px] w-full sm:mb-0 mb-10">
-            {/* All Products navigation */}
+            {/* User navigation */}
             <div className="mb-6">
-              <span className="font-semibold mb-4 inline-block">Products</span>
+              <span className="font-semibold mb-4 inline-block">
+                Manage My Account
+              </span>
 
               <ul className="text-border-2 text-sm space-y-2">
                 <li>
                   <Link
                     className={
-                      isActive("/admin/add-product")
+                      isActive("/user/profile")
                         ? "text-secondary-3"
                         : "text-border-2"
                     }
-                    href="/admin/add-product"
+                    href="/user/profile"
                   >
-                    Add new product
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={
-                      isActive("/admin/all-product")
-                        ? "text-secondary-3"
-                        : "text-border-2"
-                    }
-                    href="/admin/all-product"
-                  >
-                    Manage All Product
+                    My Profile
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* All orders navigation */}
+            {/* Orders navigation */}
             <div>
-              <span className="font-semibold mb-4 inline-block">Orders</span>
+              <span className="font-semibold mb-4 inline-block">My Orders</span>
 
               <ul className="text-border-2 text-sm space-y-2">
                 <li>
-                  <Link
-                    className={
-                      isActive("/admin/all-order")
+                  <Link className={
+                      isActive("/user/purchases")
                         ? "text-secondary-3"
                         : "text-border-2"
-                    }
-                    href="/admin/all-order"
-                  >
-                    All Orders
-                  </Link>
+                    } href="/user/purchases">My Purchases</Link>
                 </li>
               </ul>
             </div>
           </div>
 
           {/* Main content */}
-          <div className="bg-white shadow-custom p-4 lg:p-8 flex-1 rounded-md">
+          <div className="bg-white shadow-custom p-4 pb-14 sm:pb-8 lg:p-8 flex-1 rounded-md">
             {children}
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { IUser } from "@/libs/database/models/auth.model";
+
 export interface SignUpWithCredentialsParams {
   user: {
     name: string;
@@ -11,3 +13,14 @@ export interface SignUpWithCredentialsParams {
     provider: "google" | "credentials";
   };
 }
+
+export type UserParams = {
+  user: IUser;
+};
+
+export type PartialUserUpdate = {
+  name: string;
+  email: string;
+  address: string;
+  image?: string;
+};

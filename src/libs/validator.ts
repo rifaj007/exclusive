@@ -114,3 +114,83 @@ export const adminAddProductFormSchema = object({
     errorMap: () => ({ message: "Select availability status" }),
   }),
 });
+
+export const userUpdateProfileFormSchema = z
+  .object({
+    name: z.string().nonempty("Please! provide your name."),
+    email: z.string().min(1, "Please! provide your email.").email("Invalid email"),
+    address: z.string().nonempty("Please! provide your address."),
+    image: z.string().optional(),
+
+    currentPassword: z
+      .string()
+      .optional()
+      .transform((val) => (val === "" ? undefined : val)),
+
+    newPassword: z
+      .string()
+      .optional()
+      .transform((val) => (val === "" ? undefined : val)),
+
+    confirmPassword: z
+      .string()
+      .optional()
+      .transform((val) => (val === "" ? undefined : val)),
+  })
+  .superRefine(({ currentPassword, newPassword, confirmPassword }, ctx) => {
+    if (currentPassword) {
+      // Enforce newPassword rules if currentPassword is present
+      if (!newPassword) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["newPassword"],
+          message: "New password is required.",
+        });
+      } else {
+        if (newPassword.length < 8) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["newPassword"],
+            message: "Password must be at least 8 characters.",
+          });
+        }
+        if (!/[A-Z]/.test(newPassword)) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["newPassword"],
+            message: "Password must contain at least one uppercase letter.",
+          });
+        }
+        if (!/[a-z]/.test(newPassword)) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["newPassword"],
+            message: "Password must contain at least one lowercase letter.",
+          });
+        }
+        if (!/[0-9]/.test(newPassword)) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["newPassword"],
+            message: "Password must contain at least one number.",
+          });
+        }
+      }
+  
+      // Confirm password is required if changing password
+      if (!confirmPassword) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["confirmPassword"],
+          message: "Please confirm your new password.",
+        });
+      } else if (newPassword && newPassword !== confirmPassword) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["confirmPassword"],
+          message: "Passwords don't match",
+        });
+      }
+    }
+  });
+  ;

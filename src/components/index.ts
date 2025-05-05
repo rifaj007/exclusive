@@ -28,3 +28,4 @@ export { default as ProductCard } from "./product/ProductCard";
 export { default as Pagination } from "./product/Pagination";
 export { default as SortDropdown } from "./product/SortDropdown";
 export { default as ProductCardSkeleton } from "./product/ProductCardSkeleton";
+export { default as ProfileForm } from "./auth/ProfileForm";

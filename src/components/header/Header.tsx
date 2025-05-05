@@ -242,6 +242,7 @@ const Header = () => {
                 <Link
                   href="/user/profile"
                   className="flex items-center gap-3 text-sm"
+                  onClick={() => setIsDropdownOpen(false)}
                 >
                   <ProfileIcon />
                   Manage My Account
@@ -251,11 +252,12 @@ const Header = () => {
               {/* Order route */}
               <li>
                 <Link
-                  href="/user/order"
+                  href="/user/purchases"
                   className="flex items-center gap-3 text-sm"
+                  onClick={() => setIsDropdownOpen(false)}
                 >
                   <BagIcon />
-                  My Order
+                  My Purchases
                 </Link>
               </li>
 

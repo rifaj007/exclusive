@@ -55,6 +55,7 @@ export default {
                 address: "",
                 image,
                 authProviderId: id,
+                provider: "google",
                 emailVerified: true,
                 role: "user",
               });

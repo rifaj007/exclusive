@@ -14,7 +14,7 @@ type Props = {
 const MAX_FILE_SIZE_MB = 4;
 
 const MultiImgUploader = ({ files, onChange }: Props) => {
-  const { routeConfig } = useUploadThing("productImageUploader");
+  const { routeConfig } = useUploadThing("imageUploader");
   const fileTypes = routeConfig ? Object.keys(routeConfig) : [];
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
