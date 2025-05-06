@@ -36,6 +36,7 @@ Discover a wide range of top-quality products at unbeatable prices. Whether you'
 </div>
 
 ## <a name="quick-links">🔗 Quick Links</a>
+
 **Live link**: [https://exclusive-online-shopping.vercel.app/](https://exclusive-online-shopping.vercel.app/)
 <br />
 **Documentation link**: [click here](https://docs.google.com/document/d/1lqqS4nTOXwnmdh7ydwdUpJq7ByHlzAAc2pqdVeftjjA/edit?usp=sharing)
@@ -46,21 +47,25 @@ Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exc
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
-- **Frontend & Backend**: Next.js, React, TypeScript
+- **Frontend**: React, Next.js, Tailwind CSS
+- **Backend**: Next.js API routes, MongoDB, Mongoose
 - **Authentication**: Auth.js (NextAuth.js v5) (Credentials + Google)
-- **Database**: MongoDB with Mongoose
+- **Database**: MongoDB(Cloud) with Mongoose
+- **Forms**: react-hook-form + Zod
+- **Notifications**: react-hot-toast
+- **UI**: Swiper, Skeleton loader, React CountUp
 - **Payments**: Stripe Checkout
 - **State Management**: Redux and Redux Toolkit
-- **File Uploads**: UploadThing
-- **Form Validation**: React Hook Form + Zod
-- **Others**: Nodemailer, Swiper, React Hot Toast, bcryptjs
-
-
+- **Image Uploads**: UploadThing
+- **Security**: Bcryptjs, JWT for tokens
+- **Others**: Nodemailer for sending emails
 
 ## <a name="features">🔋 Features</a>
 
 ### Features of the Exclusive Online Shopping Platform
+
 ## 🔐 Authentication
+
 - Email/password and Google login
 - Email verification via Nodemailer
 - Password reset with secure email link
@@ -68,6 +73,7 @@ Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exc
 - Admin and User roles with route protection
 
 ### 🧑‍💼 User
+
 - View and purchase products
 - Manage profile and password
 - Wishlist and cart management
@@ -75,6 +81,7 @@ Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exc
 - View order history
 
 ### 🛠️ Admin
+
 - Add, update, and delete products
 - Manage all customer orders
 - Protected admin dashboard
@@ -84,17 +91,20 @@ Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exc
 <img src="https://8vn2k952ph.ufs.sh/f/pHBrcjrefCzPyc6LIR2tVnjZ4l0MbIoNifSq9QLBGkx8wYuD" alt="admin manage product" />
 
 ## 💳 Cart & Checkout
+
 - Add/remove products from cart
 - Increase/decrease quantity
 - Coupon code input
 - Protected Stripe Checkout for logged-in users
 
 ## ❤️ Wishlist
+
 - Add/remove products from wishlist
 - View wishlist products
 - Clear all wishlist
 
 ## 🏠 Homepage Highlights
+
 - Responsive navbar with search
 - Hero slider for featured categories
 - Hero navigation for quick browse categories
@@ -102,12 +112,14 @@ Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exc
 - Category slider and explore products
 
 ## 📂 Collections
+
 - Search by name
 - Filter by category/type
 - Sort by price
 - Pagination for performance
 
 ## 📦 Product Details
+
 - Image gallery
 - Size/color selector
 - Reviews and ratings
@@ -115,10 +127,12 @@ Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exc
 - Add to cart and wishlist
 
 ## 📬 Contact & About
+
 - Contact form with quick message
 - About us page with support details
 
 ## 📧 Additional Tools
+
 - Nodemailer for email
 - Bcryptjs for password hashing
 - React CountUp for animations
@@ -127,6 +141,7 @@ Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exc
 and many more, including code architecture and reusability
 
 ## 🧩 Folder Structure
+
 Organized using app directory structure:
 
 ```
@@ -212,21 +227,24 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
 
 ## 📄 License
+
 This project is open-source and available under the MIT License.
 
 ## 👤 Author
+
 Created by [Md Rifajul Islam](https://github.com/rifaj007)
 
 ## 🤝 Contributing
+
 We welcome contributions to improve Exclusive! To contribute:
 
 Fork the repository
 
-Create a new branch ```(git checkout -b feature-name)```
+Create a new branch `(git checkout -b feature-name)`
 
 Make your changes
 
-Commit and push your changes ```(git commit -m "Your message" && git push)```
+Commit and push your changes `(git commit -m "Your message" && git push)`
 
 Open a pull request
 
