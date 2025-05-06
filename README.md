@@ -39,7 +39,7 @@ Discover a wide range of top-quality products at unbeatable prices. Whether you'
 
 **Live link**: [https://exclusive-online-shopping.vercel.app/](https://exclusive-online-shopping.vercel.app/)
 <br />
-**Documentation link**: [click here](https://docs.google.com/document/d/1lqqS4nTOXwnmdh7ydwdUpJq7ByHlzAAc2pqdVeftjjA/edit?usp=sharing)
+**Documentation link**: [to see in google docs click here](https://docs.google.com/document/d/1lqqS4nTOXwnmdh7ydwdUpJq7ByHlzAAc2pqdVeftjjA/edit?usp=sharing)
 
 ## <a name="introduction">🚀 Introduction</a>
 
