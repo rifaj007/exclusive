@@ -43,7 +43,7 @@ Discover a wide range of top-quality products at unbeatable prices. Whether you'
 
 ## <a name="introduction">🚀 Introduction</a>
 
-Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exclusive** is a full-stack e-commerce platform that provides a seamless shopping experience. It features secure **authentication**, **Stripe**-powered payments, state-managed cart and wishlist with **Redux**, and an **admin dashboard** for product and order management. With **responsive** design, real-time updates, and scalable architecture, it delivers a modern, optimized shopping experience for users and administrators alike.
+Built with **Next.js**, **TypeScript**, and **MongoDB** with **Mongoose**, **Exclusive** is a full-stack e-commerce platform that provides a seamless shopping experience. It features secure **authentication**, **Stripe**-powered payments, state-managed cart and wishlist with **Redux and Redux Toolkit**, and an **admin dashboard** for product and order management. With **responsive** design, real-time updates, and scalable architecture, it delivers a modern, optimized shopping experience for users and administrators alike.
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
